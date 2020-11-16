@@ -1,14 +1,11 @@
-[![Build Status](https://travis-ci.org/jbacon/blog-static-site-react.svg?branch=master)](https://travis-ci.org/jbacon/blog-static-site-react.svg?branch=master)
-
-# Blog Website Static Content: https://portfolio.joshbacon.name
+# Portfolio Website:
+Visit: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
 
 ## Technical Features:
-- Pure Single Page Application (SPA)
-- Pure Static Content
-- No Server-Side Rendering
-- No Static Site Generators
-- Hosted on S3+CloudFront via tricky redirect policy
-- Local Development uses `docker-compose.yaml` w/ nginx reverse proxy.
+- ReactJS
+- Material UI
+- S3 + CloudFront Hosting
+- EmailJS
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
