@@ -50,7 +50,7 @@ class Home extends React.Component {
                             height: "50vh",
                             background: 'white',
                             overflow: "hidden"}}>
-                            <Parallax y={["100", "-120"]} >
+                            <Parallax y={["100", "-125"]} >
                                 <div style={{
                                     height: "100vh",
                                     background: 'url(./images/stuart_mt_2.jpg)',
@@ -189,6 +189,7 @@ class Home extends React.Component {
                             </div>
                             <div style={{
                                 flex: 1,
+                                overflow: "hidden",
                             }}>
                             <Parallax y={["200px", "-300px"]} >
                                 <Avatar style={{

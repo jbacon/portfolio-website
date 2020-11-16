@@ -7,6 +7,13 @@ Visit: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
 - S3 + CloudFront Hosting
 - EmailJS
 
+### Build & Deploy
+```bash
+npm run-script build
+aws s3 sync --delete ${PWD}/build/ s3://portfolio.joshbacon.name/
+aws cloudfront create-invalidation --distribution-id='E2DH15J9LGHZU1' --paths='/*'
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
