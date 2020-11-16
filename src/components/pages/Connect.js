@@ -8,6 +8,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 
+import EmailJS from "emailjs-com"
+import EmailJsApiKeys from "../apikeys"
+
 const styles = theme => ({
 });
 
@@ -16,6 +19,9 @@ class Connect extends React.Component {
       super(props);
       this.state = {
           open: false,
+          email: "",
+          name: "",
+          message: "",
       };
     }
 
@@ -27,48 +33,90 @@ class Connect extends React.Component {
         this.setState({ open: false});
     };
 
+    handleNameChange = (event) => {
+        this.setState({name: event.target.value});
+    }
+    handleEmailChange = (event) => {
+        this.setState({email: event.target.value});
+    }
+    handleMessageChange = (event) => {
+        this.setState({message: event.target.value});
+    }
 
-
+    handleSend = (event) => {
+        event.preventDefault();
+        EmailJS.send(
+            EmailJsApiKeys.SERVICE_ID,
+            EmailJsApiKeys.TEMPLATE_ID,
+            {
+                name: this.state.name,
+                email: this.state.email,
+                message: this.state.message,
+            },
+            EmailJsApiKeys.USER_ID)
+            .then(result => {
+                alert('Message Sent, I\'ll get back to you soon');
+                this.setState({ name: ""});
+                this.setState({ email: ""});
+                this.setState({ message: ""});
+                this.setState({ open: false});
+            },
+            error => {
+                alert( 'An error occured, Plese try again',error.text)
+            })
+    }
+    
     render() {
         return (
             <React.Fragment>
             <Button style={this.props.style} onClick={this.handleClickOpen}>Connect</Button>
             <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                {/* <DialogTitle id="form-dialog-title">Connect</DialogTitle> */}
-                <DialogContent>
-                <DialogContentText>
-                    Send me a email:
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Your Email"
-                    type="email"
-                    fullWidth
-                />
-                <TextField
-                    margin="dense"
-                    id="name"
-                    label="Subject"
-                    fullWidth
-                />
-                <TextField
-                    margin="dense"
-                    id="name"
-                    label="Message"
-                    fullWidth
-                    multiline
-                />
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={this.handleClose} color="primary">
-                    Send
-                </Button>
-                </DialogActions>
+                <DialogTitle id="form-dialog-title">Send Me A Email</DialogTitle>
+                <form onSubmit = {this.handleSend} >
+                    <DialogContent>
+                    {/* <DialogContentText>
+                        Send me a email:
+                    </DialogContentText> */}
+                        <TextField
+                            required
+                            autoFocus
+                            margin="normal"
+                            id="name"
+                            label="Your Name"
+                            fullWidth
+                            value={this.state.name}
+                            onChange={this.handleNameChange}
+                        />
+                        <TextField
+                            required
+                            margin="normal"
+                            id="email"
+                            label="Your Email"
+                            type="email"
+                            fullWidth
+                            value={this.state.email}
+                            onChange={this.handleEmailChange}
+                        />
+                        <TextField
+                            required
+                            margin="normal"
+                            id="message"
+                            label="Your Message"
+                            fullWidth
+                            multiline
+                            value={this.state.message}
+                            onChange={this.handleMessageChange}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose}>
+                            Cancel
+                        </Button>
+                        <Button type="submit">
+                            Send
+                        </Button>
+                    </DialogActions>
+                </form>
             </Dialog>
             </React.Fragment>
         );

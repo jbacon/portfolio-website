@@ -51,17 +51,20 @@ class Home extends React.Component {
                             background: 'white',
                             overflow: "hidden"}}>
                             <Parallax y={["100", "-120"]} >
-                            <div style={{
-                                height: "100vh",
-                                background: 'url(./images/stuart_mt_2.jpg)',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: "50%",
-                                backgroundSize: 'cover'}}>
-                                <Typography variant="h3" style={{ 
-                                    display: "block",
-                                    textAlign: "center",
-                                    padding: "4rem",
-                                    color: "black", }}>welcome.</Typography></div>
+                                <div style={{
+                                    height: "100vh",
+                                    background: 'url(./images/stuart_mt_2.jpg)',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: "50%",
+                                    backgroundSize: 'cover'}}>
+                                    <FadeIntoView>
+                                        <Typography variant="h3" style={{ 
+                                            display: "block",
+                                            textAlign: "center",
+                                            padding: "4rem",
+                                            color: "black", }}>welcome.</Typography>
+                                    </FadeIntoView>
+                                </div>
                             </Parallax>
                         </div>
                         <div style={{
@@ -75,7 +78,7 @@ class Home extends React.Component {
                                 // bottom: "75px",
                                 right: "calc(-50% + 75px)",
                                 }} src={process.env.PUBLIC_URL + '/images/me.jpg'}/>
-                            <Text style={{ }}><br/>keep scrolling.</Text>
+                            <Text style={{ }}><br/>keep scrolling</Text>
                             <ExpandMoreIcon style={{
                                 width: "100%",
                             }}/>
@@ -85,7 +88,7 @@ class Home extends React.Component {
                             <Text>
                             Hi, I'm Josh,<br/>
                             <br/>
-                            Seattle based and dev friendly<br />
+                            Seattle based and developer friendly<br />
                             </Text>
                         </FadeIntoView>
                         <div style={{
@@ -103,7 +106,7 @@ class Home extends React.Component {
                         </div>
                         <FadeIntoView>
                             <Text>
-                            Do you need help building elegant software?<br/>
+                            Need help building elegant software?<br/>
                             <br/>
                             Let's connect<br/>
                             </Text>
