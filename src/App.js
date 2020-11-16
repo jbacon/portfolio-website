@@ -11,8 +11,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Home from "./components/pages/Home"
-import Connect from "./components/pages/Connect"
+import Home from "./components/Home"
+import Connect from "./components/Connect"
 
 const styles = theme => ({
   sectionDesktop: {
