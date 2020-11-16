@@ -133,21 +133,24 @@ class Home extends React.Component {
                             From conception to production, let's build it.<br/>
                             </Text>
                         </FadeIntoView>
-                        <Parallax x={["150", "-150"]} >
-                            <Avatar style={{
-                                width: "150px",
-                                height: "150px",
-                                // position: "absolute",
-                                // bottom: "75px",
-                                right: "calc(-50% + 75px)",
-                                }} src={process.env.PUBLIC_URL + '/images/me7.jpg'}/>
-                            <Text>Washington born and raised</Text>
-                        </Parallax>
+                        <div style={{
+                            overflow: "hidden",
+                        }}>
+                            <Parallax  y={["350px", "-100px"]} >
+                                <Avatar style={{
+                                    width: "150px",
+                                    height: "150px",
+                                    // position: "absolute",
+                                    // bottom: "75px",
+                                    right: "calc(-50% + 75px)",
+                                    }} src={process.env.PUBLIC_URL + '/images/me7.jpg'}/>
+                                <Text>Washington born and raised</Text>
+                            </Parallax>
+                        </div>
                         <FadeIntoView>
                             <Text>
-                            Teamwork is the most important competency.<br/>
-                            My work is done in partnership with peers.<br/>
-                            I value people, and form working relationships that are friendly and effective.<br/>
+                            Teamwork is my most important competency.<br/>
+                            I value people, and form work relationships that are friendly and effect.<br/>
                             Let's collaborate, stretch our minds, and share ideas!<br/>
                             </Text>
                         </FadeIntoView>

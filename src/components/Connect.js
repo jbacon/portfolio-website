@@ -62,7 +62,7 @@ class Connect extends React.Component {
                 this.setState({ open: false});
             },
             error => {
-                alert( 'An error occured, Plese try again',error.text)
+                alert('Sorry, something went wrong. Failed to deliver message')
             })
     }
     
