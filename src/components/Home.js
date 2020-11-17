@@ -86,9 +86,9 @@ class Home extends React.Component {
                         </div>
                         <FadeIntoView>
                             <Text>
-                            Hi, I'm Josh,<br/>
+                            Hi, I'm Josh!<br/>
                             <br/>
-                            Seattle based and developer friendly<br />
+                            Seattle based, software developer/engineer<br />
                             </Text>
                         </FadeIntoView>
                         <div style={{
@@ -127,16 +127,17 @@ class Home extends React.Component {
                         <FadeIntoView>
                             <Text>
                             5+ years experience in software development.<br/>
-                            I've collected an array of technical skills;<br/>
+                            I have an array of technical skills;<br/>
                             Lead various cloud, back-end, and front-end efforts;<br/>
                             And tackle projects with assurance.<br/>
-                            From conception to production, let's build it.<br/>
+                            From conception to production.. let's build it.<br/>
                             </Text>
                         </FadeIntoView>
                         <div style={{
                             overflow: "hidden",
+                            padding: "10px",
                         }}>
-                            <Parallax  y={["350px", "-100px"]} >
+                            <Parallax  y={["350px", "-105px"]} >
                                 <Avatar style={{
                                     width: "150px",
                                     height: "150px",
@@ -144,13 +145,13 @@ class Home extends React.Component {
                                     // bottom: "75px",
                                     right: "calc(-50% + 75px)",
                                     }} src={process.env.PUBLIC_URL + '/images/me7.jpg'}/>
-                                <Text>Washington born and raised</Text>
                             </Parallax>
                         </div>
                         <FadeIntoView>
                             <Text>
                             Teamwork is my most important competency.<br/>
-                            I value people, and form work relationships that are friendly and effect.<br/>
+                            I value people.<br/>
+                            My work relationships are friendly and effect.<br/>
                             Let's collaborate, stretch our minds, and share ideas!<br/>
                             </Text>
                         </FadeIntoView>
