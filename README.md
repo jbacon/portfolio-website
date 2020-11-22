@@ -1,5 +1,4 @@
-# Portfolio Website:
-Visit: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
+# Portfolio Website: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
 
 ## Technical Features:
 - ReactJS

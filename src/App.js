@@ -136,11 +136,11 @@ class App extends React.Component {
               <BottomNavigationAction  style={{ flex: 0 }} href="https://github.com/jbacon" target="_blank" label="GitHub" icon={
                 <GitHubIcon fontSize="large" style={{ color: "white" }}/>
               }/>
-              <BottomNavigationAction  style={{ flex: 0 }} selected href="https://github.com/jbacon" target="_blank" label="LinkedIn" icon={
+              <BottomNavigationAction  style={{ flex: 0 }} selected href="https://www.linkedin.com/in/jbacon47/" target="_blank" label="LinkedIn" icon={
                 <LinkedInIcon fontSize="large" style={{ color: "white"}}/>
               }/>
               {/* <div className={this.props.classes.grow} /> */}
-              <a href="https://reactjs.org/" target="_blank" style={{
+              <a href="https://github.com/jbacon/portfolio-website/" target="_blank" rel="noopener noreferrer" style={{
                   flex: "0 1 0%",
                   height: "100%",
                 }}>

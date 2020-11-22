@@ -1,10 +1,13 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {Avatar, Typography} from '@material-ui/core';
+import {Avatar, Typography, Paper} from '@material-ui/core';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import styled from 'styled-components'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FadeIntoView from "./reusable/FadeIntoView"
+import Carousel from 'react-material-ui-carousel'
+import { Parallax as Parallax2, Background } from 'react-parallax';
+
 
 
 const Text = styled(Typography).attrs(props => ({
@@ -46,7 +49,53 @@ class Home extends React.Component {
                             // alignItems: "stretch",
                             flexDirection: "column",
                         }}>
-                        <div style={{
+                            <Parallax2
+                                // bgImage={process.env.PUBLIC_URL + '/images/stuart_mt_2.jpg'}
+                                // bgImageAlt="the cat"
+                                style={{
+                                    height: "50vh",
+                                    background: 'white',
+                                    overflow: "hidden"
+                                }}
+                                renderLayer={percentage => (
+                                    <div
+                                        style={{
+                                            // "url("./images/stuart_mt_2.jpg") 50% -6.89655% / 200% no-repeat"
+                                            background: 'url(./images/stuart_mt_2.jpg)',
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundPosition: "50% "+(percentage*-1000+910)+"px",
+                                            backgroundSize: 'auto 1000px',
+                                            position: 'absolute',
+                                            // background: `rgba(255, 125, 0, ${percentage * 1})`,
+                                            left: '0px',
+                                            top: "0px",
+                                            width: "100%",
+                                            height: "100vh"//*percentage * 300,
+                                        }}
+                                    />
+                                )}>
+                                <FadeIntoView>
+                                    <Typography variant="h3" style={{ 
+                                        display: "block",
+                                        textAlign: "center",
+                                        padding: "4rem",
+                                        color: "black", }}>welcome.</Typography>
+                                </FadeIntoView>
+                            </Parallax2>
+
+                            {/* <Parallax strength={2000}>
+                                <Background className="custom-bg">
+                                    <div style={{
+                                        height: "100vh",
+                                        background: 'url(./images/stuart_mt_2.jpg)',
+                                        backgroundRepeat: 'no-repeat',
+                                        backgroundPosition: "50%",
+                                        backgroundSize: 'cover'}}>
+                                    </div>
+                                </Background>
+                            </Parallax> */}
+                        
+                        {/* <div style={{
                             height: "50vh",
                             background: 'white',
                             overflow: "hidden"}}>
@@ -66,9 +115,9 @@ class Home extends React.Component {
                                     </FadeIntoView>
                                 </div>
                             </Parallax>
-                        </div>
+                        </div> */}
                         <div style={{
-                            height: "50vh",
+                            minHeight: "50vh",
                             padding: "3rem",
                             background: 'white'}}>
                             <Avatar style={{
@@ -85,7 +134,8 @@ class Home extends React.Component {
                             {/* <IconButton><ExpandMoreIcon/></IconButton> */}
                         </div>
                         <FadeIntoView>
-                            <Text>
+                            <Text style={{
+                                minHeight: "50vh",}}>
                             Hi, I'm Josh!<br/>
                             <br/>
                             Seattle based, software developer/engineer<br />
@@ -93,7 +143,6 @@ class Home extends React.Component {
                         </FadeIntoView>
                         <div style={{
                             height: "50vh",
-                            background: 'white',
                             overflow: "hidden"}}>
                             <Parallax y={["570px", "-720px"]} >
                             <div style={{
@@ -104,16 +153,16 @@ class Home extends React.Component {
                                 backgroundSize: 'cover'}}/>
                             </Parallax>
                         </div>
-                        <FadeIntoView>
-                            <Text>
-                            Need help building elegant software?<br/>
-                            <br/>
-                            Let's connect<br/>
-                            </Text>
+                        <Text style={{
+                                height: "25vh"}}>
+                        Need help building elegant solutions?<br/>
+                        </Text>
+                        <FadeIntoView style={{
+                                height: "25vh"}}>
+                            <Text>Let's connect<br/></Text>
                         </FadeIntoView>
                         <div style={{
                             height: "50vh",
-                            background: 'white',
                             overflow: "hidden"}}>
                             <Parallax y={["570px", "-720px"]} >
                             <div style={{
@@ -125,19 +174,18 @@ class Home extends React.Component {
                             </Parallax>
                         </div>
                         <FadeIntoView>
-                            <Text>
-                            5+ years experience in software development.<br/>
+                            <Text style={{
+                                height: "50vh"}}>
+                            5+ years experience developing software.<br/>
                             I have an array of technical skills;<br/>
                             Lead various cloud, back-end, and front-end efforts;<br/>
                             And tackle projects with assurance.<br/>
                             From conception to production.. let's build it.<br/>
                             </Text>
                         </FadeIntoView>
-                        <div style={{
-                            overflow: "hidden",
-                            padding: "10px",
-                        }}>
-                            <Parallax  y={["350px", "-105px"]} >
+                        <FadeIntoView>
+                            <div style={{
+                                height: "50vh"}}>
                                 <Avatar style={{
                                     width: "150px",
                                     height: "150px",
@@ -145,66 +193,104 @@ class Home extends React.Component {
                                     // bottom: "75px",
                                     right: "calc(-50% + 75px)",
                                     }} src={process.env.PUBLIC_URL + '/images/me7.jpg'}/>
-                            </Parallax>
-                        </div>
-                        <FadeIntoView>
-                            <Text>
-                            Teamwork is my most important competency.<br/>
-                            I value people.<br/>
-                            My work relationships are friendly and effect.<br/>
-                            Let's collaborate, stretch our minds, and share ideas!<br/>
+                                <Text>Washington born and raised</Text>
+                            </div>
+                        </FadeIntoView>
+                        <FadeIntoView >
+                            <Text style={{
+                                height: "50vh"}}>
+                            Teamwork is the most important competency.<br/>
+                            I value people and partnerships.<br/>
+                            My work relationships are both friendly and effective.<br/>
+                            Let's collaborate and stretch our minds!<br/>
                             </Text>
                         </FadeIntoView>
                         <div style={{
-                            display: "flex",
-                            flexDirection:"row",
-                            justifyContent: "center",
-                        }}>
-                            <div style={{
-                                flex: 1,
-                            }}>
-                            <Parallax y={["200px", "-300px"]} >
+                                height: "50vh"}}>
+                        <Text>Get To Know Me:</Text>
+                        <Carousel>
+                            <div>
                                 <Avatar style={{
-                                    width: "100px",
-                                    height: "100px",
+                                    width: "150px",
+                                    height: "150px",
                                     // position: "absolute",
                                     // bottom: "75px",
-                                    right: "calc(-50% + 50px)",
+                                    right: "calc(-50% + 75px)",
                                     }} src={process.env.PUBLIC_URL + '/images/me8.jpg'}/>
-                                <Text>Cycling<br/>Gears</Text>
-                            </Parallax>
+                                <Text>Cycling Gears</Text>
                             </div>
-                            <div style={{
-                                flex: 1,
-                            }}>
-                            <Parallax y={["100px", "-150px"]} >
+                            <div>
                                 <Avatar style={{
-                                    width: "100px",
-                                    height: "100px",
+                                    width: "150px",
+                                    height: "150px",
                                     // position: "absolute",
                                     // bottom: "75px",
-                                    right: "calc(-50% + 50px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/me5.jpg'}/>
-                                <Text>Climbing<br/>Rocks</Text>
-                            </Parallax>
+                                    right: "calc(-50% + 75px)",
+                                    }} src={process.env.PUBLIC_URL + '/images/climbing.jpg'}/>
+                                <Text>Climbing Cliffs</Text>
                             </div>
-                            <div style={{
-                                flex: 1,
-                                overflow: "hidden",
-                            }}>
-                            <Parallax y={["200px", "-300px"]} >
+                            <div>
                                 <Avatar style={{
-                                    width: "100px",
-                                    height: "100px",
+                                    width: "150px",
+                                    height: "150px",
                                     // position: "absolute",
                                     // bottom: "75px",
-                                    right: "calc(-50% + 50px)",
+                                    right: "calc(-50% + 75px)",
+                                    }} src={process.env.PUBLIC_URL + '/images/skiing_with_mom.jpg'}/>
+                                <Text>Sking Slopes</Text>
+                            </div>
+                            <div>
+                                <Avatar style={{
+                                    width: "150px",
+                                    height: "150px",
+                                    // position: "absolute",
+                                    // bottom: "75px",
+                                    right: "calc(-50% + 75px)",
+                                    }} src={process.env.PUBLIC_URL + '/images/groupphotohike.jpg'}/>
+                                <Text>Friendly Hikes</Text>
+                            </div>
+                            <div>
+                                <Avatar style={{
+                                    width: "150px",
+                                    height: "150px",
+                                    // position: "absolute",
+                                    // bottom: "75px",
+                                    right: "calc(-50% + 75px)",
                                     }} src={process.env.PUBLIC_URL + '/images/me6.jpg'}/>
-                                <Text>Furry<br/>Friends</Text>
-                            </Parallax>
+                                <Text>Furball Friends</Text>
                             </div>
+                            <div>
+                                <Avatar style={{
+                                    width: "150px",
+                                    height: "150px",
+                                    // position: "absolute",
+                                    // bottom: "75px",
+                                    right: "calc(-50% + 75px)",
+                                    }} src={process.env.PUBLIC_URL + '/images/drone.jpg'}/>
+                                <Text>Drone Racing</Text>
+                            </div>
+                            <div>
+                                <Avatar style={{
+                                    width: "150px",
+                                    height: "150px",
+                                    // position: "absolute",
+                                    // bottom: "75px",
+                                    right: "calc(-50% + 75px)",
+                                    }} src={process.env.PUBLIC_URL + '/images/hummingbird.jpg'}/>
+                                <Text>Art &#38; Photography</Text>
+                            </div>
+                            <div>
+                                <Avatar style={{
+                                    width: "150px",
+                                    height: "150px",
+                                    // position: "absolute",
+                                    // bottom: "75px",
+                                    right: "calc(-50% + 75px)",
+                                    }} src={process.env.PUBLIC_URL + '/images/lakedays.jpg'}/>
+                                <Text>Lake Days</Text>
+                            </div>
+                        </Carousel>
                         </div>
-                        <Text><br/>Come Again</Text>
                     </div>
                 </ParallaxProvider>
             </React.Fragment>

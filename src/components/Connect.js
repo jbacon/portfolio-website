@@ -71,7 +71,7 @@ class Connect extends React.Component {
             <React.Fragment>
             <Button style={this.props.style} onClick={this.handleClickOpen}>Connect</Button>
             <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Send Me A Email</DialogTitle>
+                <DialogTitle id="form-dialog-title">Send Me An Email</DialogTitle>
                 <form onSubmit = {this.handleSend} >
                     <DialogContent>
                     {/* <DialogContentText>
