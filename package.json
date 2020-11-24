@@ -8,8 +8,11 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "emailjs-com": "^2.6.4",
     "material-auto-rotating-carousel": "^3.0.2",
+    "material-snackbar-supplier": "^1.0.1",
+    "material-ui-snackbar-provider": "^1.4.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-material-ui-carousel": "^2.1.1",

@@ -1,12 +1,12 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {Avatar, Typography, Paper} from '@material-ui/core';
+import {Avatar, Typography} from '@material-ui/core';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import styled from 'styled-components'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FadeIntoView from "./reusable/FadeIntoView"
 import Carousel from 'react-material-ui-carousel'
-import { Parallax as Parallax2, Background } from 'react-parallax';
+import { Parallax as Parallax2 } from 'react-parallax';
 
 
 
@@ -82,7 +82,6 @@ class Home extends React.Component {
                                         color: "black", }}>welcome.</Typography>
                                 </FadeIntoView>
                             </Parallax2>
-
                             {/* <Parallax strength={2000}>
                                 <Background className="custom-bg">
                                     <div style={{
@@ -113,7 +112,7 @@ class Home extends React.Component {
                                             padding: "4rem",
                                             color: "black", }}>welcome.</Typography>
                                     </FadeIntoView>
-                                </div>
+                                </div>f
                             </Parallax>
                         </div> */}
                         <div style={{
@@ -179,8 +178,9 @@ class Home extends React.Component {
                             5+ years experience developing software.<br/>
                             I have an array of technical skills;<br/>
                             Lead various cloud, back-end, and front-end efforts;<br/>
-                            And tackle projects with assurance.<br/>
-                            From conception to production.. let's build it.<br/>
+                            I tackle projects with assurance.<br/>
+                            From conception to production...<br/>
+                            ...let's build it.<br/>
                             </Text>
                         </FadeIntoView>
                         <FadeIntoView>
@@ -199,16 +199,28 @@ class Home extends React.Component {
                         <FadeIntoView >
                             <Text style={{
                                 height: "50vh"}}>
-                            Teamwork is the most important competency.<br/>
+                            Teamwork is my most important competency.<br/>
                             I value people and partnerships.<br/>
-                            My work relationships are both friendly and effective.<br/>
-                            Let's collaborate and stretch our minds!<br/>
+                            My work relations are both friendly and effective.<br/>
+                            Learning is a collaborative process,<br/>
+                            and mentorships are given and recieved with gratitude.<br/>
+                            Let's stretch our minds together<br/>
                             </Text>
                         </FadeIntoView>
                         <div style={{
                                 height: "50vh"}}>
                         <Text>Get To Know Me:</Text>
                         <Carousel>
+                            <div>
+                                <img style={{
+                                    position: "relative",
+                                    width: "150px",
+                                    height: "150px",
+                                    right: "calc(-50% + 75px)",
+                                    }}
+                                    alt="Gonzaga" src={process.env.PUBLIC_URL + '/images/gonzaga.png'}/>
+                                <Text>Gonzaga Alumni</Text>
+                            </div>
                             <div>
                                 <Avatar style={{
                                     width: "150px",

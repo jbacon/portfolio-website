@@ -3,7 +3,7 @@ import './App.css';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { ThemeProvider, withTheme, createMuiTheme, AppBar, Menu, IconButton, MenuItem, Button, CssBaseline, Toolbar, Typography, Tabs, Tab, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { Backdrop, AppBar, Menu, IconButton, MenuItem, Button, CssBaseline, Toolbar, Typography, Tabs, Tab, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home"
 import Connect from "./components/Connect"
+import { SnackbarProvider } from 'material-ui-snackbar-provider'
 
 const styles = theme => ({
   sectionDesktop: {
@@ -45,7 +46,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mobileMoreAnchorEl: null,
+      mobileMoreAnchorEl: null
     };
   }
   handleChange = (event, value) => {};
@@ -68,6 +69,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <CssBaseline/>
+        <SnackbarProvider SnackbarProps={{ autoHideDuration: 4000 }}>
         <Router>
         <div style={{
             display: "flex",
@@ -153,6 +155,7 @@ class App extends React.Component {
           </BottomNavigation>
         </div>
         </Router>
+        </SnackbarProvider>
       </React.Fragment>
     );
   }

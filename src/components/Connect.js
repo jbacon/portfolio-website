@@ -10,11 +10,14 @@ import { withStyles } from '@material-ui/core/styles';
 
 import EmailJS from "emailjs-com"
 import EmailJsApiKeys from "./apikeys"
+import BackdropLoader from "./reusable/BackdropLoader"
+import { withSnackbar } from 'material-ui-snackbar-provider'
 
 const styles = theme => ({
 });
 
 class Connect extends React.Component {
+    
     constructor(props) {
       super(props);
       this.state = {
@@ -22,6 +25,7 @@ class Connect extends React.Component {
           email: "",
           name: "",
           message: "",
+          backdropOpen: false,
       };
     }
 
@@ -45,6 +49,7 @@ class Connect extends React.Component {
 
     handleSend = (event) => {
         event.preventDefault();
+        this.setState({backdropOpen: true});
         EmailJS.send(
             EmailJsApiKeys.SERVICE_ID,
             EmailJsApiKeys.TEMPLATE_ID,
@@ -55,14 +60,15 @@ class Connect extends React.Component {
             },
             EmailJsApiKeys.USER_ID)
             .then(result => {
-                alert('Message Sent, I\'ll get back to you soon');
+                this.props.snackbar.showMessage('Email Sent Successfully!')
                 this.setState({ name: ""});
                 this.setState({ email: ""});
                 this.setState({ message: ""});
                 this.setState({ open: false});
+                this.setState({backdropOpen: false});
             },
             error => {
-                alert('Sorry, something went wrong. Failed to deliver message')
+                this.setState({backdropOpen: false});
             })
     }
     
@@ -71,6 +77,7 @@ class Connect extends React.Component {
             <React.Fragment>
             <Button style={this.props.style} onClick={this.handleClickOpen}>Connect</Button>
             <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                <BackdropLoader open={this.state.backdropOpen}></BackdropLoader>
                 <DialogTitle id="form-dialog-title">Send Me An Email</DialogTitle>
                 <form onSubmit = {this.handleSend} >
                     <DialogContent>
@@ -125,4 +132,4 @@ class Connect extends React.Component {
 
 Connect.propTypes = {};
 
-export default withStyles(styles)(Connect);
+export default withSnackbar(withStyles(styles))(Connect);
