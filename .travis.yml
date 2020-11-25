@@ -41,7 +41,7 @@ deploy:
   provider: script
   script: aws s3 sync --delete --exclude '.git/*' ${PWD}/build/ s3://portfolio.joshbacon.name/
   on:
-    branch: production
+    branch: main
   skip_cleanup: true
 after_deploy:
 - aws cloudfront create-invalidation --distribution-id="E2DH15J9LGHZU1" --paths='/*'
