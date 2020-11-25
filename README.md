@@ -8,7 +8,7 @@
 
 ### Build & Deploy
 ```bash
-npm run-script build
+docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script build
 aws s3 sync --delete ${PWD}/build/ s3://portfolio.joshbacon.name/
 aws cloudfront create-invalidation --distribution-id='E2DH15J9LGHZU1' --paths='/*'
 ```

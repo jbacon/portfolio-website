@@ -24,12 +24,12 @@ class FadeIntoView extends React.Component {
           isVisible: false,
       };
       this.domRef = React.createRef();
+      this.observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => this.setState({isVisible: entry.isIntersecting}));
+    });
     }
     
     componentDidMount() {
-        this.observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => this.setState({isVisible: entry.isIntersecting}));
-        });
         this.observer.observe(this.domRef.current);
         return () => this.observer.unobserve(this.domRef.current);
     }

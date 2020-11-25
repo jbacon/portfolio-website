@@ -1,0 +1,45 @@
+language: bash
+sudo: required
+dist: trusty
+services:
+- docker
+git:
+  depth: 1
+  submodules: false
+branches:
+  only:
+  - main
+env:
+  global:
+  - PATH=$HOME/.local/bin:$PATH
+  - AWS_REGION=us-west-2
+  - secure: gwJkdpdGQ+O71vVqRvE9P1D1B3aaQwcJPdwNjX3+8I1XWec4p+CV2xDzKT7Cb9A1SHXUfiBK7cXzHcVMMfHqJiIV1+rap+LBAY2bONpSTO7jjanvEnyuWajACR42neo96Pa1mpSZIYzle4as4Aj3rXqZv9vg8zpRcTMbkyQzNTCw65GiLYa4NnulFvpK/EqAnmQPKkEEXiW1zEePrMMqLcwQ13Yql6yGg2aborcK60g9NYQXQoP4ZMf+ygEPMySCWwS0dgbWc7BF4iNar0qLW1Z+GKSrgd+J0cdOx0a4/bvJL6/hLYmrGrW5W41jYGfVKEpFhjr5wnsoAsJYNM2OXi3Z1Rx4AQDWN+Cso2XKmJrF45AcBwUeEoe/WLFYHx7QQksIBLDfG7SbZQZiFvHhfnvx6Te6736dVJy72Gg5CdedFePwKPAsg3vBaRQ1u4xBjoiD54n6KuEb8RyPD4yAOwhMr8/GN5eeW1UCA0UJjnI62ZWNJ+OLnDmS4xSNALjePhcOsnXKlgTjUeyU3ZnoJqLPytpWhF/cyvUK+7whB6k9xrVC+FH858CqFV3SxtBTJPYN6WyMWCFY7Od6YGQdJ0du7mT3MBOR54QM7rQcBYep+0/nh0QsryC3GxrAqrJGj+yoT/9JWDQiPNqhDuk1Yysyvhez8BUCnzgJcUTR8o0=
+  - secure: kYyftJX9BLN+sCWzdjc5g7Q3wmI6DTEvLRyxr4yoMQiTQ1ZXtuK6SZUO8dEAJmMVaa4AuAuQCTwjtccl1XYq6purWTV75zJQmc+Qi5299N8KvSXrXprSj8OO9MMOuBbEttzVvB6Cdwf8ftTSEw+nxJuO+c5yLvjeccYbC0rp5gjP65jtdBcCQbJYFOOdUNrV4KUoxE1rn6eFTjaIHZQsuGs15H55uw/Erov0PQLUakA8iFB/Vl8vULbvYKid7eKCZvZli2W8y1Eo+bAo9hEK+/Qg10ry3Eu2DeDDuaO+QU9nmY/PfFh/K2K6U9BTe/ZW+AJlQzNi/I5OIdxue7y8hdFMqpa4UrWi15ZAaDkohA4ta6cMvoW7Mx4hB5QJ4kAEi6nWPQGhzpkGabJqbYs/DcB83wF+wg8gDCwfCSgtTVxLswm7dSmxM6Fc29EG0jsTYWB2BAHFsAJ0IHEfatardehRYcVc8rkkr4CeDNic/ZRGRHMGDrf1p297+XGh+j9aZE65Go2CS0hDV61X0dHQGxtZ8FQjrgWWfgHbLFlTYrGZuSVUx0ZwvqJkie5y+gSjwsK31l9CElT0Dme+CgupbTbcxJChS/CVRhcb/lQNjnvLVRLSfCP/qyBeuXnA+Cj4Nikf060gE3Vaws0e7PC34cO7CaAr+q+F1yn3zkJ6L00=
+before_install:
+- pip install --user awscli
+install:
+- docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm install
+before_script:
+- docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script
+  test
+script:
+- docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script
+  bult
+after_script:
+- echo "After Script..."
+before_cache:
+- echo "Before Cache..."
+after_success:
+- echo "After Success..."
+after_failure:
+- echo "After Failure..."
+before_deploy:
+- echo "Before Deploy..."
+deploy:
+  provider: script
+  script: aws s3 sync --delete --exclude '.git/*' ${PWD}/build/ s3://portfolio.joshbacon.name/
+  on:
+    branch: master
+  skip_cleanup: true
+after_deploy:
+- aws cloudfront create-invalidation --distribution-id="E2DH15J9LGHZU1" --paths='/*'

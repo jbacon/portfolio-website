@@ -3,7 +3,7 @@ import './App.css';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { Backdrop, AppBar, Menu, IconButton, MenuItem, Button, CssBaseline, Toolbar, Typography, Tabs, Tab, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { AppBar, Menu, IconButton, MenuItem, Button, CssBaseline, Toolbar, Typography, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
@@ -133,16 +133,22 @@ class App extends React.Component {
                 <Home />
               </Route>
             </Switch>
-            <BottomNavigation style={{ background: 'black' }}>
-              {/* <div className={this.props.classes.grow} /> */}
+            <BottomNavigation style={{ background: 'black', overflow: "hidden" }}>
               <BottomNavigationAction  style={{ flex: 0 }} href="https://github.com/jbacon" target="_blank" label="GitHub" icon={
                 <GitHubIcon fontSize="large" style={{ color: "white" }}/>
               }/>
               <BottomNavigationAction  style={{ flex: 0 }} selected href="https://www.linkedin.com/in/jbacon47/" target="_blank" label="LinkedIn" icon={
                 <LinkedInIcon fontSize="large" style={{ color: "white"}}/>
               }/>
-              {/* <div className={this.props.classes.grow} /> */}
-              <a href="https://github.com/jbacon/portfolio-website/" target="_blank" rel="noopener noreferrer" style={{
+              <BottomNavigationAction  style={{
+                flex: "1"}} selected href="https://github.com/jbacon/portfolio-website/" target="_blank" label="Website Source" icon={
+                <img style={{
+                  width: "100%",
+                  padding: "1rem",
+                }}
+                alt="Made With ReactJS" src={process.env.PUBLIC_URL + '/images/poweredwithreactjs.png'}/>
+              }/>
+              {/* <a href="https://github.com/jbacon/portfolio-website/" target="_blank" rel="noopener noreferrer" style={{
                   flex: "0 1 0%",
                   height: "100%",
                 }}>
@@ -151,7 +157,7 @@ class App extends React.Component {
                   padding: "8px",
                 }}
                 alt="Made With ReactJS" src={process.env.PUBLIC_URL + '/images/poweredwithreactjs.png'}/>
-              </a>
+              </a> */}
           </BottomNavigation>
         </div>
         </Router>
