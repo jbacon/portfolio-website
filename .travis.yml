@@ -22,11 +22,11 @@ env:
 before_install:
 - pip install --user awscli
 install:
-- docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm install
+- docker run -e CI=true -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm install
 before_script:
-- docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm test -- --coverage
+- docker run -e CI=true -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm test -- --coverage
 script:
-- docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script
+- docker run -e CI=true -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script
   bult
 after_script:
 - echo "After Script..."
