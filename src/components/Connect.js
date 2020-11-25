@@ -81,9 +81,7 @@ class Connect extends React.Component {
                 <DialogTitle id="form-dialog-title">Send Me An Email</DialogTitle>
                 <form onSubmit = {this.handleSend} >
                     <DialogContent>
-                    {/* <DialogContentText>
-                        Send me a email:
-                    </DialogContentText> */}
+                    <DialogContentText></DialogContentText>
                         <TextField
                             required
                             autoFocus

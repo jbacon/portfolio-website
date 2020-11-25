@@ -3,9 +3,11 @@
 # Portfolio Website: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
 
 ## Technical Features:
-- ReactJS
+- ReactJS - [Create React App](https://reactjs.org/docs/create-a-new-react-app.html)
 - Material UI
-- S3 + CloudFront Hosting
+- S3 Static Website
+- CloudFront CDN
+- Travis CI
 - EmailJS
 
 ### Build & Deploy
