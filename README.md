@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.com/jbacon/portfolio-website.svg?branch=main)](https://api.travis-ci.com/jbacon/portfolio-website.svg?branch=main)
+
 # Portfolio Website: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
 
 ## Technical Features:
