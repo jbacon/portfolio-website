@@ -9,6 +9,9 @@ git:
 branches:
   only:
   - main
+cache:
+  directories:
+    - node_modules
 env:
   global:
   - PATH=$HOME/.local/bin:$PATH
