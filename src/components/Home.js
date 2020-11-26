@@ -57,7 +57,7 @@ class Home extends React.Component {
                                         style={{
                                             background: 'url(./images/stuart_mt_2.jpg)',
                                             backgroundRepeat: 'no-repeat',
-                                            backgroundPosition: "50% "+(percentage*-1000+910)+"px",
+                                            backgroundPosition: "50% "+(percentage*-1000+(800))+"px",
                                             backgroundSize: 'auto 1000px',
                                             position: 'absolute',
                                             left: '0px',
@@ -91,7 +91,8 @@ class Home extends React.Component {
                         </div>
                         <FadeIntoView>
                             <Text style={{
-                                minHeight: "50vh",}}>
+                                minHeight: "50vh",
+                                padding: "3rem",}}>
                             Hi, I'm Josh!<br/>
                             <br/>
                             Seattle based, software developer/engineer<br />
@@ -131,7 +132,8 @@ class Home extends React.Component {
                         </div>
                         <FadeIntoView>
                             <Text style={{
-                                height: "50vh"}}>
+                                minHeight: "50vh",
+                                padding: "3rem",}}>
                             5+ years experience developing software.<br/>
                             I have an array of technical skills;<br/>
                             Lead various cloud, back-end, and front-end efforts;<br/>
@@ -142,7 +144,8 @@ class Home extends React.Component {
                         </FadeIntoView>
                         <FadeIntoView>
                             <div style={{
-                                height: "50vh"}}>
+                                minHeight: "50vh",
+                                padding: "3rem",}}>
                                 <img style={{
                                     position: "relative",
                                     width: "150px",
@@ -159,16 +162,18 @@ class Home extends React.Component {
                         </FadeIntoView>
                         <FadeIntoView >
                             <Text style={{
-                                height: "50vh"}}>
+                                minHeight: "50vh",
+                                padding: "3rem",}}>
                             Teamwork is the most important competency.<br/>
-                            I value people and partnerships.<br/>
-                            Learning is a collaborative process,<br/>
+                            I value people and my partnerships.<br/>
+                            Learning is collaborative,<br/>
                             and my work relations are both friendly and effective.<br/>
                             Let's stretch our minds together...<br/>
                             </Text>
                         </FadeIntoView>
                         <div style={{
-                                height: "50vh"}}>
+                                minHeight: "50vh",
+                                padding: "3rem",}}>
                         <Text>Get To Know Me:</Text>
                         <Carousel>
                             <div>
