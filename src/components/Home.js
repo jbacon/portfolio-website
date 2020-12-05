@@ -7,6 +7,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FadeIntoView from "./reusable/FadeIntoView"
 import Carousel from 'react-material-ui-carousel'
 import { Parallax as Parallax2 } from 'react-parallax';
+import Button from '@material-ui/core/Button';
+import AppContext from '../AppContext'
 
 
 // Example of a "styled-component"
@@ -29,6 +31,7 @@ const styles = theme => ({
 });
 
 class Home extends React.Component {
+    static contextType = AppContext;
     constructor(props) {
       super(props);
       this.state = {
@@ -116,7 +119,7 @@ class Home extends React.Component {
                         </Text>
                         <FadeIntoView style={{
                                 height: "25vh"}}>
-                            <Text>Let's connect<br/></Text>
+                            <Text>Let's <Button onClick={this.context.openConnectDialog}>Connect</Button><br/></Text>
                         </FadeIntoView>
                         <div style={{
                             height: "50vh",

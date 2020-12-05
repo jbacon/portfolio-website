@@ -13,7 +13,9 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home"
 import Connect from "./components/Connect"
+import AppContext from "./AppContext"
 import { SnackbarProvider } from 'material-ui-snackbar-provider'
+import BackdropLoader from "./components/reusable/BackdropLoader"
 
 const styles = theme => ({
   sectionDesktop: {
@@ -46,17 +48,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mobileMoreAnchorEl: null
+      mobileMoreAnchorEl: null,
+      isConnectDialogOpen: false,
+      isLoading: false,
     };
   }
-  handleChange = (event, value) => {};
-  
-  handleMobileMenuOpen = (event) => {
-    this.setState({mobileMoreAnchorEl: event.currentTarget});
-  };
-  handleMobileMenuClose = () => {
-    this.setState({mobileMoreAnchorEl: null});
-  };
+  handleMobileMenuOpen = (event) => { this.setState({mobileMoreAnchorEl: event.currentTarget}) };
+  handleMobileMenuClose = () => { this.setState({mobileMoreAnchorEl: null}) };
+  openConnectDialog = () => { this.setState({ isConnectDialogOpen: true }) };
+  closeConnectDialog = () => { this.setState({ isConnectDialogOpen: false }) };
+  setLoading = () => { this.setState({isLoading: true}) };
+  setLoaded = () => { this.setState({isLoading: false}) };
   componentDidMount() {
   }
 
@@ -68,6 +70,12 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <AppContext.Provider value={{
+          isMobile: Boolean(this.state.mobileMoreAnchorEl),
+          openConnectDialog: this.openConnectDialog,
+          setLoading: this.isLoading,
+          setLoaded: this.isLoaded,
+        }}>
         <CssBaseline/>
         <SnackbarProvider SnackbarProps={{ autoHideDuration: 4000 }}>
         <Router>
@@ -77,6 +85,8 @@ class App extends React.Component {
             flexDirection: "column",
             justifyContent: "space-between",
         }}>
+            <Connect open={this.state.isConnectDialogOpen} onDone={this.closeConnectDialog}/>
+            <BackdropLoader open={this.state.isLoading}></BackdropLoader>
             <AppBar position='static' color='default' style={{
               background: 'black',
               // flex: "1",
@@ -94,8 +104,7 @@ class App extends React.Component {
                 <div className={this.props.classes.grow} />
                 <div className={this.props.classes.sectionDesktop}>
                   <Button href={process.env.PUBLIC_URL + '/josh_bacon_resume.pdf'} download target="_blank" style={{ color: 'white' }}>Resume</Button>
-                  <Connect style={{ color: "white" }}></Connect>
-                  {/* <Button to='/connect' component={Link} style={{ color: 'white' }}>Connect</Button> */}
+                  <Button style={{ color: "white" }} onClick={this.openConnectDialog}>Connect</Button>
                 </div>
                 <div className={this.props.classes.sectionMobile}>
                   <IconButton
@@ -124,7 +133,7 @@ class App extends React.Component {
                   <Button href={process.env.PUBLIC_URL + '/josh_bacon_resume.pdf'} download target="_blank" style={{ color: 'black' }}>Resume</Button>
                 </MenuItem>
                 <MenuItem>
-                  <Connect style={{ color: "black"}}></Connect>
+                  <Button style={{ color: "black"}} onClick={this.openConnectDialog}>Connect</Button>
                 </MenuItem>
               </Menu>
             </AppBar>
@@ -162,6 +171,7 @@ class App extends React.Component {
         </div>
         </Router>
         </SnackbarProvider>
+        </AppContext.Provider>
       </React.Fragment>
     );
   }

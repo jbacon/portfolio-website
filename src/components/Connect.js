@@ -10,32 +10,24 @@ import { withStyles } from '@material-ui/core/styles';
 
 import EmailJS from "emailjs-com"
 import EmailJsApiKeys from "./apikeys"
-import BackdropLoader from "./reusable/BackdropLoader"
 import { withSnackbar } from 'material-ui-snackbar-provider'
+import PropTypes from 'prop-types';
+import AppContext from '../AppContext'
 
 const styles = theme => ({
 });
 
 class Connect extends React.Component {
-    
+    static contextType = AppContext
+
     constructor(props) {
       super(props);
       this.state = {
-          open: false,
           email: "",
           name: "",
           message: "",
-          backdropOpen: false,
       };
     }
-
-    handleClickOpen = () => {
-        this.setState({ open: true});
-    };
-    
-    handleClose = () => {
-        this.setState({ open: false});
-    };
 
     handleNameChange = (event) => {
         this.setState({name: event.target.value});
@@ -49,7 +41,7 @@ class Connect extends React.Component {
 
     handleSend = (event) => {
         event.preventDefault();
-        this.setState({backdropOpen: true});
+        this.context.setLoading();
         EmailJS.send(
             EmailJsApiKeys.SERVICE_ID,
             EmailJsApiKeys.TEMPLATE_ID,
@@ -64,70 +56,74 @@ class Connect extends React.Component {
                 this.setState({ name: ""});
                 this.setState({ email: ""});
                 this.setState({ message: ""});
+                this.props.onDone();
+                this.context.setLoaded();
                 this.setState({ open: false});
-                this.setState({backdropOpen: false});
             },
             error => {
-                this.setState({backdropOpen: false});
+                this.context.setLoaded();
+                this.props.onDone();
             })
     }
     
     render() {
         return (
             <React.Fragment>
-            <Button style={this.props.style} onClick={this.handleClickOpen}>Connect</Button>
-            <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                <BackdropLoader open={this.state.backdropOpen}></BackdropLoader>
-                <DialogTitle id="form-dialog-title">Send Me An Email</DialogTitle>
-                <form onSubmit = {this.handleSend} >
-                    <DialogContent>
-                    <DialogContentText></DialogContentText>
-                        <TextField
-                            required
-                            autoFocus
-                            margin="normal"
-                            id="name"
-                            label="Your Name"
-                            fullWidth
-                            value={this.state.name}
-                            onChange={this.handleNameChange}
-                        />
-                        <TextField
-                            required
-                            margin="normal"
-                            id="email"
-                            label="Your Email"
-                            type="email"
-                            fullWidth
-                            value={this.state.email}
-                            onChange={this.handleEmailChange}
-                        />
-                        <TextField
-                            required
-                            margin="normal"
-                            id="message"
-                            label="Your Message"
-                            fullWidth
-                            multiline
-                            value={this.state.message}
-                            onChange={this.handleMessageChange}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleClose}>
-                            Cancel
-                        </Button>
-                        <Button type="submit">
-                            Send
-                        </Button>
-                    </DialogActions>
-                </form>
-            </Dialog>
+                <Dialog open={this.props.open} onClose={this.props.onDone} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Send Me An Email</DialogTitle>
+                    <form onSubmit = {this.handleSend} >
+                        <DialogContent>
+                        <DialogContentText></DialogContentText>
+                            <TextField
+                                required
+                                autoFocus
+                                margin="normal"
+                                id="name"
+                                label="Your Name"
+                                fullWidth
+                                value={this.state.name}
+                                onChange={this.handleNameChange}
+                            />
+                            <TextField
+                                required
+                                margin="normal"
+                                id="email"
+                                label="Your Email"
+                                type="email"
+                                fullWidth
+                                value={this.state.email}
+                                onChange={this.handleEmailChange}
+                            />
+                            <TextField
+                                required
+                                margin="normal"
+                                id="message"
+                                label="Your Message"
+                                fullWidth
+                                multiline
+                                value={this.state.message}
+                                onChange={this.handleMessageChange}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.props.onDone}>
+                                Cancel
+                            </Button>
+                            <Button type="submit">
+                                Send
+                            </Button>
+                        </DialogActions>
+                    </form>
+                </Dialog>
             </React.Fragment>
         );
     }
 }
 
-Connect.propTypes = {};
+Connect.propTypes = {
+    onDone: PropTypes.func.isRequired,
+    open: PropTypes.bool,
+};
+
 
 export default withSnackbar(withStyles(styles))(Connect);
