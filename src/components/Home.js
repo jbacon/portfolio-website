@@ -9,6 +9,8 @@ import Carousel from 'react-material-ui-carousel'
 import { Parallax as Parallax2 } from 'react-parallax';
 import Button from '@material-ui/core/Button';
 import AppContext from '../AppContext'
+import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 
 // Example of a "styled-component"
@@ -86,7 +88,7 @@ class Home extends React.Component {
                                 width: "150px",
                                 height: "150px",
                                 right: "calc(-50% + 75px)",
-                                }} src={process.env.PUBLIC_URL + '/images/me.jpg'}/>
+                                }} src={process.env.PUBLIC_URL + '/images/self.jpg'}/>
                             <Text style={{ }}><br/>keep scrolling</Text>
                             <ExpandMoreIcon style={{
                                 width: "100%",
@@ -119,7 +121,7 @@ class Home extends React.Component {
                         </Text>
                         <FadeIntoView style={{
                                 height: "25vh"}}>
-                            <Text>Let's <Button onClick={this.context.openConnectDialog}>Connect</Button><br/></Text>
+                            <Text>Let's  <Button variant="outlined" onClick={this.context.openConnectDialog}>Connect</Button><br/></Text>
                         </FadeIntoView>
                         <div style={{
                             height: "50vh",
@@ -174,10 +176,26 @@ class Home extends React.Component {
                             Let's stretch our minds together...<br/>
                             </Text>
                         </FadeIntoView>
+                        <Avatar style={{
+                                    width: "150px",
+                                    height: "150px",
+                                    right: "calc(-50% + 75px)",
+                                    }} src={process.env.PUBLIC_URL + '/images/skiing_with_mom.jpg'}/>
                         <div style={{
                                 minHeight: "50vh",
                                 padding: "3rem",}}>
-                        <Text>Get To Know Me:</Text>
+                                    <Text>Recommendations:</Text>
+                        <Carousel>
+                            <div>
+                                <Text><FormatQuoteIcon/>Josh is a great employee. I've been very impressed with his ability to pick up new skills as well as his attention to detail. Josh is also very easy to work with and is a great team player. He collaborates well with other to ensure a quality product is delivered. He has been a huge asset to the Information Delivery team here at Clearwater Paper during his internship. Josh is just getting started in his career, but I know he's going to go far.<FormatQuoteIcon/><br/></Text>
+                                <Text>Phil Peck, June 10, 2015, managed directly</Text>
+                            </div>
+                            <div>
+                                <Text><FormatQuoteIcon/>'Tons of potential' is the phrase that comes to mind when I think of Josh. Josh has been my intern for less than a year and has picked up complex technologies far quicker than I expected him to. He's a very quick learner and self-starter who has a great drive to figure things out on his own. He's going to be a superstar performer when he's done with college; any company will be lucky to have to him.<FormatQuoteIcon/><br/></Text>
+                                <Text>Kyle Stevension, October 18, 2014, managed directly</Text>
+                            </div>
+                        </Carousel>
+                        {/* <Text>Get To Know Me:</Text>
                         <Carousel>
                             <div>
                                 <Avatar style={{
@@ -251,7 +269,7 @@ class Home extends React.Component {
                                     }} src={process.env.PUBLIC_URL + '/images/lakedays.jpg'}/>
                                 <Text>Lake Days</Text>
                             </div>
-                        </Carousel>
+                        </Carousel> */}
                         </div>
                     </div>
                 </ParallaxProvider>

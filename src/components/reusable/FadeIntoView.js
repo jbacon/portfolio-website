@@ -7,7 +7,7 @@ const styles = theme => ({
         opacity: "0",
         transform: "translateY(20vh)",
         visibility: "hidden",
-        transition: "opacity 6s ease-out, transform 1.2s ease-out",
+        transition: "opacity 3s ease-out, transform 1.2s ease-out",
         willChange: "opacity, visibility",
       },
       isVisible: {
