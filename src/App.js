@@ -129,10 +129,10 @@ class App extends React.Component {
                 open={Boolean(this.state.mobileMoreAnchorEl)}
                 onClose={this.handleMobileMenuClose}
               >
-                <MenuItem>
+                <MenuItem onClick={this.handleMobileMenuClose}>
                   <Button href={process.env.PUBLIC_URL + '/josh_bacon_resume.pdf'} download target="_blank" style={{ color: 'black' }}>Resume</Button>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={this.handleMobileMenuClose}>
                   <Button style={{ color: "black"}} onClick={this.openConnectDialog}>Connect</Button>
                 </MenuItem>
               </Menu>
