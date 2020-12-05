@@ -10,7 +10,6 @@ import { Parallax as Parallax2 } from 'react-parallax';
 import Button from '@material-ui/core/Button';
 import AppContext from '../AppContext'
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 
 // Example of a "styled-component"
