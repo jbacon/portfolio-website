@@ -191,7 +191,7 @@ class Home extends React.Component {
                             </div>
                             <div>
                                 <Text><FormatQuoteIcon/>'Tons of potential' is the phrase that comes to mind when I think of Josh. Josh has been my intern for less than a year and has picked up complex technologies far quicker than I expected him to. He's a very quick learner and self-starter who has a great drive to figure things out on his own. He's going to be a superstar performer when he's done with college; any company will be lucky to have to him.<FormatQuoteIcon/><br/></Text>
-                                <Text>Kyle Stevension, October 18, 2014, managed directly</Text>
+                                <Text>Kyle Stevenson, October 18, 2014, managed directly</Text>
                             </div>
                         </Carousel>
                         {/* <Text>Get To Know Me:</Text>
