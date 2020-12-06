@@ -22,7 +22,10 @@ const Text = styled(Typography).attrs(props => ({
   display: block;
   text-align: center;
   color: black;
-  padding: 1rem;
+  padding-left: .3rem;
+  padding-right: .3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 //   position: absolute;
 //   top: 0;
 
@@ -81,14 +84,14 @@ class Home extends React.Component {
                             </Parallax2>
                         <div style={{
                             minHeight: "50vh",
-                            padding: "3rem",
+                            padding: "2rem",
                             background: 'white'}}>
                             <Avatar style={{
-                                width: "150px",
-                                height: "150px",
-                                right: "calc(-50% + 75px)",
+                                width: "180px",
+                                height: "180px",
+                                right: "calc(-50% + 90px)",
                                 }} src={process.env.PUBLIC_URL + '/images/self.jpg'}/>
-                            <Text style={{ }}><br/>keep scrolling</Text>
+                            <Text style={{ padding: ".5rem" }}><br/>keep scrolling</Text>
                             <ExpandMoreIcon style={{
                                 width: "100%",
                             }}/>
@@ -137,7 +140,8 @@ class Home extends React.Component {
                         <FadeIntoView>
                             <Text style={{
                                 minHeight: "50vh",
-                                padding: "3rem",}}>
+                                paddingTop: "3rem",
+                                paddingBottom: "3rem",}}>
                             5+ years experience developing software.<br/>
                             I have an array of technical skills;<br/>
                             Lead various cloud, back-end, and front-end efforts;<br/>
@@ -167,7 +171,8 @@ class Home extends React.Component {
                         <FadeIntoView >
                             <Text style={{
                                 minHeight: "50vh",
-                                padding: "3rem",}}>
+                                paddingTop: "3rem",
+                                paddingBottom: "3rem",}}>
                             Teamwork is the most important competency.<br/>
                             I value people and my partnerships.<br/>
                             Learning is collaborative,<br/>
@@ -176,15 +181,15 @@ class Home extends React.Component {
                             </Text>
                         </FadeIntoView>
                         <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
+                                    width: "180px",
+                                    height: "180px",
+                                    right: "calc(-50% + 90px)",
                                     }} src={process.env.PUBLIC_URL + '/images/skiing_with_mom.jpg'}/>
                         <div style={{
                                 minHeight: "50vh",
                                 padding: "3rem",}}>
                                     <Text>Recommendations:</Text>
-                        <Carousel autoPlay="false">
+                        <Carousel autoPlay={false} navButtonsAlwaysInvisible={true}>
                             <div>
                                 <Text><FormatQuoteIcon/>Josh is a great employee. I've been very impressed with his ability to pick up new skills as well as his attention to detail. Josh is also very easy to work with and is a great team player. He collaborates well with other to ensure a quality product is delivered. He has been a huge asset to the Information Delivery team here at Clearwater Paper during his internship. Josh is just getting started in his career, but I know he's going to go far.<FormatQuoteIcon/><br/></Text>
                                 <Text>Phil Peck, June 10, 2015, managed directly</Text>
