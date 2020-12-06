@@ -73,8 +73,8 @@ class App extends React.Component {
         <AppContext.Provider value={{
           isMobile: Boolean(this.state.mobileMoreAnchorEl),
           openConnectDialog: this.openConnectDialog,
-          setLoading: this.isLoading,
-          setLoaded: this.isLoaded,
+          setLoading: this.setLoading,
+          setLoaded: this.setLoaded,
         }}>
         <CssBaseline/>
         <SnackbarProvider SnackbarProps={{ autoHideDuration: 4000 }}>

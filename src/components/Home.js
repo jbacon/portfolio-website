@@ -184,7 +184,7 @@ class Home extends React.Component {
                                 minHeight: "50vh",
                                 padding: "3rem",}}>
                                     <Text>Recommendations:</Text>
-                        <Carousel>
+                        <Carousel autoPlay="false">
                             <div>
                                 <Text><FormatQuoteIcon/>Josh is a great employee. I've been very impressed with his ability to pick up new skills as well as his attention to detail. Josh is also very easy to work with and is a great team player. He collaborates well with other to ensure a quality product is delivered. He has been a huge asset to the Information Delivery team here at Clearwater Paper during his internship. Josh is just getting started in his career, but I know he's going to go far.<FormatQuoteIcon/><br/></Text>
                                 <Text>Phil Peck, June 10, 2015, managed directly</Text>
