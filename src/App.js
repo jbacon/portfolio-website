@@ -141,6 +141,9 @@ class App extends React.Component {
               <Route exact path="/">
                 <Home />
               </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
             </Switch>
             <BottomNavigation style={{ background: 'black', overflow: "hidden" }}>
               <BottomNavigationAction  style={{ flex: 0 }} href="https://github.com/jbacon" target="_blank" label="GitHub" icon={
@@ -149,24 +152,13 @@ class App extends React.Component {
               <BottomNavigationAction  style={{ flex: 0 }} selected href="https://www.linkedin.com/in/jbacon47/" target="_blank" label="LinkedIn" icon={
                 <LinkedInIcon fontSize="large" style={{ color: "white"}}/>
               }/>
-              <BottomNavigationAction  style={{
-                flex: "1"}} selected href="https://github.com/jbacon/portfolio-website/" target="_blank" label="Website Source" icon={
+              <BottomNavigationAction  style={{ flex: 1 }} selected href="https://github.com/jbacon/portfolio-website/" target="_blank" label="Website Source" icon={
                 <img style={{
                   width: "100%",
                   padding: "1rem",
                 }}
                 alt="Made With ReactJS" src={process.env.PUBLIC_URL + '/images/poweredwithreactjs.png'}/>
               }/>
-              {/* <a href="https://github.com/jbacon/portfolio-website/" target="_blank" rel="noopener noreferrer" style={{
-                  flex: "0 1 0%",
-                  height: "100%",
-                }}>
-                <img style={{
-                  height: "100%",
-                  padding: "8px",
-                }}
-                alt="Made With ReactJS" src={process.env.PUBLIC_URL + '/images/poweredwithreactjs.png'}/>
-              </a> */}
           </BottomNavigation>
         </div>
         </Router>

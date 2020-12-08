@@ -102,7 +102,7 @@ class Home extends React.Component {
                                 padding: "3rem",}}>
                             Hi, I'm Josh!<br/>
                             <br/>
-                            Seattle based, software developer/engineer<br />
+                            Seattle based,<br/>software developer/engineer<br />
                             </Text>
                         </FadeIntoView>
                         <div style={{
@@ -142,10 +142,10 @@ class Home extends React.Component {
                                 minHeight: "50vh",
                                 paddingTop: "3rem",
                                 paddingBottom: "3rem",}}>
-                            5+ years experience developing software.<br/>
+                            5+ years professional experience.<br/>
                             I have an array of technical skills;<br/>
                             Lead various cloud, back-end, and front-end efforts;<br/>
-                            I tackle projects with assurance.<br/>
+                            And tackle projects with assurance.<br/>
                             From conception to production...<br/>
                             ...let's build it.<br/>
                             </Text>
@@ -174,10 +174,10 @@ class Home extends React.Component {
                                 paddingTop: "3rem",
                                 paddingBottom: "3rem",}}>
                             Teamwork is the most important competency.<br/>
-                            I value people and my partnerships.<br/>
-                            Learning is collaborative,<br/>
+                            I value people and partnerships,<br/>
                             and my work relations are both friendly and effective.<br/>
-                            Let's stretch our minds together...<br/>
+                            I believe learning is collaborative...<br/>
+                            ...let's stretch our minds together.<br/>
                             </Text>
                         </FadeIntoView>
                         <Avatar style={{
@@ -199,81 +199,6 @@ class Home extends React.Component {
                                 <Text>Kyle Stevenson, October 18, 2014, managed directly</Text>
                             </div>
                         </Carousel>
-                        {/* <Text>Get To Know Me:</Text>
-                        <Carousel>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/me7.jpg'}/>
-                                <Text>Washington born and raised</Text>
-                            </div>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/me8.jpg'}/>
-                                <Text>Cycling Gears</Text>
-                            </div>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/climbing.jpg'}/>
-                                <Text>Climbing Cliffs</Text>
-                            </div>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/skiing_with_mom.jpg'}/>
-                                <Text>Skiing Slopes</Text>
-                            </div>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/groupphotohike.jpg'}/>
-                                <Text>Friendly Hikes</Text>
-                            </div>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/me6.jpg'}/>
-                                <Text>Furball Friends</Text>
-                            </div>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/drone.jpg'}/>
-                                <Text>Drone Racing</Text>
-                            </div>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/hummingbird.jpg'}/>
-                                <Text>Art &#38; Photography</Text>
-                            </div>
-                            <div>
-                                <Avatar style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    right: "calc(-50% + 75px)",
-                                    }} src={process.env.PUBLIC_URL + '/images/lakedays.jpg'}/>
-                                <Text>Lake Days</Text>
-                            </div>
-                        </Carousel> */}
                         </div>
                     </div>
                 </ParallaxProvider>
