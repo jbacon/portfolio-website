@@ -76,8 +76,6 @@ class Connect extends React.Component {
                     <form onSubmit = {this.handleSend} >
                         <DialogContent>
                             <TextField
-                                // required
-                                // autoFocus
                                 margin="normal"
                                 id="to"
                                 label="To"
@@ -86,7 +84,7 @@ class Connect extends React.Component {
                                 disabled
                                 InputProps={{
                                     endAdornment:
-                                    <InputAdornment position="start">
+                                    <InputAdornment position="end">
                                         <Link style={{ display: "inline"}} href="https://www.linkedin.com/in/jbacon47/" target="_blank">
                                             <LinkedInIcon fontSize="large"/>
                                         </Link>
@@ -97,35 +95,29 @@ class Connect extends React.Component {
                                 onChange={this.handleNameChange}
                             />
                             <TextField
-                                // required
+                                required
                                 autoFocus
                                 margin="normal"
                                 variant="outlined"
                                 id="name"
                                 label="Name"
-                                // InputProps={{
-                                //     startAdornment: <InputAdornment position="start">Subject:</InputAdornment>,
-                                //   }}
                                 fullWidth
                                 value={this.state.name}
                                 onChange={this.handleNameChange}
                             />
                             <TextField
-                                // required
+                                required
                                 margin="normal"
                                 id="email"
                                 variant="outlined"
                                 label="Email"
-                                // InputProps={{
-                                //     startAdornment: <InputAdornment position="start">From:</InputAdornment>,
-                                //   }}
                                 type="email"
                                 fullWidth
                                 value={this.state.email}
                                 onChange={this.handleEmailChange}
                             />
                             <TextField
-                                // required
+                                required
                                 margin="normal"
                                 id="message"
                                 label="Message"
@@ -139,11 +131,11 @@ class Connect extends React.Component {
                             />
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.props.onDone}>
-                                Cancel
-                            </Button>
                             <Button type="submit">
                                 Send
+                            </Button>
+                            <Button onClick={this.props.onDone}>
+                                Cancel
                             </Button>
                         </DialogActions>
                     </form>
