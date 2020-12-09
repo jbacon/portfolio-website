@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -13,6 +12,9 @@ import EmailJsApiKeys from "./apikeys"
 import { withSnackbar } from 'material-ui-snackbar-provider'
 import PropTypes from 'prop-types';
 import AppContext from '../AppContext'
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import Link from '@material-ui/core/Link';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const styles = theme => ({
 });
@@ -73,32 +75,63 @@ class Connect extends React.Component {
                     <DialogTitle id="form-dialog-title">Send Me An Email</DialogTitle>
                     <form onSubmit = {this.handleSend} >
                         <DialogContent>
-                        <DialogContentText></DialogContentText>
                             <TextField
-                                required
+                                // required
+                                // autoFocus
+                                margin="normal"
+                                id="to"
+                                label="To"
+                                variant="outlined"
+                                defaultValue="Disabled"
+                                disabled
+                                InputProps={{
+                                    endAdornment:
+                                    <InputAdornment position="start">
+                                        <Link style={{ display: "inline"}} href="https://www.linkedin.com/in/jbacon47/" target="_blank">
+                                            <LinkedInIcon fontSize="large"/>
+                                        </Link>
+                                    </InputAdornment>,
+                                  }}
+                                fullWidth
+                                value="jbacon@zagmail.gonzaga.edu"
+                                onChange={this.handleNameChange}
+                            />
+                            <TextField
+                                // required
                                 autoFocus
                                 margin="normal"
+                                variant="outlined"
                                 id="name"
-                                label="Your Name"
+                                label="Name"
+                                // InputProps={{
+                                //     startAdornment: <InputAdornment position="start">Subject:</InputAdornment>,
+                                //   }}
                                 fullWidth
                                 value={this.state.name}
                                 onChange={this.handleNameChange}
                             />
                             <TextField
-                                required
+                                // required
                                 margin="normal"
                                 id="email"
-                                label="Your Email"
+                                variant="outlined"
+                                label="Email"
+                                // InputProps={{
+                                //     startAdornment: <InputAdornment position="start">From:</InputAdornment>,
+                                //   }}
                                 type="email"
                                 fullWidth
                                 value={this.state.email}
                                 onChange={this.handleEmailChange}
                             />
                             <TextField
-                                required
+                                // required
                                 margin="normal"
                                 id="message"
-                                label="Your Message"
+                                label="Message"
+                                variant="outlined"
+                                rowsMax={10}
+                                rows={4}
                                 fullWidth
                                 multiline
                                 value={this.state.message}
