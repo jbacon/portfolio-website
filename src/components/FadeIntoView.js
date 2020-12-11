@@ -1,6 +1,6 @@
 
-import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const styles = theme => ({
     fadeInSection: {
@@ -9,26 +9,26 @@ const styles = theme => ({
         visibility: "hidden",
         transition: "opacity 3s ease-out, transform 1.2s ease-out",
         willChange: "opacity, visibility",
-      },
-      isVisible: {
+    },
+    isVisible: {
         opacity: "1",
         transform: "none",
         visibility: "visible",
-      },
+    },
 });
 
 class FadeIntoView extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = {
-          isVisible: false,
-      };
-      this.domRef = React.createRef();
-      this.observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => this.setState({isVisible: entry.isIntersecting}));
-    });
+        super(props);
+        this.state = {
+            isVisible: false,
+        };
+        this.domRef = React.createRef();
+        this.observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => this.setState({ isVisible: entry.isIntersecting }));
+        });
     }
-    
+
     componentDidMount() {
         this.observer.observe(this.domRef.current);
         return () => this.observer.unobserve(this.domRef.current);
@@ -38,9 +38,9 @@ class FadeIntoView extends React.Component {
     }
     render() {
         return (
-            <div className={this.state.isVisible ? this.props.classes.fadeInSection+" "+this.props.classes.isVisible : this.props.classes.fadeInSection} ref={this.domRef}
+            <div className={this.state.isVisible ? this.props.classes.fadeInSection + " " + this.props.classes.isVisible : this.props.classes.fadeInSection} ref={this.domRef}
             >
-              {this.props.children}
+                {this.props.children}
             </div>
         );
     }
