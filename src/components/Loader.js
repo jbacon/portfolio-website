@@ -1,20 +1,12 @@
 /**
- * Summary. A component/provider that displays a loading backdrop and spinning indicator
- *  when a child component dispatches a loading signal.
- *  Supports multiple component loading signal(s) in the case that
- *  multiple async operations need to be waited upon for the same loading screen
+ * Summary. A LoaderProvider that displays a loading backdrop and spinning indicator.
  * 
- * Description. This file exports the Component, Provider, and wrapper withLoaderContext.
- *  Usage:
+ *  Loading displays child component(s) dispatch the loading signal.
+ *  Subsequentally, the loader disappears after all children dispatch the loaded signal.
  * 
- *  <LoaderProvider>
- *    <Loader/>
- *    <Component1WrappedWithLoader/>
- *    <Component2WrappedWithLoader>
- *      <Component3WrappedWithLoader/>
- *    </Component2WrappedWithLoader>
- *  </LoaderProvider>
  * 
+ * Description. This file exports the LoaderProvider and the wrapper withLoader.
+
  *  (this is definitely over-engineered, but learned a great deal about Context API!)
  */
 
@@ -23,8 +15,8 @@ import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 
 // Two context are needed for two types of consumers: One "state" consumers (re-renders) and "updater" consumers (no re-rendering)
-const LoaderStateContext = React.createContext({}); // Contains the state
-const LoaderUpdaterContext = React.createContext({}); // Contains the updater functions
+const LoaderStateContext = React.createContext({}); // Contains state
+const LoaderUpdaterContext = React.createContext({}); // Contains functions that update state
 
 const styles = theme => ({
     backdrop: {

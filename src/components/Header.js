@@ -2,9 +2,6 @@ import { AppBar, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from 
 import { withStyles } from '@material-ui/core/styles';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import React from 'react';
-import {
-  Link
-} from "react-router-dom";
 import { withConnectDialogDispatcher } from './ConnectDialog';
 
 const styles = theme => ({
@@ -41,38 +38,30 @@ class Header extends React.Component {
   handleMobileMenuOpen = (event) => { this.setState({ mobileMoreAnchorEl: event.currentTarget }) };
   handleMobileMenuClose = () => { this.setState({ mobileMoreAnchorEl: null }) };
 
+  handleResume = () => {
+    window.open(process.env.PUBLIC_URL + '/josh_bacon_resume.pdf', "_blank")
+  }
+  handleConnect = () => {
+    this.props.connect();
+  }
+
   render() {
     return (
-      <AppBar position='static' color='default' style={{
-        background: 'black',
-        // flex: "1",
-      }}>
+      <AppBar position='static' color="secondary">
         <Toolbar>
-          <Typography noWrap
-            className={this.props.classes.title}
-            to='/' component={Link}
-            style={{
-              // flex: 1,
-              color: 'white',
-              textDecoration: "None",
-            }}><b>JOSH BACON</b> - Engineer
-                </Typography>
+          <Typography noWrap><b>JOSH BACON</b> - Engineer</Typography>
           <div className={this.props.classes.grow} />
           <div className={this.props.classes.sectionDesktop}>
-            <Button href={process.env.PUBLIC_URL + '/josh_bacon_resume.pdf'} download target="_blank" style={{ color: 'white' }}>Resume</Button>
-            <Button style={{ color: "white" }} onClick={this.props.connect}>Connect</Button>
+            <Button onClick={this.handleResume} color="inherit">Resume</Button>
+            <Button onClick={this.handleConnect} color="inherit">Connect</Button>
           </div>
           <div className={this.props.classes.sectionMobile}>
             <IconButton
+              color="inherit"
               aria-label="show more"
               aria-controls={this.mobileMenuId}
               aria-haspopup="true"
-              onClick={this.handleMobileMenuOpen}
-              style={{
-                flexGrow: 1,
-                color: 'white'
-              }}
-            >
+              onClick={this.handleMobileMenuOpen}>
               <MoreIcon />
             </IconButton>
           </div>
@@ -85,13 +74,11 @@ class Header extends React.Component {
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           open={Boolean(this.state.mobileMoreAnchorEl)}
           onClose={this.handleMobileMenuClose}
+          onClick={this.handleMobileMenuClose}
+          onScroll={this.handleMobileMenuClose}
         >
-          <MenuItem onClick={this.handleMobileMenuClose}>
-            <Button href={process.env.PUBLIC_URL + '/josh_bacon_resume.pdf'} download target="_blank" style={{ color: 'black' }}>Resume</Button>
-          </MenuItem>
-          <MenuItem onClick={this.handleMobileMenuClose}>
-            <Button style={{ color: "black" }} onClick={this.props.connect}>Connect</Button>
-          </MenuItem>
+          <MenuItem onClick={this.handleResume}>Resume</MenuItem>
+          <MenuItem onClick={this.handleConnect}>Connect</MenuItem>
         </Menu>
       </AppBar>
     );

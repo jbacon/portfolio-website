@@ -1,5 +1,5 @@
 import { CssBaseline } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import React from 'react';
 import {
   BrowserRouter,
@@ -10,7 +10,23 @@ import ContextProviderBundle from "./components/ContextProviderBundle";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import { grey, blue } from '@material-ui/core/colors';
 
+const theme = createMuiTheme({
+  palette: {
+    // type: "dark",
+    primary: {
+      light: "#00D8FE",
+      main: "#00D8FE",
+      dark: "#00D8FE",
+    },
+    secondary: {
+      light: grey[900],
+      main: grey[900],
+      dark: grey[900],
+    },
+  },
+});
 
 const styles = theme => ({});
 
@@ -23,6 +39,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <CssBaseline />
+        <ThemeProvider theme={theme}>
         <BrowserRouter>
           <ContextProviderBundle>
             <Header />
@@ -34,6 +51,7 @@ class App extends React.Component {
             <Footer />
           </ContextProviderBundle>
         </BrowserRouter>
+        </ThemeProvider>
       </React.Fragment>
     );
   }

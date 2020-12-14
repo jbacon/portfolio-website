@@ -21,14 +21,12 @@ const Text = styled(Typography).attrs(props => ({
 }))`
   display: block;
   text-align: center;
-  color: black;
   padding-left: .3rem;
   padding-right: .3rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
 //   position: absolute;
 //   top: 0;
-
 `;
 
 const styles = theme => ({
@@ -46,7 +44,6 @@ class Home extends React.Component {
             <React.Fragment>
                 <ParallaxProvider>
                     <div style={{
-                        background: "white",
                         justifyContent: "center",
                         display: "flex",
                         flexGrow: "1",
@@ -55,7 +52,6 @@ class Home extends React.Component {
                         <Parallax2
                             style={{
                                 height: "50vh",
-                                background: 'white',
                                 overflow: "hidden"
                             }}
                             renderLayer={percentage => (
@@ -77,15 +73,13 @@ class Home extends React.Component {
                                 <Typography variant="h3" style={{
                                     display: "block",
                                     textAlign: "center",
-                                    padding: "4rem",
-                                    color: "black",
+                                    padding: "4rem"
                                 }}>welcome.</Typography>
                             </FadeIntoView>
                         </Parallax2>
                         <div style={{
                             minHeight: "50vh",
                             padding: "2rem",
-                            background: 'white'
                         }}>
                             <Avatar style={{
                                 width: "180px",

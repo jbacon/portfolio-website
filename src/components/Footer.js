@@ -14,19 +14,18 @@ class Footer extends React.Component {
 
   render() {
     return (
-      <BottomNavigation style={{ background: 'black', overflow: "hidden" }}>
+      <BottomNavigation style={{  background: "black", overflow: "hidden" }}>
         <BottomNavigationAction style={{ flex: 0 }} href="https://github.com/jbacon" target="_blank" label="GitHub" icon={
-          <GitHubIcon fontSize="large" style={{ color: "white" }} />
+          <GitHubIcon fontSize="large" color="primary"/>
         } />
-        <BottomNavigationAction style={{ flex: 0 }} selected href="https://www.linkedin.com/in/jbacon47/" target="_blank" label="LinkedIn" icon={
-          <LinkedInIcon fontSize="large" style={{ color: "white" }} />
+        <BottomNavigationAction style={{ flex: 0 }} href="https://www.linkedin.com/in/jbacon47/" target="_blank" label="LinkedIn" icon={
+          <LinkedInIcon fontSize="large" color="primary"/>
         } />
-        <BottomNavigationAction style={{ flex: 1 }} selected href="https://github.com/jbacon/portfolio-website/" target="_blank" label="Website Source" icon={
+        <BottomNavigationAction style={{ flex: 1 }} href="https://github.com/jbacon/portfolio-website/" target="_blank" label="Website Source" icon={
           <img style={{
             width: "100%",
             padding: "1rem",
-          }}
-            alt="Made With ReactJS" src={process.env.PUBLIC_URL + '/images/poweredwithreactjs.png'} />
+          }} alt="Made With ReactJS" src={process.env.PUBLIC_URL + '/images/poweredwithreactjs.png'} />
         } />
       </BottomNavigation>
     );
