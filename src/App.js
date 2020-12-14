@@ -10,7 +10,7 @@ import ContextProviderBundle from "./components/ContextProviderBundle";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import { grey, blue } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
@@ -40,17 +40,17 @@ class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <ContextProviderBundle>
-            <Header />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-            </Switch>
-            <Footer />
-          </ContextProviderBundle>
-        </BrowserRouter>
+          <BrowserRouter>
+            <ContextProviderBundle>
+              <Header />
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+              </Switch>
+              <Footer />
+            </ContextProviderBundle>
+          </BrowserRouter>
         </ThemeProvider>
       </React.Fragment>
     );

@@ -49,7 +49,7 @@ const ConnectDialog = withLoader(withSnackbar(withStyles(styles))(
                 name: "",
                 message: "",
             };
-        } 
+        }
 
         handleNameChange = (event) => {
             this.setState({ name: event.target.value });
@@ -74,7 +74,7 @@ const ConnectDialog = withLoader(withSnackbar(withStyles(styles))(
                     message: this.state.message,
                 },
                 this.props.emailJsUserId)
-                .then(result => {   
+                .then(result => {
                     this.props.snackbar.showMessage('Email Sent Successfully!')
                     this.props.loader.signalLoaded();
                     this.setState({ name: "", email: "", message: "", open: false });
@@ -96,36 +96,36 @@ const ConnectDialog = withLoader(withSnackbar(withStyles(styles))(
                         <DialogTitle id="form-dialog-title">Send An Email</DialogTitle>
                         <form onSubmit={this.handleSend} >
                             <DialogContent>
-                                { this.props.dialogContentText &&
-                                <DialogContentText>{this.props.dialogContentText}</DialogContentText>
+                                {this.props.dialogContentText &&
+                                    <DialogContentText>{this.props.dialogContentText}</DialogContentText>
                                 }
-                                { this.props.email &&
-                                <TextField
-                                    margin="normal"
-                                    id="to"
-                                    label="To"
-                                    variant="outlined"
-                                    type="email"
-                                    disabled
-                                    InputProps={{
-                                        endAdornment:
-                                            <InputAdornment position="end">
-                                                { this.props.linkedIn &&
-                                                <Link style={{ display: "inline" }} href={this.props.linkedIn} target="_blank">
-                                                    <LinkedInIcon fontSize="large" />
-                                                </Link>
-                                                }
-                                                { this.props.github &&
-                                                <Link style={{ display: "inline" }} href={this.props.github} target="_blank">
-                                                    <GitHubIcon fontSize="large" />
-                                                </Link>
-                                                }
-                                            </InputAdornment>,
-                                    }}
-                                    fullWidth
-                                    value={this.props.email}
-                                    onChange={this.handleNameChange}
-                                />}
+                                {this.props.email &&
+                                    <TextField
+                                        margin="normal"
+                                        id="to"
+                                        label="To"
+                                        variant="outlined"
+                                        type="email"
+                                        disabled
+                                        InputProps={{
+                                            endAdornment:
+                                                <InputAdornment position="end">
+                                                    {this.props.linkedIn &&
+                                                        <Link style={{ display: "inline" }} href={this.props.linkedIn} target="_blank">
+                                                            <LinkedInIcon fontSize="large" />
+                                                        </Link>
+                                                    }
+                                                    {this.props.github &&
+                                                        <Link style={{ display: "inline" }} href={this.props.github} target="_blank">
+                                                            <GitHubIcon fontSize="large" />
+                                                        </Link>
+                                                    }
+                                                </InputAdornment>,
+                                        }}
+                                        fullWidth
+                                        value={this.props.email}
+                                        onChange={this.handleNameChange}
+                                    />}
                                 <TextField
                                     required
                                     autoFocus
@@ -206,25 +206,25 @@ class ConnectDialogProvider extends React.Component {
     render() {
         // Nested Providers is necessary to prevent consumer components from re-rendering if they only need to "update" the data.
         return (
-                <ConnectDialogDispatcherContext.Provider value={this.state.openConnectDialog}>
-                    <ConnectDialogStateContext.Provider value={this.state}>
-                        <LoaderProvider>
-                            <ConnectDialog 
-                                email={this.props.email}
-                                linkedIn={this.props.linkedIn}
-                                github={this.props.github}
-                                dialogContentDescription={this.props.dialogContentDescription}
-                                emailJsUserId={this.props.emailJsUserId}
-                                emailJsServiceId={this.props.emailJsServiceId}
-                                emailJsTemplateId={this.props.emailJsTemplateId}
-                                beforeSent={this.props.beforeSent}
-                                afterSent={this.props.afterSent}
-                                onSentFail={this.props.onSentFail}
-                            />
-                        </LoaderProvider>
-                        {this.props.children}
-                    </ConnectDialogStateContext.Provider>
-                </ConnectDialogDispatcherContext.Provider>
+            <ConnectDialogDispatcherContext.Provider value={this.state.openConnectDialog}>
+                <ConnectDialogStateContext.Provider value={this.state}>
+                    <LoaderProvider>
+                        <ConnectDialog
+                            email={this.props.email}
+                            linkedIn={this.props.linkedIn}
+                            github={this.props.github}
+                            dialogContentDescription={this.props.dialogContentDescription}
+                            emailJsUserId={this.props.emailJsUserId}
+                            emailJsServiceId={this.props.emailJsServiceId}
+                            emailJsTemplateId={this.props.emailJsTemplateId}
+                            beforeSent={this.props.beforeSent}
+                            afterSent={this.props.afterSent}
+                            onSentFail={this.props.onSentFail}
+                        />
+                    </LoaderProvider>
+                    {this.props.children}
+                </ConnectDialogStateContext.Provider>
+            </ConnectDialogDispatcherContext.Provider>
         );
     }
 };

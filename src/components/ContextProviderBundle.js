@@ -23,10 +23,10 @@ class ContextProviderBundle extends React.Component {
           emailJsUserId={keys.USER_ID}
           emailJsServiceId={keys.SERVICE_ID}
           emailJsTemplateId={keys.TEMPLATE_ID}
-          // beforeSent=()=>{}
-          // afterSent=()=>{}
-          // onSentFail=()=>{}
-          >
+        // beforeSent=()=>{}
+        // afterSent=()=>{}
+        // onSentFail=()=>{}
+        >
           {this.props.children}
         </ConnectDialogProvider>
       </SnackbarProvider>
