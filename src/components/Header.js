@@ -3,6 +3,18 @@ import { withStyles } from '@material-ui/core/styles';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import React from 'react';
 import { withConnectDialogDispatcher } from './ConnectDialog';
+import {
+  Link,
+} from "react-router-dom";
+import Drawer from '@material-ui/core/Drawer';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = theme => ({
   sectionDesktop: {
@@ -30,6 +42,7 @@ class Header extends React.Component {
     super(props);
     this.state = {
       mobileMoreAnchorEl: null,
+      isBlogDrawerOpen: false,
     };
   }
 
@@ -44,16 +57,24 @@ class Header extends React.Component {
   handleConnect = () => {
     this.props.connect();
   }
+  openBlogDrawer = () => {
+    this.setState({ isBlogDrawerOpen: true })
+  };
+  closeBlogDrawer = () => {
+    this.setState({ isBlogDrawerOpen: false })
+  }
 
   render() {
     return (
-      <AppBar position='static' color="secondary">
+      <AppBar position='static' color="default">
         <Toolbar>
-          <Typography noWrap><b>JOSH BACON</b> - Engineer</Typography>
+          <Button component={Link} to="/"><b>JOSH BACON</b> - Engineer</Button>
           <div className={this.props.classes.grow} />
           <div className={this.props.classes.sectionDesktop}>
             <Button onClick={this.handleResume} color="inherit">Resume</Button>
             <Button onClick={this.handleConnect} color="inherit">Connect</Button>
+            <Button component={Link} to="/about" color="inherit" style={{ display: "none" }}>About</Button>
+            <Button onClick={this.openBlogDrawer} color="inherit">Blog</Button>
           </div>
           <div className={this.props.classes.sectionMobile}>
             <IconButton
@@ -79,7 +100,48 @@ class Header extends React.Component {
         >
           <MenuItem onClick={this.handleResume}>Resume</MenuItem>
           <MenuItem onClick={this.handleConnect}>Connect</MenuItem>
+          <MenuItem component={Link} to="/about" style={{ display: "none" }} >About</MenuItem>
+          <MenuItem onClick={this.openBlogDrawer} >Blog</MenuItem>
         </Menu>
+        <Drawer anchor="right" open={this.state.isBlogDrawerOpen} onClose={this.closeBlogDrawer}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+          }}>
+            <IconButton onClick={this.closeBlogDrawer}><ChevronRightIcon /></IconButton>
+          </div>
+          <Accordion defaultExpanded>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+              <Typography>2020</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <List>
+                <ListItem button component={Link} onClick={this.closeBlogDrawer} to="/blog">
+                  <ListItemText primary="Article 3" />
+                </ListItem>
+                <ListItem button component={Link} onClick={this.closeBlogDrawer} to="/blog">
+                  <ListItemText primary="Article 4" />
+                </ListItem>
+              </List>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+              <Typography>2015</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <List>
+                <ListItem button component={Link} onClick={this.closeBlogDrawer} to="/blog/2015/ANarrativeOnWebApplications">
+                  <ListItemText primary="A Narrative On Web App Technology" />
+                </ListItem>
+                <ListItem button component={Link} onClick={this.closeBlogDrawer} to="/blog/2015/MultiPageVsSinglePageApplications">
+                  <ListItemText primary="Multi-Page vs Single-Page Applications" />
+                </ListItem>
+              </List>
+            </AccordionDetails>
+          </Accordion>
+        </Drawer>
       </AppBar>
     );
   }

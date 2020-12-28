@@ -5,9 +5,6 @@
  *  The connect dialog can be opened from child component(s) which are wrapped withConnectDialogDispatcher
  *  and exist under the ConnectProvider.
  * 
- * Dependencies: 
- *  - "material-ui-snackbar-provider" - Needs to wrap Connect Provider if you desire success/fail notification
- * 
  *  (this is definitely over-engineered, but learned a great deal about Context API!)
  */
 
@@ -25,11 +22,9 @@ import TextField from '@material-ui/core/TextField';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import EmailJS from "emailjs-com";
-import { withSnackbar } from 'material-ui-snackbar-provider';
 import React from 'react';
-import { withLoader } from "./Loader";
 import PropTypes from 'prop-types';
-import LoaderProvider from "./Loader";
+import LoadableContent from './LoadableContent'
 
 
 const ConnectDialogDispatcherContext = React.createContext({}); // Does not re-render consumer
@@ -38,7 +33,7 @@ const ConnectDialogStateContext = React.createContext({});
 const styles = theme => ({
 });
 
-const ConnectDialog = withLoader(withSnackbar(withStyles(styles))(
+const ConnectDialog = withStyles(styles)(
     class ConnectDialog extends React.Component {
         static contextType = ConnectDialogStateContext
 
@@ -48,6 +43,9 @@ const ConnectDialog = withLoader(withSnackbar(withStyles(styles))(
                 email: "",
                 name: "",
                 message: "",
+                isLoading: false,
+                isSent: false,
+                isFailed: false
             };
         }
 
@@ -64,7 +62,7 @@ const ConnectDialog = withLoader(withSnackbar(withStyles(styles))(
         handleSend = (event) => {
             event.preventDefault();
             this.props.beforeSent && this.props.beforeSent()
-            this.props.loader.signalLoading();
+            this.setState({ isLoading: true })
             EmailJS.send(
                 this.props.emailJsServiceId,
                 this.props.emailJsTemplateId,
@@ -74,27 +72,37 @@ const ConnectDialog = withLoader(withSnackbar(withStyles(styles))(
                     message: this.state.message,
                 },
                 this.props.emailJsUserId)
-                .then(result => {
-                    this.props.snackbar.showMessage('Email Sent Successfully!')
-                    this.props.loader.signalLoaded();
-                    this.setState({ name: "", email: "", message: "", open: false });
-                    this.context.closeConnectDialog()
-                    this.props.afterSent && this.props.afterSent()
-                },
+                .then(
+                    result => {
+                        this.setState({ isLoading: false, name: "", email: "", message: "", isSent: true , isFailed: false });
+                        this.props.afterSent && this.props.afterSent()
+                    },
                     error => {
-                        this.props.snackbar.showMessage('Oops, something went wrong sending that email. Lets connect on LinkedIn!')
-                        this.props.loader.signalLoaded();
-                        this.context.closeConnectDialog()
+                        this.setState({ isLoading: false, isFailed: true, isSent: false })
                         this.props.onSentFail && this.props.onSentFail()
                     })
         }
 
+        handleClose = () => {
+            this.setState({ isLoading: false });
+            this.setState({ isFailed: false });
+            this.setState({ isSent: false });
+            this.context.closeConnectDialog();
+        }
+
         render() {
             return (
-                <React.Fragment>
-                    <Dialog open={this.context.isConnectDialogOpen} onClose={this.context.closeConnectDialog} aria-labelledby="form-dialog-title">
+                <LoadableContent
+                    isLoading={this.state.isLoading}
+                    isSuccess={this.state.isSent}
+                    isError={this.state.isFailed}
+                    onClose={this.handleClose}
+                    successMessage="I will get back to you shortly, thanks!"
+                    errorMessage="Failed to send email... sorry"
+                    fullScreen={true}>
+                    <Dialog open={this.context.isConnectDialogOpen} onClose={this.context.closeConnectDialog} aria-labelledby="form-dialog-title" >
                         <DialogTitle id="form-dialog-title">Send An Email</DialogTitle>
-                        <form onSubmit={this.handleSend} >
+                        <form onSubmit={this.handleSend}>
                             <DialogContent>
                                 {this.props.dialogContentText &&
                                     <DialogContentText>{this.props.dialogContentText}</DialogContentText>
@@ -165,18 +173,18 @@ const ConnectDialog = withLoader(withSnackbar(withStyles(styles))(
                             <DialogActions>
                                 <Button type="submit">
                                     Send
-                                    </Button>
+                        </Button>
                                 <Button onClick={this.context.closeConnectDialog}>
                                     Cancel
-                                    </Button>
+                        </Button>
                             </DialogActions>
                         </form>
                     </Dialog>
-                </React.Fragment>
+                </LoadableContent>
             );
         }
     }
-));
+);
 ConnectDialog.propTypes = {
     email: PropTypes.string,
     linkedIn: PropTypes.string,
@@ -190,7 +198,7 @@ ConnectDialog.propTypes = {
     onSentFail: PropTypes.func,
 };
 
-// Open Provider allows opening the Connect component from anywhere in the app using Context API
+// ConnectDialogProvider renders the actual Dialog component and provides the dispatcher context for all children
 class ConnectDialogProvider extends React.Component {
     constructor(props) {
         super(props);
@@ -208,37 +216,12 @@ class ConnectDialogProvider extends React.Component {
         return (
             <ConnectDialogDispatcherContext.Provider value={this.state.openConnectDialog}>
                 <ConnectDialogStateContext.Provider value={this.state}>
-                    <LoaderProvider>
-                        <ConnectDialog
-                            email={this.props.email}
-                            linkedIn={this.props.linkedIn}
-                            github={this.props.github}
-                            dialogContentDescription={this.props.dialogContentDescription}
-                            emailJsUserId={this.props.emailJsUserId}
-                            emailJsServiceId={this.props.emailJsServiceId}
-                            emailJsTemplateId={this.props.emailJsTemplateId}
-                            beforeSent={this.props.beforeSent}
-                            afterSent={this.props.afterSent}
-                            onSentFail={this.props.onSentFail}
-                        />
-                    </LoaderProvider>
-                    {this.props.children}
+                    <ConnectDialog {...this.props} />
                 </ConnectDialogStateContext.Provider>
+                {this.props.children}
             </ConnectDialogDispatcherContext.Provider>
         );
     }
-};
-ConnectDialogProvider.propTypes = {
-    email: PropTypes.string,
-    linkedIn: PropTypes.string,
-    github: PropTypes.string,
-    dialogContentDescription: PropTypes.elementType,
-    emailJsUserId: PropTypes.string.isRequired,
-    emailJsServiceId: PropTypes.string.isRequired,
-    emailJsTemplateId: PropTypes.string.isRequired,
-    beforeSent: PropTypes.func,
-    afterSent: PropTypes.func,
-    onSentFail: PropTypes.func,
 };
 
 const withConnectDialogDispatcher = Component => {
@@ -254,6 +237,7 @@ const withConnectDialogDispatcher = Component => {
 };
 
 export {
+    ConnectDialogDispatcherContext,
     withConnectDialogDispatcher,
 };
 export default ConnectDialogProvider

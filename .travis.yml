@@ -38,10 +38,17 @@ after_failure:
 before_deploy:
 - echo "Before Deploy..."
 deploy:
-  provider: script
-  script: aws s3 sync --delete --exclude '.git/*' ${PWD}/build/ s3://portfolio.joshbacon.name/
-  on:
-    branch: main
-  skip_cleanup: true
+  - provider: script
+    script: aws s3 sync --delete --exclude '.git/*' ${PWD}/build/ s3://portfolio.joshbacon.name/
+    on:
+      branch: main
+    skip_cleanup: true
+  - provider: pages
+    local_dir: ${PWD}/build/
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+    keep_history: true
+    on:
+      branch: main
 after_deploy:
 - aws cloudfront create-invalidation --distribution-id="E2DH15J9LGHZU1" --paths='/*'
