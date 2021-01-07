@@ -70,7 +70,7 @@ const blog = (props) => (
             Will optimizations be enough?
             Or will the power of the Cloud give SSR the strength to return?
             <br />
-            <img alt="oops.. no image" height='100%' src={process.env.PUBLIC_URL + '/images/ill-be-back.jpg'}></img>
+            <img alt="oops.. not available" height='100%' src={process.env.PUBLIC_URL + '/images/ill-be-back.jpg'}></img>
             <br />
             <br />
             <b>We'll see...</b>

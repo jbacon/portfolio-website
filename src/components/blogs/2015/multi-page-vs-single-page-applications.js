@@ -22,7 +22,7 @@ const blog = (props) => (
             Maintaining speed, state, history, and events is a programmatic challenge.
             Frameworks have risen to the occasion and offer assistance to the aspiring web developer.
             Let's all avoid making our own home-cooked Javascript spaghetti.<br />
-            <img  alt="oops.. no image" height='100%' src={process.env.PUBLIC_URL + '/images/spaghetti-code.gif'}/>
+            <img  alt="oops.. not available" height='100%' src={process.env.PUBLIC_URL + '/images/spaghetti-code.gif'}/>
             <br />
                 * Don't forget the meatballs
             </Typography>
