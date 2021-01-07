@@ -1,10 +1,9 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
 import Blog from '../../Blog'
 import Highlight from "react-highlight.js"
 
-export default (props) => (
+const blog = (props) => (
     <Blog>
         <Typography variant="h2">GoLang Servers:<br />A Basic Demo</Typography>
         <Typography>
@@ -162,3 +161,4 @@ http.ListenAndServe(":8080", handler)`}
         </Typography>
     </Blog>
 );
+export default blog

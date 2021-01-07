@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import Blog from '../../Blog'
 
-export default (props) => (
+const blog = (props) => (
     <Blog>
         <Typography>
             Advancements in Web APIs give rise to single-page applications (SPA).
@@ -22,7 +22,7 @@ export default (props) => (
             Maintaining speed, state, history, and events is a programmatic challenge.
             Frameworks have risen to the occasion and offer assistance to the aspiring web developer.
             Let's all avoid making our own home-cooked Javascript spaghetti.<br />
-            <img height='100%' src={process.env.PUBLIC_URL + '/images/spaghetti-code.gif'}/>
+            <img  alt="oops.. no image" height='100%' src={process.env.PUBLIC_URL + '/images/spaghetti-code.gif'}/>
             <br />
                 * Don't forget the meatballs
             </Typography>
@@ -76,3 +76,4 @@ export default (props) => (
         </Typography>
     </Blog>
 );
+export default blog

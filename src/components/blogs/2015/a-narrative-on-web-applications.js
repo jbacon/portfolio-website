@@ -4,7 +4,7 @@ import Link from '@material-ui/core/Link';
 import Blog from '../../Blog'
 import { Link as RouterLink } from "react-router-dom";
 
-export default (props) => (
+const blog = (props) => (
     <Blog>
         <Typography variant="h3">A Narrative on Web Servers</Typography>
         <Typography>
@@ -70,7 +70,7 @@ export default (props) => (
             Will optimizations be enough?
             Or will the power of the Cloud give SSR the strength to return?
             <br />
-            <img height='100%' src={process.env.PUBLIC_URL + '/images/ill-be-back.jpg'}></img>
+            <img alt="oops.. no image" height='100%' src={process.env.PUBLIC_URL + '/images/ill-be-back.jpg'}></img>
             <br />
             <br />
             <b>We'll see...</b>
@@ -80,3 +80,4 @@ export default (props) => (
         </Typography>
     </Blog>
 );
+export default blog
