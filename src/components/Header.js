@@ -1,20 +1,12 @@
 import { AppBar, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
 import { withConnectDialogDispatcher } from './ConnectDialog';
 import {
   Link,
 } from "react-router-dom";
-import Drawer from '@material-ui/core/Drawer';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { BlogMenu } from './Blog';
 
 const styles = theme => ({
   sectionDesktop: {
@@ -83,7 +75,7 @@ class Header extends React.Component {
               aria-controls={this.mobileMenuId}
               aria-haspopup="true"
               onClick={this.handleMobileMenuOpen}>
-              <MoreIcon />
+              <MenuIcon />
             </IconButton>
           </div>
         </Toolbar>
@@ -103,45 +95,7 @@ class Header extends React.Component {
           <MenuItem component={Link} to="/about" style={{ display: "none" }} >About</MenuItem>
           <MenuItem onClick={this.openBlogDrawer} >Blog</MenuItem>
         </Menu>
-        <Drawer anchor="right" open={this.state.isBlogDrawerOpen} onClose={this.closeBlogDrawer}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-          }}>
-            <IconButton onClick={this.closeBlogDrawer}><ChevronRightIcon /></IconButton>
-          </div>
-          <Accordion defaultExpanded>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} >
-              <Typography>2020</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <List>
-                <ListItem button component={Link} onClick={this.closeBlogDrawer} to="/blog">
-                  <ListItemText primary="Article 3" />
-                </ListItem>
-                <ListItem button component={Link} onClick={this.closeBlogDrawer} to="/blog">
-                  <ListItemText primary="Article 4" />
-                </ListItem>
-              </List>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} >
-              <Typography>2015</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <List>
-                <ListItem button component={Link} onClick={this.closeBlogDrawer} to="/blog/2015/ANarrativeOnWebApplications">
-                  <ListItemText primary="A Narrative On Web App Technology" />
-                </ListItem>
-                <ListItem button component={Link} onClick={this.closeBlogDrawer} to="/blog/2015/MultiPageVsSinglePageApplications">
-                  <ListItemText primary="Multi-Page vs Single-Page Applications" />
-                </ListItem>
-              </List>
-            </AccordionDetails>
-          </Accordion>
-        </Drawer>
+        <BlogMenu open={this.state.isBlogDrawerOpen} onClose={this.closeBlogDrawer}/>
       </AppBar>
     );
   }

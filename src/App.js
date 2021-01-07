@@ -10,9 +10,9 @@ import ContextProviderBundle from "./components/ContextProviderBundle";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import MultiPageVsSinglePageApplications from './components/blogs/2015/MultiPageVsSinglePageApplications';
-import ANarrativeOnWebApplications from './components/blogs/2015/ANarrativeOnWebApplications';
-import FourOhFour from "./components/FourOhFour";
+import LoadableContent from "./components/LoadableContent";
+import { BlogRoutes } from "./components/Blog"
+const FourOhFour = React.lazy(() => import("./components/FourOhFour"));
 
 const theme = createMuiTheme({
   palette: {
@@ -42,23 +42,13 @@ const App = (props) => (
           }}>
             <div style={{ paddingBottom: "4rem" }}>
               <Header />
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                {/* <Route exact path="/about">
-                  <About />
-                </Route> */}
-                <Route exact path="/blog/2015/MultiPageVsSinglePageApplications">
-                  <MultiPageVsSinglePageApplications />
-                </Route>
-                <Route exact path="/blog/2015/ANarrativeOnWebApplications">
-                  <ANarrativeOnWebApplications />
-                </Route>
-                <Route path="*">
-                  <FourOhFour />
-                </Route>
-              </Switch>
+              <React.Suspense fallback={<LoadableContent isLoading={true} />}>
+                <Switch>
+                  <Route exact path="/" component={Home}/>
+                  <BlogRoutes/>
+                  <Route path="*" render={() => <FourOhFour />}/>
+                </Switch>
+              </React.Suspense>
             </div>
             <Footer />
           </div>
