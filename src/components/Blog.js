@@ -58,7 +58,7 @@ const BlogMenu = (props) => (
             let year = Object.keys(yearObj)[0]
             let yearArticlesList = yearObj[year]
             return (
-                <Accordion key={i} defaultExpanded={(i == 0) ? true : false}>
+                <Accordion key={i} defaultExpanded={(i === 0) ? true : false}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} >
                         <Typography>{year}</Typography>
                     </AccordionSummary>
