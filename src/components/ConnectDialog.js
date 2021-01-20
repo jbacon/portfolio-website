@@ -25,6 +25,7 @@ import EmailJS from "emailjs-com";
 import React from 'react';
 import PropTypes from 'prop-types';
 import LoadableContent from './LoadableContent'
+import { LightThemeProvider } from "./CustomThemeProvider"
 
 
 const ConnectDialogDispatcherContext = React.createContext({}); // Does not re-render consumer
@@ -100,6 +101,7 @@ const ConnectDialog = withStyles(styles)(
                     successMessage="I will get back to you shortly, thanks!"
                     errorMessage="Failed to send email... sorry"
                     fullScreen={true}>
+                    <LightThemeProvider>
                     <Dialog open={this.context.isConnectDialogOpen} onClose={this.context.closeConnectDialog} aria-labelledby="form-dialog-title" >
                         <DialogTitle id="form-dialog-title">Send An Email</DialogTitle>
                         <form onSubmit={this.handleSend}>
@@ -180,6 +182,7 @@ const ConnectDialog = withStyles(styles)(
                             </DialogActions>
                         </form>
                     </Dialog>
+                    </LightThemeProvider>
                 </LoadableContent>
             );
         }

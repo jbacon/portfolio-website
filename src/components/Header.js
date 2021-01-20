@@ -64,7 +64,7 @@ class Header extends React.Component {
           <div className={this.props.classes.grow} />
           <div className={this.props.classes.sectionDesktop}>
             <Button onClick={this.handleResume} color="inherit">Resume</Button>
-            <Button onClick={this.handleConnect} color="inherit">Connect</Button>
+            <Button onClick={this.handleConnect} color="inherit">Contact</Button>
             <Button component={Link} to="/about" color="inherit" style={{ display: "none" }}>About</Button>
             <Button onClick={this.openBlogDrawer} color="inherit">Blog</Button>
           </div>
@@ -91,7 +91,7 @@ class Header extends React.Component {
           onScroll={this.handleMobileMenuClose}
         >
           <MenuItem onClick={this.handleResume}>Resume</MenuItem>
-          <MenuItem onClick={this.handleConnect}>Connect</MenuItem>
+          <MenuItem onClick={this.handleConnect}>Contact</MenuItem>
           <MenuItem component={Link} to="/about" style={{ display: "none" }} >About</MenuItem>
           <MenuItem onClick={this.openBlogDrawer} >Blog</MenuItem>
         </Menu>

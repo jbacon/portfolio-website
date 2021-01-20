@@ -32,6 +32,30 @@ const Text = styled(Typography).attrs(props => ({
 const Home = (props) => (
     <React.Fragment>
         <ParallaxProvider>
+                
+                {/* <div style={{
+                    height: "50vh",
+                    overflow: "hidden"
+                }}>
+                    <Parallax y={["570px", "-720px"]} >
+                        <div style={{
+                            height: "100vh",
+                            background: 'url(./images/stuart_mt_2.jpg)',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: "100%",
+                            backgroundSize: 'cover'
+                        }} />
+                        <FadeIntoView>
+                            <Typography variant="h3" style={{
+                                display: "block",
+                                textAlign: "center",
+                                padding: "4rem"
+                            }}>welcome.</Typography>
+                        </FadeIntoView>
+                    </Parallax>
+                </div> */}
+
+
                 <Parallax2
                     style={{
                         height: "50vh",
@@ -43,7 +67,7 @@ const Home = (props) => (
                                 background: 'url(./images/stuart_mt_2.jpg)',
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: "50% " + (percentage * -1000 + (800)) + "px",
-                                backgroundSize: 'auto 1000px',
+                                backgroundSize: 'auto 1150px',
                                 position: 'absolute',
                                 left: '0px',
                                 top: "0px",
