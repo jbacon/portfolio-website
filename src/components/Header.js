@@ -60,7 +60,7 @@ class Header extends React.Component {
     return (
       <AppBar position='static' color="default">
         <Toolbar>
-          <Button component={Link} to="/"><b>JOSH BACON</b> - Engineer</Button>
+          <Button component={Link} to="/">JOSH BACON - Engineer</Button>
           <div className={this.props.classes.grow} />
           <div className={this.props.classes.sectionDesktop}>
             <Button onClick={this.handleResume} color="inherit">Resume</Button>
