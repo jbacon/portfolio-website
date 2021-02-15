@@ -177,12 +177,12 @@ env:
 before_install:
 - echo "Before Install..."
 install:
-- docker run -e CI=true -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch npm install
+- docker run -e CI=true -i -t -v \${PWD}/:/app/ --workdir /app/ node:14-stretch npm install
 before_script:
-- docker run -e CI=true -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch npm test -- --coverage
+- docker run -e CI=true -i -t -v \${PWD}/:/app/ --workdir /app/ node:14-stretch npm test -- --coverage
 script:
-- docker run -e CI=true -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script build
-- docker run -e CI=true -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script build-component
+- docker run -e CI=true -i -t -v \${PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script build
+- docker run -e CI=true -i -t -v \${PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script build-component
 after_script:
 - echo "After Script..."
 before_cache:
@@ -195,12 +195,12 @@ before_deploy:
 - echo "Before Deploy..."
 deploy:
   - provider: script
-    script: docker run -e CI=true -e NPM_TOKEN="$/{NPM_TOKEN}" -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch bash -c 'npm config set "//registry.npmjs.org/:_authToken=$/{NPM_TOKEN}" && npm publish'
+    script: docker run -e CI=true -e NPM_TOKEN="\${NPM_TOKEN}" -i -t -v \${PWD}/:/app/ --workdir /app/ node:14-stretch bash -c 'npm config set "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" && npm publish'
     on:
       branch: main
     skip_cleanup: true
   - provider: pages
-    local_dir: $/{PWD}/build/
+    local_dir: \${PWD}/build/
     skip_cleanup: true
     github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
     keep_history: true
@@ -212,7 +212,7 @@ after_deploy:
         <Typography>
         Key features to highlight include the usage of two <b>deploy</b> commands, one for NPM and one for GitHub Pages. Also the usage of two build <b>script</b>.
         Also notable, is our usage of <b>docker</b>, which allows us to ensure a consistent build environment for our source.
-        Variables must be set in your CI/CD environment for: <b>NPM_TOKEN</b>
+        Variables must be set in your CI/CD environment for: <b>NPM_TOKEN</b> and <b></b>
         <br/>
         </Typography>
         <br/>
