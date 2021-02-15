@@ -23,6 +23,7 @@ import { LightThemeProvider } from "./CustomThemeProvider"
 const BlogStructure = [
     { 2020: [
         { "building-a-simple-golang-api": "Building A Simple GoLang API" },
+        { "publish-a-react-component": "Publishing A React Component" },
     ]},
     { 2015: [
         { "a-narrative-on-web-applications": "A Narrative On Web Applications" },

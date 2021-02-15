@@ -66,7 +66,7 @@ const blog = (props) => (
             Browsers are doing some heavy lifting running all this JavaScript.
             Are you noticing long load times, slow web pages, and unresponsive interfaces?
             I sure am. Is JavaScript to blame?
-            Since off-loading heavy rendering responsiblities, servers have shifted the strain to client frameworks.
+            Since off-loading heavy rendering responsibilities, servers have shifted the strain to client frameworks.
             Will optimizations be enough?
             Or will the power of the Cloud give SSR the strength to return?
             <br />

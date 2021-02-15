@@ -31,7 +31,7 @@ const blog = (props) => (
         <Typography variant="h2">Framework Hell</Typography>
         <Typography>
             With the increased difficulty of building SPAs, frameworks have risen to fill a void.
-            But choose wisely; that snazzy new framework could very well be tomorrow's techincal debt.
+            But choose wisely; that snazzy new framework could very well be tomorrow's technical debt.
 		    <br />
             There are many to choose from:
         </Typography>

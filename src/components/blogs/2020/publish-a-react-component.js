@@ -10,121 +10,223 @@ const blog = (props) => (
         <Typography>
         <br/>
         So you built a nifty component and want to share it with the world..<br/>
-        or maybe just re-use it across projects. Either way, you need a good way to publish.<br/>
-        Many 3rd party component packaging libraries do exist (see <Link href='https://bit.dev/' target="_blank">bit.dev</Link>);<br/>
-        But this guide explores an simple strategy using NPM.<br/>
+        or maybe re-use across projects. Either way, you need a efficient means of publication.<br/>
+        Many 3rd party solutions do exist (see <Link href='https://bit.dev/' target="_blank">bit.dev</Link>); but this guide explores an simple strategy using NPM.<br/>
         <br/>
-        Our Requirements:
+        In this tutorial we will walk through project configurations for hosting a single component, and here are our requirements:
         </Typography>
         <ul>
-            <li>Dev Experience - Create React App</li>
-            <li>Single Repo - Via GitHub</li>
-            <li>Live Demo - GitHub Pages</li>
-            <li>Tests - Jest</li>
-            <li>CI/CD - Travis</li>
-            <li>Hosting - NPM</li>
+            <li>Good Dev Experience: Create React App</li>
+            <li>Single Repo: Via GitHub</li>
+            <li>Live Working Demo: GitHub Pages</li>
+            <li>Tests: Jest</li>
+            <li>CI/CD: Travis</li>
+            <li>Public Hosting: NPM</li>
         </ul><br/>
-        <Typography>
-        These requirements will make our component a professional product.<br/>
-        <br/>
-        </Typography>
         <Typography variant="h4">Create React App</Typography>
         <Typography>
-        Even though the component is not fully fledge application, we can still use CRA to provision our project to ramp up a live working demo.<br/>
-        With that said, we need to tweak a few things:
+        Even though the component is not a fully fledge app, we still use CRA to provision our project, which ramps up a live working demo.<br/>
         </Typography>
-        <ul>
-            <li>Dev Experience - Create React App</li>
-            <li>Single Repo - Via GitHub</li>
-            <li>Live Demo - GitHub Pages</li>
-            <li>Tests - Jest</li>
-            <li>CI/CD - Travis</li>
-            <li>Hosting - NPM</li>
-        </ul><br/>
         <Highlight>
-{`func ListenAndServe(addr string, handler Handler) error`}
+{`npm install -g create-react-app
+npx create-react-app my-app
+cd my-app
+npm start`}
         </Highlight>
+        <Typography>
+        The default project will need minor tweaks..<br/>
+        <br/>
+        First, add the following to <b>package.json</b>
+        </Typography>
+        <Highlight>
+{`"main": "build-component/index.js",
+"module": "build-component/index.js",
+"private": false,
+"homepage": ".",
+"publishConfig": {
+    "access": "public"
+},
+"repository": {
+    "type": "git",
+    "url": "https://github.com/jbacon/react-component-progress-indicator"
+}`}
+        </Highlight>
+        <Typography>
+        Replacing <b>repository.url</b> with your projects repo.<br/>
+        <br/>
+        Also inside <b>package.json</b>, add a new <b>script</b> called <b>build-component</b> containing the following command:<br/>
+        </Typography>
+        <Highlight>
+{`NODE_ENV=production && rm -rf build-component && mkdir build-component && npx babel src/Component --out-dir build-component --copy-files`}
+        </Highlight>
+        <Typography>
+        This build command requires us to install a new babel dependency, which is not included with CRA by default.
+        </Typography>
+        <Highlight>
+{`npm install --save-dev @babel/cli`}
+        </Highlight>   
+        <Typography>
+        <br/>
+        Next, add the line <b>"/build-component"</b> to the <b>.gitignore</b> file.<br/>
+        Then, make a new file <b>.npmignore</b> with contents copied from <b>.gitignore</b>.<br/>
+        Append these additional lines inside <b>.npmignore</b>:<br/>
+        </Typography>
+        <Highlight>
+{`## Additioanl lines for npmignore
+/public/
+/src/
+.travis.yml
+.eslintcache
+README.md
+/build
+!/build-component`}
+        </Highlight>
+        <Typography>
+        This step reduces the package size of our component on NPM. Our package should only include the <b>/build-component</b> folder.<br/>
+        However, we can further reduce package size by examining our default CRA dependencies.<br/>
+        Some CRA dependencies are unnecessary for our component package.<br/>
+        Move all dependencies <b>except "react"</b> from <b>package.json/dependencies</b> to <b>package.json/devDependencies</b>.
+        This allows us to release a small production package for our component, while maintaining the ability to develop our demo app.<br/>
+        <br/>
+        We're all done setting up our CRA application, and are ready to start developing.
+        <br/>
+        </Typography>
+        <br/>
         <Typography variant="h4">Our Component</Typography>
         <Typography>
-        Our server now needs to handle a database layer that is initialized in main:
+        Our component will be a simple grey background overly.<br/>
+        Create a new file <b>"src/Component/index.js"</b> and paste the following code:
         </Typography>
         <Highlight>
-{`sqlClient, err := sql.Open("sqlite3", "./database.db")
-if err != nil {
-    log.Fatalf("Could not open db: %v", err)
-}`}
+{`import React from 'react';
+
+const BackgroundGrey = (props) => (
+    <div style={{ backgroundColor: "grey" }}>{props.children}</div>
+)
+
+export default BackgroundGrey`}
         </Highlight>
         <Typography>
-        This leaves us asking:<br/>
-        </Typography>
-        <ul>
-            <li>How will our handlers access the database client?</li>
-        </ul>
-        <Typography>
-        While <b>sqlClient</b> could be used globally, that would not be elegant.<br/>
-        One solution is to create a wrapper around our <b>handlerFunc</b>. Like so...<br/>
+        Now in <b>App.js</b>, we write code to demonstration our new component.
         </Typography>
         <Highlight>
-{`func helloWorld(sqlClient *sql.DB) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        ... your logic ... 
-    })
-}`}
+{`import logo from './logo.svg';
+import './App.css';
+import BackgroundGrey from "./Component"
+
+function App() {
+  return (
+    <BackgroundGrey>
+        <p>Hello World</p>
+    </BackgroundGrey>
+  );
+}
+
+export default App;`}
         </Highlight>
         <Typography>
-        This neat treat exposes our <b>sqlClient</b> scope to our custom function inside <b>HandlerFunc</b>.<br/>
-        We can now, re-write main:<br/>
+        We must also fix the default tests in <b>App.test.js</b>, like so...
         </Typography>
         <Highlight>
-{`httpHandler := helloWorld(sqlClient)
-http.ListenAndServe(":8080", httpHandler)`}
+{`import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/Hello World/i);
+  expect(linkElement).toBeInTheDocument();
+});`}
         </Highlight>
         <Typography>
-        This wrapper technique also allows us to create nifty middleware.<br/>
+        Our component is now ready to test and run.
+        </Typography>
+        <Highlight>
+{`npm install;
+npm run test;
+npm run start;`}
+        </Highlight>
+        <br/>
+        <Typography variant="h4">CI/CD: Travis</Typography>
+        <Typography>
+        Deployment of any production code needs to start with CI/CD. 
+        For this guide I will assume your project is hosted via GitHub and integrated with Travis.
+        Travis will package, test, and deploy to NPM.
+        GitHub Pages will host our demonstration code into a live working site, which can be added to the README for instructional purposes. <br/>
+        <br/>
+        All this can be accomplished with the follow <b>.travis.yml</b> file
+        </Typography>
+        <Highlight>
+{`language: bash
+sudo: required
+dist: trusty
+services:
+- docker
+git:
+  depth: 1
+  submodules: false
+branches:
+  only:
+  - main
+cache:
+  directories:
+  - node_modules
+env:
+  global:
+  - PATH=$HOME/.local/bin:$PATH
+  - CI=true
+before_install:
+- echo "Before Install..."
+install:
+- docker run -e CI=true -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch npm install
+before_script:
+- docker run -e CI=true -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch npm test -- --coverage
+script:
+- docker run -e CI=true -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script build
+- docker run -e CI=true -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script build-component
+after_script:
+- echo "After Script..."
+before_cache:
+- echo "Before Cache..."
+after_success:
+- echo "After Success..."
+after_failure:
+- echo "After Failure..."
+before_deploy:
+- echo "Before Deploy..."
+deploy:
+  - provider: script
+    script: docker run -e CI=true -e NPM_TOKEN="$/{NPM_TOKEN}" -i -t -v $/{PWD}/:/app/ --workdir /app/ node:14-stretch bash -c 'npm config set "//registry.npmjs.org/:_authToken=$/{NPM_TOKEN}" && npm publish'
+    on:
+      branch: main
+    skip_cleanup: true
+  - provider: pages
+    local_dir: $/{PWD}/build/
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+    keep_history: true
+    on:
+      branch: main
+after_deploy:
+  - echo "After Deploy..."`}
+        </Highlight>
+        <Typography>
+        Key features to highlight include the usage of two <b>deploy</b> commands, one for NPM and one for GitHub Pages. Also the usage of two build <b>script</b>.
+        Also notable, is our usage of <b>docker</b>, which allows us to ensure a consistent build environment for our source.
+        Variables must be set in your CI/CD environment for: <b>NPM_TOKEN</b>
         <br/>
         </Typography>
-        <Typography variant="h3">Middleware</Typography>
-        <Typography>
-        Chaining middleware is a critical feature of any server routing solution.<br/>
-        We can use the same wrapper design above, with slight modification.<br/>
-        Instead of accepting a <b>sqlClient</b> input, middleware will accept another <b>http.Handler</b>.
-        </Typography>
-        <Highlight>
-{`func middleware(next http.Handler) http.Handler {
-    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        ...
-    }
- }`}
-        </Highlight>
         <br/>
-        <Typography variant="h3">Logging</Typography>
+        <Typography variant="h4">Publish to NPM</Typography>
         <Typography>
-        Using middleware, we can now create a logging framework.<br/>
+        Once you're ready to publish, simply merge your dev/feature branch into the <b>main</b> branch. Travis will kick off a build and deploy. And you can check your configured NPM registry.<br/>
+        <br/>
         </Typography>
-        <Highlight>
-{`func loggerMiddleware(next http.Handler) http.Handler { 
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Println("Request received")
-		next.ServeHTTP(w, r)
-		log.Println("Request handled")
-    })
-}`}
-        </Highlight>
+        <Typography variant="h4">That's All!</Typography>
         <Typography>
-        The key understanding here being <b>next.ServeHTTP</b>, which calls the inner handler.<br/>
-        We can use our new logging middleware like so:
-        </Typography>
-        <Highlight>
-{`handler := loggingMiddleware(helloWorld(sqlClient)))
-http.ListenAndServe(":8080", handler)`}
-        </Highlight>
-        <Typography>
-        Now.. it's a chain.<br/><br/>
-
-        To view the full source for this demonstration, visit my <Link href='https://github.com/jbacon/api-joshbacon-name' target="_blank">GitHub Repo</Link>.<br/><br/>
-
-        I hope this article was helpful.<br/>
-        GoLang is a nifty language for building both simple and complex http servers.
+        Hope this has been helpful! If you have many related components, you can include them into this same package.<br/>
+        However you may also want to consider adapting a more scalable enterprise strategy using 3rd party component libraries: <Link href='https://bit.dev/' target="_blank">bit.dev</Link>
+        <br/>
+        To see a live example component, visit my github here: <Link href='>https://github.com/jbacon/react-component-progress-indicator' target="_blank">React Progress Indicator</Link>.<br/>
         </Typography>
     </Blog>
 );

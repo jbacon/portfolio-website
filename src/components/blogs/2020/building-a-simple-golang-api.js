@@ -14,7 +14,7 @@ const blog = (props) => (
         <ul>
             <li>Handlers</li>
             <li>Databases</li>
-            <li>Middlware</li>
+            <li>Middleware</li>
             <li>Logging</li>
         </ul><br/>
         <Typography>
