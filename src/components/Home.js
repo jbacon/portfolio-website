@@ -9,6 +9,12 @@ import styled from 'styled-components';
 import { ConnectDialogDispatcherContext } from './ConnectDialog';
 import FadeIntoView from "./FadeIntoView";
 import Box from '@material-ui/core/Box';
+import ImageAvatarSelf from '../images/self.jpg'
+import ImageGonzaga from '../images/gonzaga.png'
+import ImageSkiingWithMom from '../images/skiing_with_mom.jpg'
+import ImageStuartMt2 from '../images/stuart_mt_2.jpg'
+import ImageSkiGroup2 from '../images/skigroup2.jpg'
+import ImageColchuckHike from '../images/colchuck_hike.jpg'
 
 
 // Example of a "styled-component" - For Reference Purposes
@@ -38,7 +44,7 @@ const Home = (props) => (
                 renderLayer={percentage => (
                     <div
                         style={{
-                            background: 'url(./images/stuart_mt_2.jpg)',
+                            background: `url(${ImageStuartMt2})`,
                             backgroundRepeat: 'no-repeat',
                             backgroundPosition: "50% " + (percentage * -1000 + (800)) + "px",
                             backgroundSize: 'auto max(1150px, 100vw)',
@@ -67,7 +73,7 @@ const Home = (props) => (
                     width: "180px",
                     height: "180px",
                     right: "calc(-50% + 90px)",
-                }} src={process.env.PUBLIC_URL + '/images/self.jpg'} />
+                }} src={ImageAvatarSelf} />
                 <Text style={{ padding: ".5rem" }}><br />keep scrolling</Text>
                 <ExpandMoreIcon style={{
                     width: "100%",
@@ -92,7 +98,7 @@ const Home = (props) => (
                 renderLayer={percentage => (
                     <div
                         style={{
-                            background: 'url(./images/skigroup2.jpg)',
+                            background: `url(${ImageSkiGroup2})`,
                             backgroundRepeat: 'no-repeat',
                             backgroundPosition: "50% " + (percentage*1.2 * -1000 + (800)) + "px",
                             backgroundSize: 'max(1150px, 100vw)',
@@ -127,7 +133,7 @@ const Home = (props) => (
                 renderLayer={percentage => (
                     <div
                         style={{
-                            background: 'url(./images/colchuck_hike.jpg)',
+                            background: `url(${ImageColchuckHike})`,
                             backgroundRepeat: 'no-repeat',
                             backgroundPosition: "50% " + (percentage * -1000 + (800)) + "px",
                             backgroundSize: 'max(1150px, 100vw)',
@@ -163,7 +169,7 @@ const Home = (props) => (
                         height: "150px",
                         right: "calc(-50% + 75px)",
                     }}
-                        alt="Gonzaga" src={process.env.PUBLIC_URL + '/images/gonzaga.png'} />
+                        alt="Gonzaga" src={ImageGonzaga} />
                     <Text>
                         Gonzaga University Alumni<br />
                         B.S. in Computer Science<br />
@@ -188,7 +194,7 @@ const Home = (props) => (
                     width: "180px",
                     height: "180px",
                     right: "calc(-50% + 90px)",
-                }} src={process.env.PUBLIC_URL + '/images/skiing_with_mom.jpg'} />
+                }} src={ImageSkiingWithMom} />
             </FadeIntoView>
             <div style={{
                 minHeight: "50vh",

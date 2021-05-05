@@ -1,11 +1,11 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
-import Blog from '../../Blog'
 import { Link as RouterLink } from "react-router-dom";
+import ImageIllBeBack from '../../images/ill-be-back.jpg'
 
 const blog = (props) => (
-    <Blog>
+    <React.Fragment>
         <Typography variant="h3">A Narrative on Web Servers</Typography>
         <Typography>
             While a subject-matter expert in web development could certainly offer a better account of the evolution of web technology,
@@ -70,7 +70,7 @@ const blog = (props) => (
             Will optimizations be enough?
             Or will the power of the Cloud give SSR the strength to return?
             <br />
-            <img alt="oops.. not available" height='100%' src={process.env.PUBLIC_URL + '/images/ill-be-back.jpg'}></img>
+            <img alt="oops.. not available" height='100%' src={ImageIllBeBack}></img>
             <br />
             <br />
             <b>We'll see...</b>
@@ -78,6 +78,6 @@ const blog = (props) => (
             <br />
             Had enough? No? Check out my next post: <Link component={RouterLink} to="/blog/2015/MultiPageVsSinglePageApplications">Mutli-Page vs Single-Page Applications</Link>
         </Typography>
-    </Blog>
+    </React.Fragment>
 );
 export default blog

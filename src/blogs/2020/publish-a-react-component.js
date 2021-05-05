@@ -1,11 +1,10 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import Blog from '../../Blog'
 import Link from '@material-ui/core/Link';
 import Highlight from "react-highlight.js"
 
 const blog = (props) => (
-    <Blog>
+    <React.Fragment>
         <Typography variant="h2">How To Publish<br />React Components</Typography>
         <Typography>
         <br/>
@@ -27,7 +26,7 @@ const blog = (props) => (
         <Typography>
         Even though the component is not a fully fledge app, we still use CRA to provision our project, which ramps up a live working demo.<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="bash">
 {`npm install -g create-react-app
 npx create-react-app my-app
 cd my-app
@@ -38,7 +37,7 @@ npm start`}
         <br/>
         First, add the following to <b>package.json</b>
         </Typography>
-        <Highlight>
+        <Highlight language="json">
 {`"main": "build-component/index.js",
 "module": "build-component/index.js",
 "private": false,
@@ -56,13 +55,13 @@ npm start`}
         <br/>
         Also inside <b>package.json</b>, add a new <b>script</b> called <b>build-component</b> containing the following command:<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="bash">
 {`NODE_ENV=production && rm -rf build-component && mkdir build-component && npx babel src/Component --out-dir build-component --copy-files`}
         </Highlight>
         <Typography>
         This build command requires us to install a new babel dependency, which is not included with CRA by default.
         </Typography>
-        <Highlight>
+        <Highlight language="bash">
 {`npm install --save-dev @babel/cli`}
         </Highlight>   
         <Typography>
@@ -71,7 +70,7 @@ npm start`}
         Then, make a new file <b>.npmignore</b> with contents copied from <b>.gitignore</b>.<br/>
         Append these additional lines inside <b>.npmignore</b>:<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="text">
 {`## Additioanl lines for npmignore
 /public/
 /src/
@@ -97,7 +96,7 @@ README.md
         Our component will be a simple grey background overly.<br/>
         Create a new file <b>"src/Component/index.js"</b> and paste the following code:
         </Typography>
-        <Highlight>
+        <Highlight language="jsx">
 {`import React from 'react';
 
 const BackgroundGrey = (props) => (
@@ -109,7 +108,7 @@ export default BackgroundGrey`}
         <Typography>
         Now in <b>App.js</b>, we write code to demonstration our new component.
         </Typography>
-        <Highlight>
+        <Highlight language="jsx">
 {`import logo from './logo.svg';
 import './App.css';
 import BackgroundGrey from "./Component"
@@ -127,7 +126,7 @@ export default App;`}
         <Typography>
         We must also fix the default tests in <b>App.test.js</b>, like so...
         </Typography>
-        <Highlight>
+        <Highlight language="jsx">
 {`import { render, screen } from '@testing-library/react';
 import App from './App';
 
@@ -140,7 +139,7 @@ test('renders learn react link', () => {
         <Typography>
         Our component is now ready to test and run.
         </Typography>
-        <Highlight>
+        <Highlight language="bash">
 {`npm install;
 npm run test;
 npm run start;`}
@@ -155,7 +154,7 @@ npm run start;`}
         <br/>
         All this can be accomplished with the follow <b>.travis.yml</b> file
         </Typography>
-        <Highlight>
+        <Highlight language="yaml">
 {`language: bash
 sudo: required
 dist: trusty
@@ -228,6 +227,6 @@ after_deploy:
         <br/>
         To see a live example component, visit my github here: <Link href='>https://github.com/jbacon/react-component-progress-indicator' target="_blank">React Progress Indicator</Link>.<br/>
         </Typography>
-    </Blog>
+    </React.Fragment>
 );
 export default blog

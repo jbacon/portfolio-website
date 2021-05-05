@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import LoadableContent from "./components/LoadableContent";
-import { BlogRoutes } from "./components/Blog"
+import { GetBlogRoutes } from "./components/Blog"
 const FourOhFour = React.lazy(() => import("./components/FourOhFour"));
 
 const App = (props) => (
@@ -27,8 +27,8 @@ const App = (props) => (
               <React.Suspense fallback={<LoadableContent isLoading={true} fullScreen={true}/>}>
                 <Switch>
                   <Route exact path="/" component={Home}/>
-                  <BlogRoutes/>
-                  <Route path="*" render={() => <FourOhFour />}/>
+                  {GetBlogRoutes()}
+                  <Route path="*" render={() => <FourOhFour/>}/>
                 </Switch>
               </React.Suspense>
             </div>

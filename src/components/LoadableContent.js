@@ -1,6 +1,3 @@
-/**
- * Summary. Adds a form for users to email a question regarding the current page.
- */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Backdrop, CircularProgress } from '@material-ui/core';
@@ -14,7 +11,7 @@ const LoadableContent = (props) => (
         {props.children}
         <Backdrop open={props.isLoading || props.isError || props.isSuccess} style={{ zIndex: 9999, flexDirection: "column", position: props.fullScreen ? "fixed": "absolute" }}>
             {props.isLoading &&
-                <CircularProgress color="primary" />
+                <CircularProgress variant="indeterminate"/>
             }
             <Collapse in={props.isError}>
                 <Alert

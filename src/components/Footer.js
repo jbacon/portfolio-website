@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import React from 'react';
+import ImagePoweredByReact from '../images/poweredwithreactjs.png'
 
 const styles = theme => ({});
 
@@ -25,7 +26,7 @@ class Footer extends React.Component {
           <img style={{
             width: "100%",
             padding: "1rem",
-          }} alt="Made With ReactJS" src={process.env.PUBLIC_URL + '/images/poweredwithreactjs.png'} />
+          }} alt="Made With ReactJS" src={ImagePoweredByReact} />
         } />
       </BottomNavigation>
     );

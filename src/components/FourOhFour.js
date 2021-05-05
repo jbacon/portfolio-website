@@ -1,21 +1,14 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
 import Container from '@material-ui/core/Container';
+import { Typography } from '@material-ui/core';
 
-const FourOhFour = (props) => (
+
+const FourOhFour = (props) => {
+     return (
     <Container >
-        <Typography variant="h1" style={{ textAlign: "center" }}>
-            <br />
-            Oops! 4o4
-            <br />
-        </Typography>
-        <Typography style={{ textAlign: "center" }}>
-            Page not found.
-            <br />
-            <br />
-            <br />
-        </Typography>
+        <Typography>Oops... 404</Typography>
     </Container>
-);
+     )
+};
 
 export default FourOhFour

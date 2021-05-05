@@ -1,11 +1,10 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import Blog from '../../Blog'
 import Highlight from "react-highlight.js"
 import Link from '@material-ui/core/Link';
 
 const blog = (props) => (
-    <Blog>
+    <React.Fragment>
         <Typography variant="h2">GoLang Servers:<br />A Basic Demo</Typography>
         <Typography>
         <br/>
@@ -21,7 +20,7 @@ const blog = (props) => (
         Let's start by building a dead simple GoLang HTTP Server<br />
         We will not use any 3rd party libraries in this demonstration.<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`package main
 
 import (
@@ -46,7 +45,7 @@ func main() {
         <Typography>
         The starting point of our demonstration is <b>http.ListenAndServe</b>.<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`func ListenAndServe(addr string, handler Handler) error`}
         </Highlight>
         <Typography>
@@ -57,7 +56,7 @@ func main() {
         In GoLang a <b>http.ServeMux</b> is a <b>http.Handler</b> with additional responsibilities as a "request multiplexer".<br/>
         To illustrate, we create a different mux (handler) like so:<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`serveMux := http.NewServeMux()
 serveMux.HandleFunc("/hello-world", helloWorld)
 http.ListenAndServe(":8080", serveMux)`}
@@ -65,7 +64,7 @@ http.ListenAndServe(":8080", serveMux)`}
         <Typography>
         We could also pass the handler directly, if we so choose:
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`serveMux := http.NewServeMux()
 handler := serveMux.HandleFunc("/hello-world", helloWorld)
 http.ListenAndServe(":8080", handler)`}
@@ -73,7 +72,7 @@ http.ListenAndServe(":8080", handler)`}
         <Typography>
         Moving along to our function.. we must pay special attention to out signature.
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`func helloWorld(responseWriter http.ResponseWriter, request *http.Request) { ... }`}
         </Highlight>
         <Typography>
@@ -84,7 +83,7 @@ http.ListenAndServe(":8080", handler)`}
         <Typography>
         Our server now needs to handle a database layer that is initialized in main:
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`sqlClient, err := sql.Open("sqlite3", "./database.db")
 if err != nil {
     log.Fatalf("Could not open db: %v", err)
@@ -100,7 +99,7 @@ if err != nil {
         While <b>sqlClient</b> could be used globally, that would not be elegant.<br/>
         One solution is to create a wrapper around our <b>handlerFunc</b>. Like so...<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`func helloWorld(sqlClient *sql.DB) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         ... your logic ... 
@@ -111,7 +110,7 @@ if err != nil {
         This neat treat exposes our <b>sqlClient</b> scope to our custom function inside <b>HandlerFunc</b>.<br/>
         We can now, re-write main:<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`httpHandler := helloWorld(sqlClient)
 http.ListenAndServe(":8080", httpHandler)`}
         </Highlight>
@@ -125,7 +124,7 @@ http.ListenAndServe(":8080", httpHandler)`}
         We can use the same wrapper design above, with slight modification.<br/>
         Instead of accepting a <b>sqlClient</b> input, middleware will accept another <b>http.Handler</b>.
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`func middleware(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         ...
@@ -137,7 +136,7 @@ http.ListenAndServe(":8080", httpHandler)`}
         <Typography>
         Using middleware, we can now create a logging framework.<br/>
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`func loggerMiddleware(next http.Handler) http.Handler { 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Println("Request received")
@@ -150,7 +149,7 @@ http.ListenAndServe(":8080", httpHandler)`}
         The key understanding here being <b>next.ServeHTTP</b>, which calls the inner handler.<br/>
         We can use our new logging middleware like so:
         </Typography>
-        <Highlight>
+        <Highlight language="golang">
 {`handler := loggingMiddleware(helloWorld(sqlClient)))
 http.ListenAndServe(":8080", handler)`}
         </Highlight>
@@ -162,6 +161,6 @@ http.ListenAndServe(":8080", handler)`}
         I hope this article was helpful.<br/>
         GoLang is a nifty language for building both simple and complex http servers.
         </Typography>
-    </Blog>
+    </React.Fragment>
 );
 export default blog
