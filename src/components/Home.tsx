@@ -15,7 +15,7 @@ import ImageSkiingWithMom from '../images/skiing_with_mom.jpg'
 import ImageStuartMt2 from '../images/stuart_mt_2.jpg'
 import ImageSkiGroup2 from '../images/skigroup2.jpg'
 import ImageMountDaniels from '../images/mount_daniels.jpg'
-import GIFGondola from '../images/gondola.gif'
+import MP4Gondola from '../images/gondola.mp4'
 import ImageMe8 from '../images/me8.jpg'
 import ImageClimbing from '../images/climbing.jpg'
 import ImageLake from '../images/lake.jpg'
@@ -187,19 +187,15 @@ const Home = () => (
                     overflow: "hidden"
                 }}
                 renderLayer={(percentage: number) => (
-                    <div
+                    <video autoPlay muted loop 
                         style={{
-                            background: `url(${GIFGondola})`,
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: "0% " + (percentage * -1000 + (500)) + "px",
-                            backgroundSize: '100vw auto',
                             position: 'absolute',
                             left: '0px',
-                            top: "0px",
-                            width: "100%",
-                            height: "100%"
-                        }}
-                    />
+                            top: (percentage * -1000 + (500)) + "px",
+                            width: "100%"
+                        }}>
+                        <source src={MP4Gondola} type="video/mp4"/>
+                    </video>
                 )}>
             </Parallax2>
             <Text style={{

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import Link from '@mui/material/Link';
-import ImageSpaghettiCode from '../../images/spaghetti-code.gif'
+import ImageSpaghettiCode from '../../images/spaghetti-code.jpg'
 
 const blog = () => (
     <React.Fragment>
