@@ -7,8 +7,8 @@ import Carousel from "react-material-ui-carousel";
 import { Parallax as Parallax2 } from "react-parallax";
 import { styled } from "@mui/system";
 import {
-  ConnectDialogDispatcherContext,
-  DispatcherContext,
+  ConnectDispatcherContext,
+  ConnectDispatcherStateInterface,
 } from "./ConnectDialog";
 import FadeIntoView from "./FadeIntoView";
 import Box from "@mui/material/Box";
@@ -147,8 +147,8 @@ const Home = () => (
       <br />
     </Text>
     <FadeIntoView>
-      <ConnectDialogDispatcherContext.Consumer>
-        {(connect: DispatcherContext | null) => (
+      <ConnectDispatcherContext.Consumer>
+        {(connect: ConnectDispatcherStateInterface | null) => (
           <Text>
             Let&apos;s{" "}
             <Button
@@ -161,7 +161,7 @@ const Home = () => (
             <br />
           </Text>
         )}
-      </ConnectDialogDispatcherContext.Consumer>
+      </ConnectDispatcherContext.Consumer>
     </FadeIntoView>
     <Parallax2
       style={{

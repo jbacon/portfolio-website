@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
-import { ConnectDialogDispatcherContext } from "./ConnectDialog";
+import { ConnectDispatcherContext } from "./ConnectDialog";
 import { Link } from "react-router-dom";
 import { BlogMenu } from "./Blog";
 import { styled } from "@mui/system";
@@ -28,9 +28,9 @@ interface HeaderState {
 }
 
 class Header extends React.Component<HeaderProps, HeaderState> {
-  static contextType = ConnectDialogDispatcherContext;
+  static contextType = ConnectDispatcherContext;
 
-  context!: React.ContextType<typeof ConnectDialogDispatcherContext>;
+  context!: React.ContextType<typeof ConnectDispatcherContext>;
 
   constructor(props: HeaderProps) {
     super(props);

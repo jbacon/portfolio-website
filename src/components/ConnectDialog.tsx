@@ -1,12 +1,9 @@
 /**
- * Summary. A Connect Dialog Popup allowing users to send me an email.
- *
- * Description. This file exports a ConnectDialogProvider and a withConnectDialogDispatcher.
- *  The connect dialog can be opened from child component(s) which are wrapped withConnectDialogDispatcher
- *  and exist under the ConnectProvider.
- *
- *  (this is definitely over-engineered, but learned a great deal about Context API!)
- */
+ * Summary: A provider that allows child components to dispatch the connect dialog
+ * Requires two separate contexts to avoid re-rendering children
+ * One context is for providing dispatcher
+ * One context is for providing dispatcher, closer, and isOpen (used internally)
+ *  */
 
 import EmailJS from "@emailjs/browser";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -20,11 +17,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import InputAdornment from "@mui/material/InputAdornment";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
-import React from "react";
+import React, { ComponentType, useContext } from "react";
 import { LightThemeProvider } from "./CustomThemeProvider";
 import LoadableContent from "./LoadableContent";
+import { withAuth0, WithAuth0Props } from "@auth0/auth0-react";
+import configs from "../configurations.json";
 
-interface ConnectDialogProps {
+interface DialogPropsInterface
+  extends WithAuth0Props,
+    WithProviderPropsInterface {
   email?: string;
   linkedIn?: string;
   github?: string;
@@ -37,7 +38,7 @@ interface ConnectDialogProps {
   onSentFail?: () => void;
 }
 
-interface ConnectDialogState {
+interface DialogStateInterface {
   email: string;
   name: string;
   message: string;
@@ -46,26 +47,21 @@ interface ConnectDialogState {
   isFailed: boolean;
 }
 
-const ConnectDialogDispatcherContext =
-  React.createContext<DispatcherContext | null>(null);
-
 // Does not re-render consumer
-const ConnectDialogStateContext =
-  React.createContext<ConnectDialogProviderState | null>(null);
+const ProviderContext = React.createContext<ProviderStateInterface | null>(
+  null
+);
 
 class ConnectDialog extends React.Component<
-  ConnectDialogProps,
-  ConnectDialogState
+  DialogPropsInterface,
+  DialogStateInterface
 > {
-  static contextType = ConnectDialogStateContext;
-
-  context!: React.ContextType<typeof ConnectDialogStateContext>;
-
-  constructor(props: ConnectDialogProps) {
+  constructor(props: DialogPropsInterface) {
     super(props);
     this.state = {
-      email: "",
-      name: "",
+      email:
+        props.auth0.user?.email !== undefined ? props.auth0.user?.email : "",
+      name: props.auth0.user?.name !== undefined ? props.auth0.user?.name : "",
       message: "",
       isLoading: false,
       isSent: false,
@@ -122,7 +118,7 @@ class ConnectDialog extends React.Component<
     this.setState({ isLoading: false });
     this.setState({ isFailed: false });
     this.setState({ isSent: false });
-    this.context?.closeConnectDialog();
+    this.props.connect.closeConnectDialog();
   };
 
   render() {
@@ -138,11 +134,11 @@ class ConnectDialog extends React.Component<
       >
         <LightThemeProvider>
           <Dialog
-            open={Boolean(this.context?.isConnectDialogOpen)}
-            onClose={this.context?.closeConnectDialog}
+            open={this.props.connect.isConnectDialogOpen}
+            onClose={this.props.connect.closeConnectDialog}
             aria-labelledby="form-dialog-title"
           >
-            <DialogTitle id="form-dialog-title">Send An Email</DialogTitle>
+            <DialogTitle id="form-dialog-title">Send Me A Message</DialogTitle>
             <form onSubmit={this.handleSend}>
               <DialogContent>
                 {this.props.dialogContentText !== undefined && (
@@ -194,7 +190,11 @@ class ConnectDialog extends React.Component<
                   id="name"
                   label="Your Name"
                   fullWidth
-                  value={this.state.name}
+                  value={
+                    this.state.name !== ""
+                      ? this.state.name
+                      : this.props.auth0.user?.name
+                  }
                   onChange={this.handleNameChange}
                 />
                 <TextField
@@ -205,7 +205,11 @@ class ConnectDialog extends React.Component<
                   label="Your Email"
                   type="email"
                   fullWidth
-                  value={this.state.email}
+                  value={
+                    this.state.email !== ""
+                      ? this.state.email
+                      : this.props.auth0.user?.email
+                  }
                   onChange={this.handleEmailChange}
                 />
                 <TextField
@@ -223,7 +227,7 @@ class ConnectDialog extends React.Component<
               </DialogContent>
               <DialogActions>
                 <Button type="submit">Send</Button>
-                <Button onClick={this.context?.closeConnectDialog}>
+                <Button onClick={this.props.connect.closeConnectDialog}>
                   Cancel
                 </Button>
               </DialogActions>
@@ -235,26 +239,50 @@ class ConnectDialog extends React.Component<
   }
 }
 
-interface DispatcherContext {
+interface WithProviderPropsInterface {
+  connect: ProviderStateInterface;
+}
+
+const withProvider = <P extends WithProviderPropsInterface>(
+  Component: ComponentType<P>,
+  context = ProviderContext
+): ComponentType<Omit<P, keyof WithProviderPropsInterface>> => {
+  return function WithProvider(props): JSX.Element {
+    return (
+      <context.Consumer>
+        {(connect: ProviderStateInterface | null): JSX.Element => (
+          <Component {...(props as P)} connect={connect} />
+        )}
+      </context.Consumer>
+    );
+  };
+};
+
+const ConnectDialogWithContexts = withAuth0(withProvider(ConnectDialog));
+
+interface ConnectDispatcherStateInterface {
   openConnectDialog: () => void;
 }
 
-interface ConnectDialogProviderProps extends ConnectDialogProps {
+const ConnectDispatcherContext =
+  React.createContext<ConnectDispatcherStateInterface | null>(null);
+
+interface ProviderPropsInterface {
   children?: React.ReactNode;
 }
 
-interface ConnectDialogProviderState {
+interface ProviderStateInterface {
   isConnectDialogOpen: boolean;
   closeConnectDialog: () => void;
   openConnectDialog: () => void;
 }
 
 // ConnectDialogProvider renders the actual Dialog component and provides the dispatcher context for all children
-class ConnectDialogProvider extends React.Component<
-  ConnectDialogProviderProps,
-  ConnectDialogProviderState
+class ConnectProvider extends React.Component<
+  ProviderPropsInterface,
+  ProviderStateInterface
 > {
-  constructor(props: ConnectDialogProviderProps) {
+  constructor(props: ProviderPropsInterface) {
     super(props);
     this.state = {
       isConnectDialogOpen: false,
@@ -274,35 +302,57 @@ class ConnectDialogProvider extends React.Component<
   render() {
     // Nested Providers is necessary to prevent consumer components from re-rendering if they only need to "update" the data.
     return (
-      <ConnectDialogDispatcherContext.Provider
+      <ConnectDispatcherContext.Provider
         value={{ openConnectDialog: this.state.openConnectDialog }}
       >
-        <ConnectDialogStateContext.Provider value={this.state}>
-          <ConnectDialog {...this.props} />
-        </ConnectDialogStateContext.Provider>
+        <ProviderContext.Provider value={this.state}>
+          <ConnectDialogWithContexts
+            email={configs.email}
+            linkedIn={configs.linkedin}
+            github={configs.github}
+            emailJsUserId={configs.emailJS.templates[0].USER_ID}
+            emailJsServiceId={configs.emailJS.templates[0].SERVICE_ID}
+            emailJsTemplateId={configs.emailJS.templates[0].TEMPLATE_ID}
+          />
+        </ProviderContext.Provider>
         {this.props.children}
-      </ConnectDialogDispatcherContext.Provider>
+      </ConnectDispatcherContext.Provider>
     );
   }
 }
 
-// This pattern is not possible with typescript. Saving for reference.
-// const withConnectDialogDispatcher = (Component: React.ComponentType<object>) =>
-//     class WithConnectDialogDispatcher extends React.Component<object> {
-//         render() {
-//             return (
-//                 <ConnectDialogDispatcherContext.Consumer>
-//                     {(connect: DispatcherContext | null) => {
-//                         return <Component {...this.props} connect={connect} />;
-//                     }}
-//                 </ConnectDialogDispatcherContext.Consumer>
-//             )
-//         }
-//     };
-// };
+interface WithConnectDispatcherProps {
+  connectDispatcher: ConnectDispatcherStateInterface;
+}
 
-export { ConnectDialogDispatcherContext };
+const withConnectDispatcher = <P extends WithConnectDispatcherProps>(
+  Component: ComponentType<P>,
+  context = ConnectDispatcherContext
+): ComponentType<Omit<P, keyof WithConnectDispatcherProps>> => {
+  return function WithConnectDispatcher(props): JSX.Element {
+    return (
+      <context.Consumer>
+        {(
+          connectDispatcher: ConnectDispatcherStateInterface | null
+        ): JSX.Element => (
+          <Component {...(props as P)} connectDispatcher={connectDispatcher} />
+        )}
+      </context.Consumer>
+    );
+  };
+};
 
-export type { DispatcherContext };
+const useConnectDispatcher = (
+  context = ConnectDispatcherContext
+): ConnectDispatcherStateInterface =>
+  useContext(context) as ConnectDispatcherStateInterface;
 
-export default ConnectDialogProvider;
+export {
+  ConnectDispatcherContext,
+  withConnectDispatcher,
+  useConnectDispatcher,
+};
+
+export type { ConnectDispatcherStateInterface };
+
+export default ConnectProvider;

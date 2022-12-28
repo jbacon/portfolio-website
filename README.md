@@ -10,9 +10,11 @@ My portfolio website/blog built using [Create React App](https://create-react-ap
 - [Material UI](https://mui.com/)
 - AWS S3 Static Site Hosting
 - AWS CloudFront CDN
-- [Travis CI](https://app.travis-ci.com/)
+- [Auth0](https://auth0.com/)
 - [EmailJS](https://www.emailjs.com/)
 - [PrismJS](https://prismjs.com/)
+- [Prettier](https://prettier.io/docs/en/install.html)
+- [Travis CI](https://app.travis-ci.com/)
 
 ### Build & Deploy
 

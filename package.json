@@ -36,6 +36,7 @@
     "depcheck": "depcheck",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "prepare": "husky install",
+    "lint": "eslint --fix",
     "prettier": "npx prettier --write ."
   },
   "eslintConfig": {
