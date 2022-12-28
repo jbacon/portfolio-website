@@ -1,5 +1,5 @@
-import { PaletteOptions } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { PaletteOptions } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
 
 const darkTheme = createTheme({
@@ -10,7 +10,7 @@ const darkTheme = createTheme({
       main: "#00D8FE",
       dark: "#00D8FE",
     },
-  }
+  },
 });
 
 const lightTheme = createTheme({
@@ -21,10 +21,10 @@ const lightTheme = createTheme({
       main: "#00D8FE",
       dark: "#00D8FE",
     },
-  }
+  },
 });
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface MyTheme {
     palette: {
       primary: {
@@ -41,19 +41,13 @@ declare module '@mui/material/styles' {
 }
 
 const LightThemeProvider = (props: { children?: React.ReactNode }) => (
-  <ThemeProvider theme={lightTheme}>
-    {props.children}
-  </ThemeProvider>
-)
+  <ThemeProvider theme={lightTheme}>{props.children}</ThemeProvider>
+);
 
 const DarkThemeProvider = (props: { children?: React.ReactNode }) => (
-  <ThemeProvider theme={darkTheme}>
-    {props.children}
-  </ThemeProvider>
-)
+  <ThemeProvider theme={darkTheme}>{props.children}</ThemeProvider>
+);
 
-export {
-  LightThemeProvider
-};
+export { LightThemeProvider };
 
-export default DarkThemeProvider
+export default DarkThemeProvider;
