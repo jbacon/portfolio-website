@@ -22,7 +22,7 @@ const blog = () => (
     </ul>
     <br />
     <Typography>
-      Let's start by building a dead simple GoLang HTTP Server
+      Let&apos;s start by building a dead simple GoLang HTTP Server
       <br />
       We will not use any 3rd party libraries in this demonstration.
       <br />
@@ -47,7 +47,7 @@ func main() {
 }`}
     />
     <Typography>
-      Done. Pretty easy eh!? Let's break it down...
+      Done. Pretty easy eh!? Let&apos;s break it down...
       <br />
       <br />
     </Typography>
@@ -70,7 +70,7 @@ func main() {
       The <b>Server</b> is sharing this same context, which explains our{" "}
       <b>nil</b>.<br />
       In GoLang a <b>http.ServeMux</b> is a <b>http.Handler</b> with additional
-      responsibilities as a "request multiplexer".
+      responsibilities as a &quot;request multiplexer&quot;.
       <br />
       To illustrate, we create a different mux (handler) like so:
       <br />
@@ -100,7 +100,7 @@ http.ListenAndServe(":8080", handler)`}
     />
     <Typography>
       This implements the proper input type for <b>handleFunc</b>. So far, this
-      is a very basic server.... let's add more functionality.
+      is a very basic server.... let&apos;s add more functionality.
       <br />
       <br />
     </Typography>
@@ -199,7 +199,7 @@ http.ListenAndServe(":8080", httpHandler)`}
 http.ListenAndServe(":8080", handler)`}
     />
     <Typography>
-      Now.. it's a chain.
+      Now.. it&apos;s a chain.
       <br />
       <br />
       To view the full source for this demonstration, visit my{" "}

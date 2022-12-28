@@ -8,7 +8,7 @@ function GetInnerText(
     | React.ReactNode
     | React.ReactNode[]
 ): string {
-  if (!reactNode) {
+  if (reactNode === undefined || reactNode === null) {
     return "";
   }
   if (typeof reactNode === "string") {
@@ -19,7 +19,7 @@ function GetInnerText(
     const props = reactElement.props as {
       children?: React.ReactNode & React.ReactNode[];
     };
-    if (props.children) {
+    if (props.children != null) {
       return GetInnerText(props.children);
     }
   }

@@ -48,16 +48,18 @@ class Question extends React.Component<QuestionProps, QuestionState> {
       isFailed: false,
     };
   }
+
   handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ email: event.target.value });
   };
+
   handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ message: event.target.value });
   };
 
   handleSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.props.beforeSent && this.props.beforeSent();
+    this.props.beforeSent?.();
     this.setState({ isLoading: true });
     EmailJS.send(
       this.props.emailJsServiceId,
@@ -69,7 +71,7 @@ class Question extends React.Component<QuestionProps, QuestionState> {
       },
       this.props.emailJsUserId
     ).then(
-      (result) => {
+      () => {
         this.setState({
           email: "",
           message: "",
@@ -77,11 +79,11 @@ class Question extends React.Component<QuestionProps, QuestionState> {
           isSent: true,
           isFailed: false,
         });
-        this.props.afterSent && this.props.afterSent();
+        this.props.afterSent?.();
       },
-      (error) => {
+      () => {
         this.setState({ isLoading: false, isSent: false, isFailed: true });
-        this.props.onSentFail && this.props.onSentFail();
+        this.props.onSentFail?.();
       }
     );
   };
@@ -121,7 +123,7 @@ class Question extends React.Component<QuestionProps, QuestionState> {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      {this.props.linkedIn && (
+                      {this.props.linkedIn === undefined && (
                         <Link
                           style={{ display: "inline" }}
                           href={this.props.linkedIn}
@@ -130,7 +132,7 @@ class Question extends React.Component<QuestionProps, QuestionState> {
                           <LinkedInIcon fontSize="large" />
                         </Link>
                       )}
-                      {this.props.github && (
+                      {this.props.github === undefined && (
                         <Link
                           style={{ display: "inline" }}
                           href={this.props.github}

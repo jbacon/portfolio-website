@@ -15,10 +15,8 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import {
-  default as DialogContentText,
-  default as DialogTitle,
-} from "@mui/material/DialogTitle";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import InputAdornment from "@mui/material/InputAdornment";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
@@ -78,16 +76,18 @@ class ConnectDialog extends React.Component<
   handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ name: event.target.value });
   };
+
   handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ email: event.target.value });
   };
+
   handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ message: event.target.value });
   };
 
   handleSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.props.beforeSent && this.props.beforeSent();
+    this.props.beforeSent?.();
     this.setState({ isLoading: true });
     EmailJS.send(
       this.props.emailJsServiceId,
@@ -108,11 +108,12 @@ class ConnectDialog extends React.Component<
           isSent: true,
           isFailed: false,
         });
-        this.props.afterSent && this.props.afterSent();
+        this.props.afterSent?.();
       },
       (error) => {
         this.setState({ isLoading: false, isFailed: true, isSent: false });
-        this.props.onSentFail && this.props.onSentFail();
+        this.props.onSentFail?.();
+        console.error(error);
       }
     );
   };
@@ -121,7 +122,7 @@ class ConnectDialog extends React.Component<
     this.setState({ isLoading: false });
     this.setState({ isFailed: false });
     this.setState({ isSent: false });
-    this.context!.closeConnectDialog();
+    this.context?.closeConnectDialog();
   };
 
   render() {
@@ -137,19 +138,19 @@ class ConnectDialog extends React.Component<
       >
         <LightThemeProvider>
           <Dialog
-            open={this.context!.isConnectDialogOpen}
-            onClose={this.context!.closeConnectDialog}
+            open={Boolean(this.context?.isConnectDialogOpen)}
+            onClose={this.context?.closeConnectDialog}
             aria-labelledby="form-dialog-title"
           >
             <DialogTitle id="form-dialog-title">Send An Email</DialogTitle>
             <form onSubmit={this.handleSend}>
               <DialogContent>
-                {this.props.dialogContentText && (
+                {this.props.dialogContentText !== undefined && (
                   <DialogContentText>
                     {this.props.dialogContentText}
                   </DialogContentText>
                 )}
-                {this.props.email && (
+                {this.props.email !== undefined && (
                   <TextField
                     margin="normal"
                     id="to"
@@ -160,7 +161,7 @@ class ConnectDialog extends React.Component<
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
-                          {this.props.linkedIn && (
+                          {this.props.linkedIn !== undefined && (
                             <Link
                               style={{ display: "inline" }}
                               href={this.props.linkedIn}
@@ -169,7 +170,7 @@ class ConnectDialog extends React.Component<
                               <LinkedInIcon fontSize="large" />
                             </Link>
                           )}
-                          {this.props.github && (
+                          {this.props.github !== undefined && (
                             <Link
                               style={{ display: "inline" }}
                               href={this.props.github}
@@ -222,7 +223,7 @@ class ConnectDialog extends React.Component<
               </DialogContent>
               <DialogActions>
                 <Button type="submit">Send</Button>
-                <Button onClick={this.context!.closeConnectDialog}>
+                <Button onClick={this.context?.closeConnectDialog}>
                   Cancel
                 </Button>
               </DialogActions>
@@ -265,6 +266,7 @@ class ConnectDialogProvider extends React.Component<
   openConnectDialog = () => {
     this.setState({ isConnectDialogOpen: true });
   };
+
   closeConnectDialog = () => {
     this.setState({ isConnectDialogOpen: false });
   };

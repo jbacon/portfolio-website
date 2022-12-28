@@ -22,7 +22,7 @@ const ProviderBundle = (props: { children?: React.ReactNode }) => {
             // const route = sessionStorage.getItem("redirect_route") || "/"
             // sessionStorage.removeItem("redirect_route")
             navigate(
-              appState && appState.redirectTo ? appState.redirectTo : "/"
+              appState?.redirectTo !== undefined ? appState.redirectTo : "/"
             );
           }}
         >

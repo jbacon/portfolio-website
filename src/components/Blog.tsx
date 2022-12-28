@@ -16,10 +16,9 @@ import ListItemText from "@mui/material/ListItemText";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import Question from "./Question";
 import { LightThemeProvider } from "./CustomThemeProvider";
-import { Route } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 // import gfm from 'remark-gfm'
 import BlogStructure from "../blogs/blog-structure";
@@ -72,7 +71,7 @@ const BlogMenu = (props: BlogMenuProps) => (
       </div>
       {BlogStructure.map((blog, i) => {
         return (
-          <Accordion key={i} defaultExpanded={i === 0 ? true : false}>
+          <Accordion key={i} defaultExpanded={i === 0}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>{blog.year}</Typography>
             </AccordionSummary>
@@ -87,7 +86,7 @@ const BlogMenu = (props: BlogMenuProps) => (
                       key={j}
                       component={Link}
                       onClick={props.onClose}
-                      to={"/blogs/" + blog.year + "/" + articlePath}
+                      to={`/blogs/${blog.year}/${articlePath}`}
                     >
                       <ListItemText primary={article.title} />
                     </ListItem>
@@ -115,7 +114,7 @@ const MarkdownBlog = (props: MarkdownBlogProps) => {
   const [markdown, setMarkdown] = React.useState("");
 
   React.useEffect(() => {
-    var asyncFunction = async () => {
+    const asyncFunction = async () => {
       try {
         const importResult = await import(
           `../blogs/${props.year}/${props.articleFilename}.md`
@@ -127,12 +126,15 @@ const MarkdownBlog = (props: MarkdownBlogProps) => {
         console.log(e);
       }
     };
-    asyncFunction();
+    asyncFunction().catch((error) => {
+      console.log(error);
+    });
   }, [props]);
 
   return (
     <Container>
       <ReactMarkdown
+        // remarkPlugins={[[gfm, { singleTilde: false }]]}
         components={{
           // https://github.com/remarkjs/react-markdown#appendix-b-node-types
           h1: (props: HeadingProps) => (
@@ -193,20 +195,25 @@ const MarkdownBlog = (props: MarkdownBlogProps) => {
             ) {
               return <pre {...props}></pre>;
             }
+
+            const firstChildProps = (firstChild as ReactElement).props as {
+              className?: string;
+            };
             return (
               <Highlight
                 language={
-                  ((firstChild as ReactElement).props as { className?: string })
-                    .className || "markdown"
+                  firstChildProps?.className !== undefined
+                    ? firstChildProps?.className
+                    : "markdown"
                 }
                 content={GetInnerText(props.children)}
               />
             );
           },
         }}
-        // remarkPlugins={[[gfm, { singleTilde: false }]]}
-        children={markdown}
-      />
+      >
+        {markdown}
+      </ReactMarkdown>
     </Container>
   );
 };
@@ -219,10 +226,10 @@ const GetBlogRoutes = () =>
       const articlePath = article.filename.substring(0, dotIndex);
       const LazyComponent = React.lazy(async () => {
         await new Promise((resolve) => setTimeout(resolve, 300));
-        return import("../blogs/" + blog.year + "/" + article.filename);
+        return await import(`../blogs/${blog.year}/${article.filename}`);
       });
 
-      var blogContent;
+      let blogContent;
       switch (articleExtension) {
         case ".md":
           blogContent = (
@@ -241,8 +248,8 @@ const GetBlogRoutes = () =>
 
       return (
         <Route
-          key={i + "" + j}
-          path={"/blogs/" + blog.year + "/" + articlePath}
+          key={`${i}${j}`}
+          path={`/blogs/${blog.year}/${articlePath}`}
           element={<Blog>{blogContent}</Blog>}
         />
       );

@@ -11,34 +11,37 @@ const blog = () => (
       While a subject-matter expert in web development could certainly offer a
       better account of the evolution of web technology, building this blog gave
       me a decent preview into the lucrative technologies of the industry. Here
-      is my offbeat narrative on the evolution of "Modern Web Applications".
+      is my offbeat narrative on the evolution of &quot;Modern Web
+      Applications&quot;.
     </Typography>
     <br />
     <br />
     <Typography variant="h5">The Rise of the Static Web</Typography>
     <Typography>
       Looking for an easy solution for publishing content to the web? Static
-      websites are the answer. HTML files typically reside on a machine's
-      file-system ready to be "served" to clients. Special "Server" software
-      assumes the responsibility of shipping these files (think nginx). Custom
-      code isn't necessary for static HTML files. Traditionally, static sites
-      still require managing machines however. Wouldn't it be great if we could
-      deploy static content to the web without managing messy api servers?
-      Thanks to the cloud computing services, this all becomes easier! Forgot
-      about managing machines and configuring APIs. Upload those static pages to
-      your favorite Cloud, and take a rest.
+      websites are the answer. HTML files typically reside on a machine&apos;s
+      file-system ready to be &quot;served&quot; to clients. Special
+      &quot;Server&quot; software assumes the responsibility of shipping these
+      files (think nginx). Custom code isn&apos;t necessary for static HTML
+      files. Traditionally, static sites still require managing machines
+      however. Wouldn&apos;t it be great if we could deploy static content to
+      the web without managing messy api servers? Thanks to the cloud computing
+      services, this all becomes easier! Forgot about managing machines and
+      configuring APIs. Upload those static pages to your favorite Cloud, and
+      take a rest.
     </Typography>
     <br />
     <Typography variant="h5">The Rise of Server-Side Rendering</Typography>
     <Typography>
       Along comes complex data, business logic, and the need for dynamically
       content. Server-Side Rendering (SSR) has come to the rescue.
-      <i>We're now officially a web application folks</i>. Applications change
-      with data, and traditional "server" software won't cut it. Database
-      connectivity is now a necessity, and that means custom server code. Pages
-      must be dynamically rendered to embed data <i>before</i> serving the final
-      HTML page. Instead of "magical" server <i>software</i> we now write custom
-      code using a "magical" server <i>framework</i>.
+      <i>We&apos;re now officially a web application folks</i>. Applications
+      change with data, and traditional &quot;server&quot; software won&apos;t
+      cut it. Database connectivity is now a necessity, and that means custom
+      server code. Pages must be dynamically rendered to embed data{" "}
+      <i>before</i> serving the final HTML page. Instead of &quot;magical&quot;
+      server <i>software</i> we now write custom code using a
+      &quot;magical&quot; server <i>framework</i>.
     </Typography>
     <br />
     <Typography variant="h5">
@@ -51,8 +54,8 @@ const blog = () => (
       perform a full page refresh when being served rendered html files.
       Rendering dynamic content is now a possibility on the client browser, not
       just the server! Servers can now be broken into two catagories:
-      traditional static content managers and data APIs. SSR takes it's last
-      bow...
+      traditional static content managers and data APIs. SSR takes it&apos;s
+      last bow...
     </Typography>
     <br />
     <Typography variant="h5">The Rise of Client-Side Rendering</Typography>
@@ -86,7 +89,7 @@ const blog = () => (
       <img alt="oops.. not available" height="100%" src={ImageIllBeBack}></img>
       <br />
       <br />
-      <b>We'll see...</b>
+      <b>We&apos;ll see...</b>
       <br />
       <br />
       Had enough? No? Check out my next post:{" "}

@@ -12,9 +12,9 @@ const blog = () => (
     <Typography variant="h2">What is SPA?</Typography>
     <Typography>
       Traditionally, navigating between web pages causes complete rending of a
-      entire page's HTML content. More often than not, only part of a page's
-      content typically changes between navigation. Inadvertently, and often
-      times... headers, footers, menus, and titles are all re-rendered
+      entire page&apos;s HTML content. More often than not, only part of a
+      page&apos;s content typically changes between navigation. Inadvertently,
+      and often times... headers, footers, menus, and titles are all re-rendered
       unnecessarily. So we must ask, why should the entire page reload just to
       render partial content? SPAs address this concern by using modern browser
       Javascript APIs to perform page modifications (DOM manipulations)
@@ -24,11 +24,11 @@ const blog = () => (
       from the likes of Google, Facebook, and Microsoft, SPAs are easier said
       than done... Maintaining speed, state, history, and events is a
       programmatic challenge. Frameworks have risen to the occasion and offer
-      assistance to the aspiring web developer. Let's all avoid making our own
-      home-cooked Javascript spaghetti.
+      assistance to the aspiring web developer. Let&apos;s all avoid making our
+      own home-cooked Javascript spaghetti.
       <br />
       <img alt="oops.. not available" height="100%" src={ImageSpaghettiCode} />
-      <br />* Don't forget the meatballs
+      <br />* Don&apos;t forget the meatballs
     </Typography>
     <br />
     <br />
@@ -36,7 +36,7 @@ const blog = () => (
     <Typography>
       With the increased difficulty of building SPAs, frameworks have risen to
       fill a void. But choose wisely; that snazzy new framework could very well
-      be tomorrow's technical debt.
+      be tomorrow&apos;s technical debt.
       <br />
       There are many to choose from:
     </Typography>
@@ -55,12 +55,12 @@ const blog = () => (
       Has the native browser API failed us? Before starting this blog website, I
       was caught in the framework nether. Critical to choosing a architecture is
       thorough understanding of the direction of the modern web. Choosing
-      cutting-edge tools that don't not reach wide-spread adoption is a real
-      bummer (thanks Web Components). It and should be noted, eventually we will
-      run out of acronyms: SSR, CSR, MVC, MVU, MVI, Flux, Redux, SPA, MPA... If
-      you don't understand the high-level trade-offs of each technique,
-      architecture, or tool you will succumb to the whim of the next popular
-      buzz-word.
+      cutting-edge tools that don&apos;t not reach wide-spread adoption is a
+      real bummer (thanks Web Components). It and should be noted, eventually we
+      will run out of acronyms: SSR, CSR, MVC, MVU, MVI, Flux, Redux, SPA,
+      MPA... If you don&apos;t understand the high-level trade-offs of each
+      technique, architecture, or tool you will succumb to the whim of the next
+      popular buzz-word.
       <br />
       Criteria for Choosing Front-End Framework:
     </Typography>

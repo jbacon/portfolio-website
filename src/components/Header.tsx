@@ -45,6 +45,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   handleMobileMenuOpen = (event: React.MouseEvent) => {
     this.setState({ mobileMoreAnchorEl: event.currentTarget });
   };
+
   handleMobileMenuClose = () => {
     this.setState({ mobileMoreAnchorEl: null });
   };
@@ -56,17 +57,22 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   openBlogDrawer = () => {
     this.setState({ isBlogDrawerOpen: true });
   };
+
   closeBlogDrawer = () => {
     this.setState({ isBlogDrawerOpen: false });
   };
 
   signUp = () => {
     // sessionStorage.setItem("redirect_route", window.location.pathname+window.location.search);
-    this.props.auth0?.loginWithRedirect({
-      appState: {
-        redirectTo: window.location.pathname + window.location.search,
-      },
-    });
+    this.props.auth0
+      ?.loginWithRedirect({
+        appState: {
+          redirectTo: window.location.pathname + window.location.search,
+        },
+      })
+      .catch((reason) => {
+        console.error(reason);
+      });
   };
 
   signOut = () => {
@@ -166,7 +172,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               bottom: 16,
               right: 16,
             }}
-            onClick={this.context!.openConnectDialog}
+            onClick={this.context?.openConnectDialog}
           >
             <EmailIcon />
           </Fab>

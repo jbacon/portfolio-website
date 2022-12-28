@@ -19,11 +19,19 @@ const LoadableContent = (props: LoadableContentProps) => (
   <div style={{ position: "relative" }}>
     {props.children}
     <Backdrop
-      open={props.isLoading || props.isError || props.isSuccess || false}
+      open={
+        props.isLoading ||
+        Boolean(props.isError) ||
+        Boolean(props.isSuccess) ||
+        false
+      }
       style={{
         zIndex: 9999,
         flexDirection: "column",
-        position: props.fullScreen ? "fixed" : "absolute",
+        position:
+          props.fullScreen === undefined || props.fullScreen
+            ? "fixed"
+            : "absolute",
       }}
     >
       {props.isLoading && <CircularProgress variant="indeterminate" />}
@@ -43,7 +51,9 @@ const LoadableContent = (props: LoadableContentProps) => (
           }
         >
           <AlertTitle>Oops!</AlertTitle>
-          {props.errorMessage || "Something went wrong"}
+          {props.errorMessage !== undefined
+            ? props.errorMessage
+            : "Something went wrong"}
         </Alert>
       </Collapse>
       <Collapse in={props.isSuccess}>

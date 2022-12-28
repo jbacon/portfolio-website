@@ -55,7 +55,7 @@ const Home = () => (
           style={{
             background: `url(${ImageStuartMt2})`,
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "50% " + (percentage * -1000 + 800) + "px",
+            backgroundPosition: `50% ${percentage * -1000 + 800}px`,
             backgroundSize: "auto max(700px, 60vw)",
             position: "absolute",
             left: "0px",
@@ -108,7 +108,7 @@ const Home = () => (
           padding: "3rem",
         }}
       >
-        Hi, I'm Josh!
+        Hi, I&apos;m Josh!
         <br />
         <br />
         A Seattle based
@@ -127,8 +127,7 @@ const Home = () => (
           style={{
             background: `url(${ImageSkiGroup2})`,
             backgroundRepeat: "no-repeat",
-            backgroundPosition:
-              "50% " + (percentage * 1.2 * -1000 + 800) + "px",
+            backgroundPosition: `50% ${percentage * 1.2 * -1000 + 800}px`,
             backgroundSize: "max(1150px, 100vw)",
             position: "absolute",
             left: "0px",
@@ -151,7 +150,7 @@ const Home = () => (
       <ConnectDialogDispatcherContext.Consumer>
         {(connect: DispatcherContext | null) => (
           <Text>
-            Let's{" "}
+            Let&apos;s{" "}
             <Button
               variant="outlined"
               color="primary"
@@ -174,7 +173,7 @@ const Home = () => (
           style={{
             background: `url(${ImageMountDaniels})`,
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "100% " + (percentage * -1000 + 500) + "px",
+            backgroundPosition: `100% ${percentage * -1000 + 500}px`,
             backgroundSize: "max(1150px, 100vw)",
             position: "absolute",
             left: "0px",
@@ -202,7 +201,7 @@ const Home = () => (
       <br />
       From conception to production...
       <br />
-      ...let's build it.
+      ...let&apos;s build it.
       <br />
     </Text>
     <FadeIntoView>
@@ -245,7 +244,7 @@ const Home = () => (
           style={{
             position: "absolute",
             left: "0px",
-            top: percentage * -1000 + 500 + "px",
+            top: `${percentage * -1000 + 500}px`,
             width: "100%",
           }}
         >
@@ -270,7 +269,7 @@ const Home = () => (
       <br />
       Learning is most often collaborative,
       <br />
-      so let's stretch our minds together.
+      so let&apos;s stretch our minds together.
       <br />
     </Text>
     <Carousel
@@ -300,13 +299,13 @@ const Home = () => (
         <div>
           <Text>
             <FormatQuoteIcon />
-            Josh is a great employee. I've been very impressed with his ability
-            to pick up new skills as well as his attention to detail. Josh is
-            also very easy to work with and is a great team player. He
+            Josh is a great employee. I&apos;ve been very impressed with his
+            ability to pick up new skills as well as his attention to detail.
+            Josh is also very easy to work with and is a great team player. He
             collaborates well with other to ensure a quality product is
             delivered. He has been a huge asset to the Information Delivery team
             here at Clearwater Paper during his internship. Josh is just getting
-            started in his career, but I know he's going to go far.
+            started in his career, but I know he&apos;s going to go far.
             <FormatQuoteIcon />
             <br />
           </Text>
@@ -315,12 +314,13 @@ const Home = () => (
         <div>
           <Text>
             <FormatQuoteIcon />
-            'Tons of potential' is the phrase that comes to mind when I think of
-            Josh. Josh has been my intern for less than a year and has picked up
-            complex technologies far quicker than I expected him to. He's a very
-            quick learner and self-starter who has a great drive to figure
-            things out on his own. He's going to be a superstar performer when
-            he's done with college; any company will be lucky to have to him.
+            &apos;Tons of potential&apos; is the phrase that comes to mind when
+            I think of Josh. Josh has been my intern for less than a year and
+            has picked up complex technologies far quicker than I expected him
+            to. He&apos;s a very quick learner and self-starter who has a great
+            drive to figure things out on his own. He&apos;s going to be a
+            superstar performer when he&apos;s done with college; any company
+            will be lucky to have to him.
             <FormatQuoteIcon />
             <br />
           </Text>

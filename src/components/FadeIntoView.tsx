@@ -29,16 +29,22 @@ class FadeIntoView extends React.Component<
   }
 
   componentDidMount() {
-    if (this.state.domRef.current) {
-      this.state.observer.observe(this.state.domRef.current!);
-      return () => this.state.observer.unobserve(this.state.domRef.current!);
+    if (this.state.domRef.current != null) {
+      this.state.observer.observe(this.state.domRef.current);
+      return () => {
+        if (this.state.domRef.current !== null) {
+          this.state.observer.unobserve(this.state.domRef.current);
+        }
+      };
     }
   }
+
   componentWillUnmount() {
-    if (this.state.domRef.current) {
-      this.state.observer.unobserve(this.state.domRef.current!);
+    if (this.state.domRef.current != null) {
+      this.state.observer.unobserve(this.state.domRef.current);
     }
   }
+
   render() {
     return (
       <Fade ref={this.state.domRef} in={this.state.isVisible} timeout={3000}>

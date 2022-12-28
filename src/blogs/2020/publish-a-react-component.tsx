@@ -91,8 +91,8 @@ npx babel src/Component --out-dir build-component --copy-files`}
     <Highlight language="bash" content={`npm install --save-dev @babel/cli`} />
     <Typography>
       <br />
-      Next, add the line <b>"/build-component"</b> to the <b>.gitignore</b>{" "}
-      file.
+      Next, add the line <b>&quot;/build-component&quot;</b> to the{" "}
+      <b>.gitignore</b> file.
       <br />
       Then, make a new file <b>.npmignore</b> with contents copied from{" "}
       <b>.gitignore</b>.<br />
@@ -118,13 +118,13 @@ README.md
       <br />
       Some CRA dependencies are unnecessary for our component package.
       <br />
-      Move all dependencies <b>except "react"</b> from{" "}
+      Move all dependencies <b>except &quot;react&quot;</b> from{" "}
       <b>package.json/dependencies</b> to <b>package.json/devDependencies</b>.
       This allows us to release a small production package for our component,
       while maintaining the ability to develop our demo app.
       <br />
       <br />
-      We're all done setting up our CRA application, and are ready to start
+      We&apos;re all done setting up our CRA application, and are ready to start
       developing.
       <br />
     </Typography>
@@ -133,8 +133,8 @@ README.md
     <Typography>
       Our component will be a simple grey background overly.
       <br />
-      Create a new file <b>"src/Component/index.js"</b> and paste the following
-      code:
+      Create a new file <b>&quot;src/Component/index.js&quot;</b> and paste the
+      following code:
     </Typography>
     <Highlight
       language="jsx"
@@ -263,13 +263,13 @@ after_deploy:
     <br />
     <Typography variant="h4">Publish to NPM</Typography>
     <Typography>
-      Once you're ready to publish, simply merge your dev/feature branch into
-      the <b>main</b> branch. Travis will kick off a build and deploy. And you
-      can check your configured NPM registry.
+      Once you&apos;re ready to publish, simply merge your dev/feature branch
+      into the <b>main</b> branch. Travis will kick off a build and deploy. And
+      you can check your configured NPM registry.
       <br />
       <br />
     </Typography>
-    <Typography variant="h4">That's All!</Typography>
+    <Typography variant="h4">That&apos;s All!</Typography>
     <Typography>
       Hope this has been helpful! If you have many related components, you can
       include them into this same package.

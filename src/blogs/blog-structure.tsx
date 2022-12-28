@@ -3,15 +3,15 @@
 
 type BlogStructure = Blog[];
 
-type Blog = {
+interface Blog {
   year: number;
   articles: Article[];
-};
+}
 
-type Article = {
+interface Article {
   filename: string;
   title: string;
-};
+}
 
 const blogStructure: BlogStructure = [
   {
