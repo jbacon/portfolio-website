@@ -250,7 +250,11 @@ const GetBlogRoutes = () =>
         <Route
           key={`${i}${j}`}
           path={`/blogs/${blog.year}/${articlePath}`}
-          element={<Blog>{blogContent}</Blog>}
+          element={
+            <Blog key={`/blogs/${blog.year}/${articlePath}`}>
+              {blogContent}
+            </Blog>
+          }
         />
       );
     })

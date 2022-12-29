@@ -97,6 +97,11 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             <Typography>Hi, {this.props.auth0?.user?.name}</Typography>
           )}
           <div className="sectionDesktop">
+            {!this.props.auth0?.isAuthenticated && (
+              <Button onClick={this.signUp} color="inherit">
+                Connect
+              </Button>
+            )}
             <Button onClick={this.handleResume} color="inherit">
               Resume
             </Button>
@@ -111,11 +116,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             <Button onClick={this.openBlogDrawer} color="inherit">
               Blog
             </Button>
-            {!this.props.auth0?.isAuthenticated && (
-              <Button onClick={this.signUp} color="inherit">
-                Connect
-              </Button>
-            )}
             {/* {this.props.auth0?.isAuthenticated && <Button onClick={this.signOut} color="inherit">Sign Out</Button>} */}
           </div>
           <div className="sectionMobile">
@@ -141,14 +141,14 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           onClick={this.handleMobileMenuClose}
           onScroll={this.handleMobileMenuClose}
         >
+          {!this.props.auth0?.isAuthenticated && (
+            <MenuItem onClick={this.signUp}>Connect</MenuItem>
+          )}
           <MenuItem onClick={this.handleResume}>Resume</MenuItem>
           <MenuItem component={Link} to="/about" style={{ display: "none" }}>
             About
           </MenuItem>
           <MenuItem onClick={this.openBlogDrawer}>Blog</MenuItem>
-          {!this.props.auth0?.isAuthenticated && (
-            <MenuItem onClick={this.signUp}>Connect</MenuItem>
-          )}
           {/* {this.props.auth0?.isAuthenticated && <MenuItem onClick={this.signOut} >Sign Out</MenuItem>} */}
         </Menu>
         <BlogMenu

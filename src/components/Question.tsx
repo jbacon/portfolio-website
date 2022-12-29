@@ -14,8 +14,9 @@ import LoadableContent from "./LoadableContent";
 import Link from "@mui/material/Link";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { withAuth0, WithAuth0Props } from "@auth0/auth0-react";
 
-interface QuestionProps {
+interface QuestionProps extends WithAuth0Props {
   emailJsUserId: string;
   emailJsServiceId: string;
   emailJsTemplateId: string;
@@ -156,7 +157,11 @@ class Question extends React.Component<QuestionProps, QuestionState> {
                 label="Your Email"
                 type="email"
                 fullWidth
-                value={this.state.email}
+                value={
+                  this.state.email !== ""
+                    ? this.state.email
+                    : this.props.auth0.user?.email
+                }
                 onChange={this.handleEmailChange}
               />
               <TextField
@@ -180,4 +185,6 @@ class Question extends React.Component<QuestionProps, QuestionState> {
   }
 }
 
-export default Question;
+const QuestionWithContexts = withAuth0(Question);
+
+export default QuestionWithContexts;
