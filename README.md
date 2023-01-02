@@ -1,4 +1,4 @@
-![main workflow](https://github.com/jbacon/portfolio-website/actions/workflows/main.yml/badge.svg)
+![main workflow](https://github.com/jbacon/portfolio-website/actions/workflows/main.yaml/badge.svg)
 
 # Portfolio Website: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
 

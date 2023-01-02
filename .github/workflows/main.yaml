@@ -1,8 +1,14 @@
-name: Push to Main
+name: main
 
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - 'README.md'
+      - 'CRA_README.md'
+      - '.vscode/**'
+      - '.husky/**'
+      - 'LICENSE'
 
 jobs:
   deploy:
