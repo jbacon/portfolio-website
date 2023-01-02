@@ -3,6 +3,12 @@ name: Pull Request to Main
 on:
   pull_request:
     branches: ["main"]
+    paths-ignore:
+      - '**/README.md'
+      - '**/CRA_README.md'
+      - '.vscode/**'
+      - '.husky/**'
+      - '**/LICENSE'
 
 jobs:
   build:
