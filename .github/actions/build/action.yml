@@ -8,13 +8,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-      - name: Use Node.js ${{ inputs.node-version }}
+      - name: Use Node.js ${{ input.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: ${{ input.node-version }}
           cache: "npm"
       - name: Install
-        shell: bash
         run: npm ci
       # - name: Test
       #   run: npm test
