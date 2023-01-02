@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.com/jbacon/portfolio-website.svg?branch=main)](https://api.travis-ci.com/jbacon/portfolio-website.svg?branch=main)
+![deploy workflow](https://github.com/jbacon/portfolio-website/actions/workflows/deploy.yml/badge.svg)
 
 # Portfolio Website: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
 

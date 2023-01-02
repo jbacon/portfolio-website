@@ -14,14 +14,19 @@ runs:
           node-version: ${{ input.node-version }}
           cache: "npm"
       - name: Install
+        shell: bash
         run: npm ci
       # - name: Test
       #   run: npm test
       - name: Build
+        shell: bash
         run: npm run build
       - name: Dependency Check
+        shell: bash
         run: npm run depcheck
       - name: Format Check
+        shell: bash
         run: npm run prettier-check
       - name: Lint Check
+        shell: bash
         run: npm run lint-check
