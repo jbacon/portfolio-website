@@ -1,0 +1,32 @@
+name: 'Build'
+description: 'Build the NodeJS project and verify tests, linting, and formatting'
+inputs:
+  node-version:  # id of input
+    description: 'NodeJS version'
+    required: true
+    default: '18.x'
+runs:
+  using: "composite"
+  steps:
+      - name: Use Node.js ${{ inputs.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: "npm"
+      - name: Install
+        shell: bash
+        run: npm ci
+      # - name: Test
+      #   run: npm test
+      - name: Build
+        shell: bash
+        run: npm run build
+      - name: Dependency Check
+        shell: bash
+        run: npm run depcheck
+      - name: Format Check
+        shell: bash
+        run: npm run prettier-check
+      - name: Lint Check
+        shell: bash
+        run: npm run lint-check

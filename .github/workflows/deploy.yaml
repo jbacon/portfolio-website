@@ -1,14 +1,7 @@
 name: Deploy
 
 on:
-  push:
-    branches: ["main"]
-
-env:
-  AWS_REGION: us-west-2
-
-permissions:
-  contents: read
+  workflow_call:
 
 jobs:
   deploy:
@@ -21,22 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Build
+        uses: ./.github/actions/build
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - name: Install
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Upload S3
-        run: aws s3 sync --delete ${PWD}/build/ s3://portfolio.joshbacon.name/
-      - name: Update CloudFront
-        run: aws cloudfront create-invalidation --distribution-id='E2DH15J9LGHZU1' --paths='/*'
+      - name: Deploy
+        uses: ./.github/actions/deploy
+        with:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

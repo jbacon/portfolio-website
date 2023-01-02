@@ -1,0 +1,40 @@
+name: 'Deploy'
+description: 'Deploys contents of ./build/ to AWS S3 and updates CloudFront'
+inputs:
+  AWS_REGION:
+    description: 'AWS_REGION'
+    required: true
+    default: "us-west-2"
+  AWS_ACCESS_KEY_ID:
+    description: 'AWS_ACCESS_KEY_ID'
+    required: true
+  AWS_SECRET_ACCESS_KEY: 
+    description: 'AWS_SECRET_ACCESS_KEY'
+    required: true
+  S3_BUCKET: 
+    description: 'S3 bucket'
+    required: true
+    default: "portfolio.joshbacon.name"
+  CF_DISTRIBUTION_ID: 
+    description: 'Cloud Front Distribution ID'
+    required: true
+    default: "E2DH15J9LGHZU1"
+# outputs:
+#   random-number:
+#     description: "Random number"
+#     value: ${{ steps.random-number-generator.outputs.random-number }}
+runs:
+  using: "composite"
+  steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ inputs.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ inputs.AWS_REGION }}
+      - name: Upload S3
+        shell: bash
+        run: aws s3 sync --delete ${PWD}/build/ s3://${{ inputs.S3_BUCKET }}/
+      - name: Update CloudFront
+        shell: bash
+        run: aws cloudfront create-invalidation --distribution-id="${{ inputs.CF_DISTRIBUTION_ID }}" --paths='/*'

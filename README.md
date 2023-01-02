@@ -1,20 +1,20 @@
-[![Build Status](https://api.travis-ci.com/jbacon/portfolio-website.svg?branch=main)](https://api.travis-ci.com/jbacon/portfolio-website.svg?branch=main)
+![main workflow](https://github.com/jbacon/portfolio-website/actions/workflows/main.yml/badge.svg)
 
 # Portfolio Website: [https://portfolio.joshbacon.name](https://portfolio.joshbacon.name)
 
-My portfolio website/blog built using [Create React App](https://create-react-app.dev/) with Typescript and Material UI. This application is hosted as a static-site on [AWS S3 w/ CloudFront CDN](https://aws.amazon.com/getting-started/hands-on/host-static-website/). The only back-end service currently being integrated is EmailJS, with more to come!
+My portfolio website/blog built using React with Typescript and Material UI. This application is hosted as a static-site on AWS S3 with CloudFront content delivery. The only back-end services currently being integrated are EmailJS and Auth0, with more to come.
 
 ## Key Technologies Used:
 
-- ReactJS - [Create React App](https://reactjs.org/docs/create-a-new-react-app.html)
+- [Create React App](https://reactjs.org/docs/create-a-new-react-app.html)
 - [Material UI](https://mui.com/)
-- AWS S3 Static Site Hosting
-- AWS CloudFront CDN
+- [AWS S3 Static Site Hosting](https://aws.amazon.com/getting-started/hands-on/host-static-website/)
+- [AWS CloudFront CDN](https://www.amazonaws.cn/en/cloudfront/)
 - [Auth0](https://auth0.com/)
 - [EmailJS](https://www.emailjs.com/)
 - [PrismJS](https://prismjs.com/)
 - [Prettier](https://prettier.io/docs/en/install.html)
-- [Travis CI](https://app.travis-ci.com/)
+- [GitHub Actions](https://github.com/features/actions)
 
 ### Build
 
