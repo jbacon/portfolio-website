@@ -16,10 +16,8 @@ My portfolio website/blog built using [Create React App](https://create-react-ap
 - [Prettier](https://prettier.io/docs/en/install.html)
 - [Travis CI](https://app.travis-ci.com/)
 
-### Build & Deploy
+### Build
 
 ```bash
-docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:14-stretch npm run-script build
-aws s3 sync --delete ${PWD}/build/ s3://portfolio.joshbacon.name/
-aws cloudfront create-invalidation --distribution-id='E2DH15J9LGHZU1' --paths='/*'
+docker run -i -t -v ${PWD}/:/app/ --workdir /app/ node:18-stretch npm run-script build
 ```

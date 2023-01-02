@@ -37,7 +37,8 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "prepare": "husky install",
     "lint": "eslint --fix",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write .",
+    "prettier-check": "npx prettier --check ."
   },
   "eslintConfig": {
     "extends": [
