@@ -17,6 +17,7 @@ runs:
         shell: bash
         run: npm ci
       - name: Test
+        shell: bash
         run: npm test -- --coverage
       - name: Build
         shell: bash
