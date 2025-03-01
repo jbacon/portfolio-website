@@ -1,32 +1,33 @@
-import { Avatar, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import { Avatar, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/system";
 import React, { Fragment } from "react";
 import Carousel from "react-material-ui-carousel";
 import { Parallax as Parallax2 } from "react-parallax";
-import { styled } from "@mui/system";
+import ImageClimbing from "../images/climbing.jpg";
+import MP4Gondola from "../images/gondola.mp4";
+import ImageGonzaga from "../images/gonzaga.png";
+import ImageLake from "../images/lake.jpg";
+import ImageMe8 from "../images/me8.jpg";
+import ImageMeBackpacking from "../images/me_backpacking.jpeg";
+import ImageMeHurricaneRidge from "../images/me_hurricane_ridge.jpeg";
+import ImageMei90 from "../images/me_i90.jpg";
+import ImageMeClimbingIndoor from "../images/me_indoor_climbing.jpg";
+import ImageMeSkiing from "../images/me_skiing.jpg";
+import ImageMountDaniels from "../images/mount_daniels.jpg";
+import ImageAvatarSelf from "../images/self.jpg";
+import ImageSkiGroup2 from "../images/skigroup2.jpg";
+import ImageSkiingWithMom from "../images/skiing_with_mom.jpg";
+import ImageStuartMt2 from "../images/stuart_mt_2.jpg";
+import ChatBox from "./assistant/ChatBox";
 import {
   ConnectDispatcherContext,
   ConnectDispatcherStateInterface,
 } from "./ConnectDialog";
 import FadeIntoView from "./FadeIntoView";
-import Box from "@mui/material/Box";
-import ImageAvatarSelf from "../images/self.jpg";
-import ImageGonzaga from "../images/gonzaga.png";
-import ImageSkiingWithMom from "../images/skiing_with_mom.jpg";
-import ImageStuartMt2 from "../images/stuart_mt_2.jpg";
-import ImageSkiGroup2 from "../images/skigroup2.jpg";
-import ImageMountDaniels from "../images/mount_daniels.jpg";
-import MP4Gondola from "../images/gondola.mp4";
-import ImageMe8 from "../images/me8.jpg";
-import ImageClimbing from "../images/climbing.jpg";
-import ImageLake from "../images/lake.jpg";
-import ImageMeBackpacking from "../images/me_backpacking.jpeg";
-import ImageMeSkiing from "../images/me_skiing.jpg";
-import ImageMei90 from "../images/me_i90.jpg";
-import ImageMeHurricaneRidge from "../images/me_hurricane_ridge.jpeg";
-import ImageMeClimbingIndoor from "../images/me_indoor_climbing.jpg";
 import "./Home.css";
 
 // Example of a "styled-component" - For Reference Purposes
@@ -47,7 +48,7 @@ const Home = () => (
   <React.Fragment>
     <Parallax2
       style={{
-        height: "50vh",
+        height: "100vh",
         overflow: "hidden",
       }}
       renderLayer={(percentage: number) => (
@@ -56,27 +57,37 @@ const Home = () => (
             background: `url(${ImageStuartMt2})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: `50% ${percentage * -1000 + 800}px`,
-            backgroundSize: "auto max(700px, 60vw)",
+            backgroundSize: "auto max(120vh, 60vw)",
             position: "absolute",
             left: "0px",
             top: "0px",
             width: "100%",
-            height: "50vh",
+            height: "100vh",
           }}
         />
       )}
     >
       <FadeIntoView>
-        <Typography
-          variant="h3"
-          style={{
-            display: "block",
-            textAlign: "center",
-            padding: "4rem",
-          }}
-        >
-          welcome.
-        </Typography>
+        <Fragment>
+          <Text variant="h5">Welcome!</Text>
+          <Avatar className="avatar" src={ImageAvatarSelf} />
+          <br />
+          {/* <Text style={{ padding: ".2rem" }}>
+            Questions? Ask with my assistant:
+          </Text> */}
+          <div className="center" style={{ width: "100%" }}>
+            {/* <Paper elevation={1} style={{ padding: "10px" }}> */}
+            <ChatBox shouldOpenChat style={{ padding: ".2rem" }} />
+            {/* </Paper> */}
+          </div>
+          <br />
+          <Text style={{ padding: ".5rem" }}>or keep scrolling</Text>
+          <ExpandMoreIcon
+            style={{
+              width: "100%",
+            }}
+          />
+        </Fragment>
       </FadeIntoView>
     </Parallax2>
     <Box
@@ -87,36 +98,22 @@ const Home = () => (
       }}
     >
       <FadeIntoView>
-        <Fragment>
-          <Avatar className="avatar" src={ImageAvatarSelf} />
-          <Text style={{ padding: ".5rem" }}>
-            <br />
-            keep scrolling
-          </Text>
-          <ExpandMoreIcon
-            style={{
-              width: "100%",
-            }}
-          />
-        </Fragment>
+        <Text
+          style={{
+            minHeight: "50vh",
+            padding: "3rem",
+          }}
+        >
+          Hi, I&apos;m Josh!
+          <br />
+          <br />
+          A Seattle based
+          <br />
+          software developer/engineer
+          <br />
+        </Text>
       </FadeIntoView>
     </Box>
-    <FadeIntoView>
-      <Text
-        style={{
-          minHeight: "50vh",
-          padding: "3rem",
-        }}
-      >
-        Hi, I&apos;m Josh!
-        <br />
-        <br />
-        A Seattle based
-        <br />
-        software developer/engineer
-        <br />
-      </Text>
-    </FadeIntoView>
     <Parallax2
       style={{
         height: "50vh",

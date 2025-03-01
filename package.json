@@ -3,27 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@auth0/auth0-react": "^1.12.0",
-    "@emailjs/browser": "^3.6.2",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.8.0",
-    "@mui/material": "^5.8.1",
-    "@mui/system": "^5.11.1",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.5",
-    "depcheck": "^1.4.3",
+    "@auth0/auth0-react": "^1.12.1",
+    "@emailjs/browser": "^3.12.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^5.16.14",
+    "@mui/material": "^5.16.14",
+    "@mui/system": "^5.16.14",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "depcheck": "^1.4.7",
     "eslint-config-react-app": "^7.0.1",
     "material-ui-snackbar-provider": "^2.0.0",
     "prismjs": "^1.29.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-markdown": "^8.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^8.0.7",
     "react-material-ui-carousel": "^3.4.2",
     "react-parallax": "^3.5.1",
-    "react-router-dom": "^6.6.1",
+    "react-router-dom": "^6.29.0",
     "react-scripts": "5.0.1",
     "source-map-explorer": "^2.5.3",
     "web-vitals": "^2.1.4"
@@ -60,27 +60,44 @@
     ]
   },
   "devDependencies": {
-    "@types/prismjs": "^1.26.0",
-    "@typescript-eslint/eslint-plugin": "^5.47.1",
-    "eslint": "^8.30.0",
-    "eslint-config-prettier": "^8.5.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/css-mediaquery": "^0.1.4",
+    "@types/prismjs": "^1.26.5",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "css-mediaquery": "^0.1.2",
+    "dotenv": "^16.4.7",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^8.10.0",
     "eslint-config-standard-with-typescript": "^24.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.6.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.31.11",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.6.0",
+    "eslint-plugin-react": "^7.37.4",
+    "husky": "^8.0.3",
+    "intersection-observer": "^0.12.2",
+    "lint-staged": "^13.3.0",
     "prettier": "2.8.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "jest": {
     "moduleNameMapper": {
       "react-markdown": "<rootDir>/node_modules/react-markdown/react-markdown.min.js"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/path/to/dir/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
     }
   },
   "lint-staged": {
-    "**/*": "eslint --fix",
     "**/*": "prettier --write --ignore-unknown"
   }
 }

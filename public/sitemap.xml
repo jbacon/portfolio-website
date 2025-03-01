@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://portfolio.joshbacon.name/</loc>
+        <!-- <lastmod>2005-01-01</lastmod> -->
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://portfolio.joshbacon.name/josh_bacon_resume.pdf</loc>
+        <!-- <lastmod>2005-01-01</lastmod> -->
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://portfolio.joshbacon.name/blogs/2020/markdown-and-react</loc>
+        <!-- <lastmod>2005-01-01</lastmod> -->
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://portfolio.joshbacon.name/blogs/2020/building-a-simple-golang-api</loc>
+        <!-- <lastmod>2005-01-01</lastmod> -->
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://portfolio.joshbacon.name/blogs/2020/publish-a-react-component</loc>
+        <!-- <lastmod>2005-01-01</lastmod> -->
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://portfolio.joshbacon.name/blogs/2015/a-narrative-on-web-applications</loc>
+        <!-- <lastmod>2005-01-01</lastmod> -->
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://portfolio.joshbacon.name/blogs/2015/multi-page-vs-single-page-applications</loc>
+        <!-- <lastmod>2005-01-01</lastmod> -->
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset>

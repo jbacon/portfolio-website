@@ -20,13 +20,20 @@ export default function Highlight(props: HighlighterProps): JSX.Element {
   const language = props.language
     .trim()
     .replace("language-", "")
-    .replace("lang-", "");
+    .replace("lang-", "")
+    .toLowerCase();
 
-  const highlighted = Prism.highlight(
-    props.content,
-    Prism.languages[language],
-    language
-  );
+  let highlighted;
+  try {
+    highlighted = Prism.highlight(
+      props.content,
+      Prism.languages[language],
+      language
+    );
+  } catch (error) {
+    console.log(error);
+    highlighted = props.content;
+  }
 
   return (
     <pre

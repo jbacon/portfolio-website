@@ -3,11 +3,10 @@ import React from "react";
 import ConnectProvider from "./ConnectDialog";
 import DarkThemeProvider from "./CustomThemeProvider";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
+import Assistant from "./assistant/Assistant";
+import { BrowserRouter } from "react-router-dom";
 
 const ProviderBundle = (props: { children?: React.ReactNode }) => {
-  const navigate = useNavigate();
-
   return (
     <DarkThemeProvider>
       <Auth0Provider
@@ -15,18 +14,19 @@ const ProviderBundle = (props: { children?: React.ReactNode }) => {
         clientId="GS7pZEBjIGsfTZ0z5jHiiqzwFna9an5C"
         redirectUri={window.location.origin + "/auth0/callback"}
         cacheLocation="localstorage"
+        authorizationParam={{
+          redirect_uri: window.location.origin + "/auth0/callback",
+        }}
         onRedirectCallback={(appState) => {
-          // handle callback url -> return to page
-          // Have to use sessionStorage because Auth0 only supports allowed returnTo paths w/o wildcard
-          // const route = sessionStorage.getItem("redirect_route") || "/"
-          // sessionStorage.removeItem("redirect_route")
-          navigate(
-            appState?.redirectTo !== undefined ? appState.redirectTo : "/"
-          );
+          window.location.href = "/";
         }}
       >
         <SnackbarProvider SnackbarProps={{ autoHideDuration: 4000 }}>
-          <ConnectProvider>{props.children}</ConnectProvider>
+          <Assistant>
+            <ConnectProvider>
+              <BrowserRouter>{props.children}</BrowserRouter>
+            </ConnectProvider>
+          </Assistant>
         </SnackbarProvider>
       </Auth0Provider>
     </DarkThemeProvider>

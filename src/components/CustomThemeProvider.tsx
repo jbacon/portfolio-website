@@ -10,6 +10,11 @@ const darkTheme = createTheme({
       main: "#00D8FE",
       dark: "#00D8FE",
     },
+    secondary: {
+      light: "#F34F7E",
+      main: "#F34F7E",
+      dark: "#F34F7E",
+    },
   },
 });
 
@@ -20,6 +25,11 @@ const lightTheme = createTheme({
       light: "#00D8FE",
       main: "#00D8FE",
       dark: "#00D8FE",
+    },
+    secondary: {
+      light: "#F34F7E",
+      main: "#F34F7E",
+      dark: "#F34F7E",
     },
   },
 });

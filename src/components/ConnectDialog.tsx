@@ -17,11 +17,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import InputAdornment from "@mui/material/InputAdornment";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
-import React, { ComponentType, useContext } from "react";
-import { LightThemeProvider } from "./CustomThemeProvider";
+import React, { ComponentType, useContext, useState } from "react";
 import LoadableContent from "./LoadableContent";
 import { withAuth0, WithAuth0Props } from "@auth0/auth0-react";
-import configs from "../configurations.json";
+import { configs } from "../configurations";
+import { IconButton, useTheme } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface DialogPropsInterface
   extends WithAuth0Props,
@@ -52,192 +53,214 @@ const ProviderContext = React.createContext<ProviderStateInterface | null>(
   null
 );
 
-class ConnectDialog extends React.Component<
-  DialogPropsInterface,
-  DialogStateInterface
-> {
-  constructor(props: DialogPropsInterface) {
-    super(props);
-    this.state = {
-      email:
-        props.auth0.user?.email !== undefined ? props.auth0.user?.email : "",
-      name: props.auth0.user?.name !== undefined ? props.auth0.user?.name : "",
-      message: "",
-      isLoading: false,
-      isSent: false,
-      isFailed: false,
-    };
-  }
+const ConnectDialog: React.FC<DialogPropsInterface> = (
+  props: DialogPropsInterface
+) => {
+  const theme = useTheme();
 
-  handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ name: event.target.value });
+  const [state, setState] = useState<DialogStateInterface>({
+    email: props.auth0.user?.email !== undefined ? props.auth0.user?.email : "",
+    name: props.auth0.user?.name !== undefined ? props.auth0.user?.name : "",
+    message: "",
+    isLoading: false,
+    isSent: false,
+    isFailed: false,
+  });
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState((prev) => ({ ...prev, name: event.target.value }));
   };
 
-  handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ email: event.target.value });
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState((prev) => ({ ...prev, email: event.target.value }));
   };
 
-  handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ message: event.target.value });
+  const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState((prev) => ({ ...prev, message: event.target.value }));
   };
 
-  handleSend = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.props.beforeSent?.();
-    this.setState({ isLoading: true });
+    props.beforeSent?.();
+    setState((prev) => ({ ...prev, isLoading: true }));
     EmailJS.send(
-      this.props.emailJsServiceId,
-      this.props.emailJsTemplateId,
+      props.emailJsServiceId,
+      props.emailJsTemplateId,
       {
-        name: this.state.name,
-        email: this.state.email,
-        message: this.state.message,
+        name: state.name,
+        email: state.email,
+        message: state.message,
       },
-      this.props.emailJsUserId
+      props.emailJsUserId
     ).then(
       (result) => {
-        this.setState({
+        setState((prev) => ({
+          ...prev,
           isLoading: false,
           name: "",
           email: "",
           message: "",
           isSent: true,
           isFailed: false,
-        });
-        this.props.afterSent?.();
+        }));
+        props.afterSent?.();
       },
       (error) => {
-        this.setState({ isLoading: false, isFailed: true, isSent: false });
-        this.props.onSentFail?.();
+        setState((prev) => ({
+          ...prev,
+          isLoading: false,
+          isFailed: true,
+          isSent: false,
+        }));
+        props.onSentFail?.();
         console.error(error);
       }
     );
   };
 
-  handleClose = () => {
-    this.setState({ isLoading: false });
-    this.setState({ isFailed: false });
-    this.setState({ isSent: false });
-    this.props.connect.closeConnectDialog();
+  const handleClose = () => {
+    setState((prev) => ({ ...prev, isLoading: false }));
+    setState((prev) => ({ ...prev, isFailed: false }));
+    setState((prev) => ({ ...prev, isSent: false }));
+    props.connect.closeConnectDialog();
   };
 
-  render() {
-    return (
-      <LoadableContent
-        isLoading={this.state.isLoading}
-        isSuccess={this.state.isSent}
-        isError={this.state.isFailed}
-        onClose={this.handleClose}
-        successMessage="I will get back to you shortly, thanks!"
-        errorMessage="Failed to send email! Please reach out to me directly"
-        fullScreen={true}
+  const signUp = () => {
+    // sessionStorage.setItem("redirect_route", window.location.pathname+window.location.search);
+    props.auth0
+      ?.loginWithRedirect({
+        appState: {
+          redirectTo: window.location.pathname + window.location.search,
+        },
+      })
+      .catch((reason) => {
+        console.error(reason);
+      });
+  };
+
+  return (
+    <LoadableContent
+      isLoading={state.isLoading}
+      isSuccess={state.isSent}
+      isError={state.isFailed}
+      onClose={handleClose}
+      successMessage="I will get back to you shortly, thanks!"
+      errorMessage="Failed to send email! Please reach out to me directly"
+      fullScreen={true}
+    >
+      <Dialog
+        fullScreen={Boolean(window.innerWidth < theme.breakpoints.values.sm)}
+        open={props.connect.isConnectDialogOpen}
+        onClose={props.connect.closeConnectDialog}
+        aria-labelledby="form-dialog-title"
       >
-        <LightThemeProvider>
-          <Dialog
-            open={this.props.connect.isConnectDialogOpen}
-            onClose={this.props.connect.closeConnectDialog}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Send Me A Message</DialogTitle>
-            <form onSubmit={this.handleSend}>
-              <DialogContent>
-                {this.props.dialogContentText !== undefined && (
-                  <DialogContentText>
-                    {this.props.dialogContentText}
-                  </DialogContentText>
-                )}
-                {this.props.email !== undefined && (
-                  <TextField
-                    margin="normal"
-                    id="to"
-                    label="To"
-                    variant="outlined"
-                    type="email"
-                    disabled
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          {this.props.linkedIn !== undefined && (
-                            <Link
-                              style={{ display: "inline" }}
-                              href={this.props.linkedIn}
-                              target="_blank"
-                            >
-                              <LinkedInIcon fontSize="large" />
-                            </Link>
-                          )}
-                          {this.props.github !== undefined && (
-                            <Link
-                              style={{ display: "inline" }}
-                              href={this.props.github}
-                              target="_blank"
-                            >
-                              <GitHubIcon fontSize="large" />
-                            </Link>
-                          )}
-                        </InputAdornment>
-                      ),
-                    }}
-                    fullWidth
-                    value={this.props.email}
-                  />
-                )}
-                <TextField
-                  required
-                  autoFocus
-                  margin="normal"
-                  variant="outlined"
-                  id="name"
-                  label="Your Name"
-                  fullWidth
-                  value={
-                    this.state.name !== ""
-                      ? this.state.name
-                      : this.props.auth0.user?.name
-                  }
-                  onChange={this.handleNameChange}
-                />
-                <TextField
-                  required
-                  margin="normal"
-                  id="email"
-                  variant="outlined"
-                  label="Your Email"
-                  type="email"
-                  fullWidth
-                  value={
-                    this.state.email !== ""
-                      ? this.state.email
-                      : this.props.auth0.user?.email
-                  }
-                  onChange={this.handleEmailChange}
-                />
-                <TextField
-                  required
-                  margin="normal"
-                  id="message"
-                  label="Message"
-                  variant="outlined"
-                  rows={4}
-                  fullWidth
-                  multiline
-                  value={this.state.message}
-                  onChange={this.handleMessageChange}
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button type="submit">Send</Button>
-                <Button onClick={this.props.connect.closeConnectDialog}>
-                  Cancel
-                </Button>
-              </DialogActions>
-            </form>
-          </Dialog>
-        </LightThemeProvider>
-      </LoadableContent>
-    );
-  }
-}
+        <DialogTitle id="form-dialog-title">Send Me A Message</DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={props.connect.closeConnectDialog}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <form onSubmit={handleSend}>
+          <DialogContent>
+            {props.dialogContentText !== undefined && (
+              <DialogContentText>{props.dialogContentText}</DialogContentText>
+            )}
+            {props.email !== undefined && (
+              <TextField
+                margin="normal"
+                id="to"
+                label="To"
+                variant="outlined"
+                type="email"
+                disabled
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {props.linkedIn !== undefined && (
+                        <Link
+                          style={{ display: "inline" }}
+                          href={props.linkedIn}
+                          target="_blank"
+                        >
+                          <LinkedInIcon fontSize="large" />
+                        </Link>
+                      )}
+                      {props.github !== undefined && (
+                        <Link
+                          style={{ display: "inline" }}
+                          href={props.github}
+                          target="_blank"
+                        >
+                          <GitHubIcon fontSize="large" />
+                        </Link>
+                      )}
+                    </InputAdornment>
+                  ),
+                }}
+                fullWidth
+                value={props.email}
+              />
+            )}
+            <TextField
+              required
+              autoFocus
+              margin="normal"
+              variant="outlined"
+              id="name"
+              label="Your Name"
+              fullWidth
+              value={state.name !== "" ? state.name : props.auth0.user?.name}
+              onChange={handleNameChange}
+            />
+            <TextField
+              required
+              margin="normal"
+              id="email"
+              variant="outlined"
+              label="Your Email"
+              type="email"
+              fullWidth
+              value={state.email !== "" ? state.email : props.auth0.user?.email}
+              onChange={handleEmailChange}
+              style={{ marginBottom: "0px" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {!props.auth0?.isAuthenticated && (
+                      <Link onClick={signUp}>.. or sign in</Link>
+                    )}
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              required
+              margin="normal"
+              id="message"
+              label="Message"
+              variant="outlined"
+              rows={4}
+              fullWidth
+              multiline
+              value={state.message}
+              onChange={handleMessageChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button type="submit">Send</Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+    </LoadableContent>
+  );
+};
 
 interface WithProviderPropsInterface {
   connect: ProviderStateInterface;
@@ -310,9 +333,9 @@ class ConnectProvider extends React.Component<
             email={configs.email}
             linkedIn={configs.linkedin}
             github={configs.github}
-            emailJsUserId={configs.emailJS.templates[0].USER_ID}
-            emailJsServiceId={configs.emailJS.templates[0].SERVICE_ID}
-            emailJsTemplateId={configs.emailJS.templates[0].TEMPLATE_ID}
+            emailJsUserId={configs.emailJS.userId}
+            emailJsServiceId={configs.emailJS.serviceId}
+            emailJsTemplateId={configs.emailJS.templateForConnect}
           />
         </ProviderContext.Provider>
         {this.props.children}
