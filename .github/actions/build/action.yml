@@ -7,8 +7,6 @@ inputs:
     default: '23.x'
 runs:
   using: "composite"
-  env: 
-
   steps:
       - name: Use Node.js ${{ inputs.node-version }}
         uses: actions/setup-node@v3
