@@ -18,10 +18,12 @@ const withChatDispatcher = <P extends WithChatDispatcherProps>(
   Component: ComponentType<P>,
   context = ChatDispatcherContext
 ): ComponentType<Omit<P, keyof WithChatDispatcherProps>> => {
-  return function WithChatDispatcher(props): JSX.Element {
+  return function WithChatDispatcher(props): React.JSX.Element {
     return (
       <context.Consumer>
-        {(chatDispatcher: ChatDispatcherStateInterface | null): JSX.Element => (
+        {(
+          chatDispatcher: ChatDispatcherStateInterface | null
+        ): React.JSX.Element => (
           <Component {...(props as P)} chatDispatcher={chatDispatcher} />
         )}
       </context.Consumer>

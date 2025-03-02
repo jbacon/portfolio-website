@@ -1,5 +1,5 @@
-import React from "react";
-import { ReactElement } from "react-markdown/lib/react-markdown";
+import React, { ReactElement } from "react";
+// import { ReactElement } from "react-markdown/lib/react-markdown";
 
 // Get inner text content from a React.ReactNode & React.ReactNode[]
 function GetInnerText(

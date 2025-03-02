@@ -12,9 +12,8 @@ const ProviderBundle = (props: { children?: React.ReactNode }) => {
       <Auth0Provider
         domain="dev-doylanbzoaktwa7a.us.auth0.com"
         clientId="GS7pZEBjIGsfTZ0z5jHiiqzwFna9an5C"
-        redirectUri={window.location.origin + "/auth0/callback"}
         cacheLocation="localstorage"
-        authorizationParam={{
+        authorizationParams={{
           redirect_uri: window.location.origin + "/auth0/callback",
         }}
         onRedirectCallback={(appState) => {

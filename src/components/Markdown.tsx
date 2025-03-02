@@ -5,16 +5,12 @@ import {
   TypographyProps,
 } from "@mui/material";
 import React, { ReactElement } from "react";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { ExtraProps } from "react-markdown";
 import { GetInnerText } from "../helpers/ChildrenHelpers";
 import Highlight from "./Highlight";
 
 interface MarkdownProps {
   content: string;
-}
-
-interface HeadingProps extends TypographyProps {
-  level: number;
 }
 
 const Markdown = (props: MarkdownProps) => {
@@ -23,42 +19,42 @@ const Markdown = (props: MarkdownProps) => {
       // remarkPlugins={[[gfm, { singleTilde: false }]]}
       components={{
         // https://github.com/remarkjs/react-markdown#appendix-b-node-types
-        h1: (props: HeadingProps) => (
+        h1: (props: React.JSX.IntrinsicElements["h1"] & ExtraProps) => (
           <Typography
             style={{ paddingTop: 30 - 1 * 3 }}
             variant={"h1"}
             {...props}
           />
         ),
-        h2: (props: HeadingProps) => (
+        h2: (props: React.JSX.IntrinsicElements["h2"] & ExtraProps) => (
           <Typography
             style={{ paddingTop: 30 - 2 * 3 }}
             variant={"h2"}
             {...props}
           />
         ),
-        h3: (props: HeadingProps) => (
+        h3: (props: React.JSX.IntrinsicElements["h3"] & ExtraProps) => (
           <Typography
             style={{ paddingTop: 30 - 3 * 3 }}
             variant={"h3"}
             {...props}
           />
         ),
-        h4: (props: HeadingProps) => (
+        h4: (props: React.JSX.IntrinsicElements["h4"] & ExtraProps) => (
           <Typography
             style={{ paddingTop: 30 - 4 * 3 }}
             variant={"h4"}
             {...props}
           />
         ),
-        h5: (props: HeadingProps) => (
+        h5: (props: React.JSX.IntrinsicElements["h5"] & ExtraProps) => (
           <Typography
             style={{ paddingTop: 30 - 5 * 3 }}
             variant={"h5"}
             {...props}
           />
         ),
-        h6: (props: HeadingProps) => (
+        h6: (props: React.JSX.IntrinsicElements["h6"] & ExtraProps) => (
           <Typography
             style={{ paddingTop: 30 - 6 * 3 }}
             variant={"h6"}
@@ -70,11 +66,11 @@ const Markdown = (props: MarkdownProps) => {
         // code: (props) => {
         //     return <Highlight language={props.className || "markdown"} content={"`"+props.children+"`"} />
         // }, // Using code will mess up the pre part
-        pre: (props) => {
-          if (props.children.length !== 1) {
-            return <pre {...props}></pre>;
-          }
-          const firstChild = props.children.at(0);
+        pre: (props: React.JSX.IntrinsicElements["pre"] & ExtraProps) => {
+          // if (props.children?.length !== 1) {
+          //   return <pre {...props}></pre>;
+          // }
+          const firstChild = props.children;
           if (
             !React.isValidElement(firstChild) ||
             (firstChild as ReactElement).type !== "code"

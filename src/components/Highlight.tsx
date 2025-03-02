@@ -16,7 +16,7 @@ interface HighlighterProps {
   language: string;
 }
 
-export default function Highlight(props: HighlighterProps): JSX.Element {
+export default function Highlight(props: HighlighterProps): React.JSX.Element {
   const language = props.language
     .trim()
     .replace("language-", "")

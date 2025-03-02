@@ -1,10 +1,10 @@
+import React from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import { Avatar, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
-import React, { Fragment } from "react";
 import Carousel from "react-material-ui-carousel";
 import { Parallax as Parallax2 } from "react-parallax";
 import ImageClimbing from "../images/climbing.jpg";
@@ -45,7 +45,7 @@ const Text = styled(Typography)(() => ({
 }));
 
 const Home = () => (
-  <React.Fragment>
+  <>
     <Parallax2
       style={{
         height: "100vh",
@@ -68,7 +68,7 @@ const Home = () => (
       )}
     >
       <FadeIntoView>
-        <Fragment>
+        <div>
           <Text variant="h5">Welcome!</Text>
           <Avatar className="avatar" src={ImageAvatarSelf} />
           <br />
@@ -87,7 +87,7 @@ const Home = () => (
               width: "100%",
             }}
           />
-        </Fragment>
+        </div>
       </FadeIntoView>
     </Parallax2>
     <Box
@@ -325,7 +325,7 @@ const Home = () => (
         </div>
       </Carousel>
     </div>
-  </React.Fragment>
+  </>
 );
 
 export default Home;

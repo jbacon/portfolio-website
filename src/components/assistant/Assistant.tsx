@@ -145,7 +145,7 @@ const Assistant: React.FC<AssistantProps> = (props: AssistantProps) => {
     setState((prev) => ({ ...prev, isChatOpen: false }));
   };
 
-  const dialogContentRef: RefObject<HTMLDivElement> = React.createRef();
+  const dialogContentRef: RefObject<HTMLDivElement | null> = React.createRef();
 
   // Function to scroll to the bottom
   function scrollToBottom() {

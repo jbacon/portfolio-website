@@ -70,9 +70,15 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   };
 
   const signOut = () => {
-    props.auth0?.logout({
-      returnTo: window.location.origin + "/signout",
-    });
+    props.auth0
+      ?.logout({
+        logoutParams: {
+          returnTo: window.location.origin + "/signout",
+        },
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   return (
@@ -86,14 +92,12 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
           <Typography>Hi, {props.auth0?.user?.name}</Typography>
         )}
         <div className="sectionDesktop">
-          {!props.auth0?.isAuthenticated && (
-            <Button
-              onClick={connectDispatcherContext.openConnectDialog}
-              color="inherit"
-            >
-              Connect
-            </Button>
-          )}
+          <Button
+            onClick={connectDispatcherContext.openConnectDialog}
+            color="inherit"
+          >
+            Connect
+          </Button>
           <Button onClick={handleResume} color="inherit">
             Resume
           </Button>

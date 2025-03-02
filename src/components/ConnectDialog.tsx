@@ -270,10 +270,10 @@ const withProvider = <P extends WithProviderPropsInterface>(
   Component: ComponentType<P>,
   context = ProviderContext
 ): ComponentType<Omit<P, keyof WithProviderPropsInterface>> => {
-  return function WithProvider(props): JSX.Element {
+  return function WithProvider(props): React.JSX.Element {
     return (
       <context.Consumer>
-        {(connect: ProviderStateInterface | null): JSX.Element => (
+        {(connect: ProviderStateInterface | null): React.JSX.Element => (
           <Component {...(props as P)} connect={connect} />
         )}
       </context.Consumer>
@@ -352,12 +352,12 @@ const withConnectDispatcher = <P extends WithConnectDispatcherProps>(
   Component: ComponentType<P>,
   context = ConnectDispatcherContext
 ): ComponentType<Omit<P, keyof WithConnectDispatcherProps>> => {
-  return function WithConnectDispatcher(props): JSX.Element {
+  return function WithConnectDispatcher(props): React.JSX.Element {
     return (
       <context.Consumer>
         {(
           connectDispatcher: ConnectDispatcherStateInterface | null
-        ): JSX.Element => (
+        ): React.JSX.Element => (
           <Component {...(props as P)} connectDispatcher={connectDispatcher} />
         )}
       </context.Consumer>

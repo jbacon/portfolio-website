@@ -13,7 +13,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Signout = () => {
   const auth0 = useAuth0();
-  auth0?.logout();
+  auth0
+    ?.logout({
+      logoutParams: {
+        returnTo: window.location.origin + "/signout",
+      },
+    })
+    .catch((e) => {
+      console.error(e);
+    });
   return <Navigate to="/" />;
 };
 

@@ -13,7 +13,7 @@ jest.mock("@auth0/auth0-react", () => {
     withAuth0: <P extends WithAuth0Props>(
       Component: React.ComponentType<P>
     ): React.ComponentType<Omit<P, keyof WithAuth0Props>> => {
-      return function WithAuth(props): JSX.Element {
+      return function WithAuth(props): React.JSX.Element {
         return <Component {...(props as P)} auth0={auth0} />;
       };
     },
