@@ -7,7 +7,7 @@ interface FadeIntoViewProps {
 
 interface FadeIntoViewState {
   isVisible: boolean;
-  domRef: React.RefObject<Element>;
+  domRef: React.RefObject<Element | null>;
   observer: IntersectionObserver;
 }
 

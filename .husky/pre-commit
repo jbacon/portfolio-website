@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
+set -e
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+export CI=true
+
+npm run prettier
+npm run lint

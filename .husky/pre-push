@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+set -e
+. "$(dirname -- "$0")/_/husky.sh"
+
+export CI=true
+
+npm ci --force
+npm run prettier-check
+npm run lint-check
+npm run test -- --coverage
+npm run build
+npm run depcheck

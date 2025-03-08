@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 import Highlight from "../../components/Highlight";
 
 const blog = () => (
-  <React.Fragment>
+  <>
     <Typography variant="h2">
       How To Publish
       <br />
@@ -289,6 +289,6 @@ after_deploy:
       </Link>
       .<br />
     </Typography>
-  </React.Fragment>
+  </>
 );
 export default blog;

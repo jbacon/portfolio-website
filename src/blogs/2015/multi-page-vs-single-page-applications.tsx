@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 import ImageSpaghettiCode from "../../images/spaghetti-code.jpg";
 
 const blog = () => (
-  <React.Fragment>
+  <>
     <Typography>
       Advancements in Web APIs give rise to single-page applications (SPA).
     </Typography>
@@ -87,6 +87,6 @@ const blog = () => (
       <br />
       <br />
     </Typography>
-  </React.Fragment>
+  </>
 );
 export default blog;

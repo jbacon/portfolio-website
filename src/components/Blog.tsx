@@ -1,47 +1,37 @@
-import {
-  IconButton,
-  Typography,
-  Link as Link2,
-  TypographyProps,
-  LinkProps,
-} from "@mui/material";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { IconButton, ListItemButton, Typography } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import Question from "./Question";
 import { LightThemeProvider } from "./CustomThemeProvider";
-import ReactMarkdown from "react-markdown";
+import Question from "./Question";
 // import gfm from 'remark-gfm'
 import BlogStructure from "../blogs/blog-structure";
-import Highlight from "./Highlight";
+import { configs } from "../configurations";
 import FourOhFour from "./FourOhFour";
-import { ReactElement } from "react-markdown/lib/react-markdown";
-import { GetInnerText } from "../helpers/ChildrenHelpers";
-import configs from "../configurations.json";
+import Markdown from "./Markdown";
 
 interface PropsWithChildren {
   children: React.ReactNode;
 }
 
 const Blog = (props?: PropsWithChildren) => (
-  <Container>
+  <Container style={{ overflow: "auto" }}>
     <br />
     {props?.children}
     <br />
     <br />
     <Question
-      emailJsUserId={configs.emailJS.templates[1].USER_ID}
-      emailJsServiceId={configs.emailJS.templates[1].SERVICE_ID}
-      emailJsTemplateId={configs.emailJS.templates[1].TEMPLATE_ID}
+      emailJsServiceId={configs.emailJS.serviceId}
+      emailJsUserId={configs.emailJS.userId}
+      emailJsTemplateId={configs.emailJS.templateForQuestion}
       email={configs.email}
       linkedIn={configs.linkedin}
       github={configs.github}
@@ -81,15 +71,14 @@ const BlogMenu = (props: BlogMenuProps) => (
                   const dotIndex = article.filename.indexOf(".");
                   const articlePath = article.filename.substring(0, dotIndex);
                   return (
-                    <ListItem
-                      button
+                    <ListItemButton
                       key={j}
                       component={Link}
                       onClick={props.onClose}
                       to={`/blogs/${blog.year}/${articlePath}`}
                     >
                       <ListItemText primary={article.title} />
-                    </ListItem>
+                    </ListItemButton>
                   );
                 })}
               </List>
@@ -106,114 +95,26 @@ interface MarkdownBlogProps {
   articleFilename: string;
 }
 
-interface HeadingProps extends TypographyProps {
-  level: number;
-}
-
 const MarkdownBlog = (props: MarkdownBlogProps) => {
   const [markdown, setMarkdown] = React.useState("");
 
   React.useEffect(() => {
     const asyncFunction = async () => {
-      try {
-        const importResult = await import(
-          `../blogs/${props.year}/${props.articleFilename}.md`
-        );
-        const result = await fetch(importResult.default);
-        const text = await result.text();
-        setMarkdown(text);
-      } catch (e) {
-        console.log(e);
-      }
+      const importResult = await import(
+        `../blogs/${props.year}/${props.articleFilename}.md`
+      );
+      const result = await fetch(importResult.default);
+      const text = await result.text();
+      setMarkdown(text);
     };
-    asyncFunction().catch((error) => {
-      console.log(error);
+    asyncFunction().catch((e) => {
+      console.log(e);
     });
   }, [props]);
 
   return (
     <Container>
-      <ReactMarkdown
-        // remarkPlugins={[[gfm, { singleTilde: false }]]}
-        components={{
-          // https://github.com/remarkjs/react-markdown#appendix-b-node-types
-          h1: (props: HeadingProps) => (
-            <Typography
-              style={{ paddingTop: 30 - 1 * 3 }}
-              variant={"h1"}
-              {...props}
-            />
-          ),
-          h2: (props: HeadingProps) => (
-            <Typography
-              style={{ paddingTop: 30 - 2 * 3 }}
-              variant={"h2"}
-              {...props}
-            />
-          ),
-          h3: (props: HeadingProps) => (
-            <Typography
-              style={{ paddingTop: 30 - 3 * 3 }}
-              variant={"h3"}
-              {...props}
-            />
-          ),
-          h4: (props: HeadingProps) => (
-            <Typography
-              style={{ paddingTop: 30 - 4 * 3 }}
-              variant={"h4"}
-              {...props}
-            />
-          ),
-          h5: (props: HeadingProps) => (
-            <Typography
-              style={{ paddingTop: 30 - 5 * 3 }}
-              variant={"h5"}
-              {...props}
-            />
-          ),
-          h6: (props: HeadingProps) => (
-            <Typography
-              style={{ paddingTop: 30 - 6 * 3 }}
-              variant={"h6"}
-              {...props}
-            />
-          ),
-          p: (props: TypographyProps) => <Typography {...props} />,
-          a: (props: LinkProps) => <Link2 {...props} />,
-          // code: (props) => {
-          //     return <Highlight language={props.className || "markdown"} content={"`"+props.children+"`"} />
-          // }, // Using code will mess up the pre part
-          pre: (props) => {
-            if (props.children.length !== 1) {
-              return <pre {...props}></pre>;
-            }
-            const firstChild = props.children.at(0);
-            if (
-              !React.isValidElement(firstChild) ||
-              (firstChild as ReactElement).type !== "code"
-            ) {
-              return <pre {...props}></pre>;
-            }
-
-            const firstChildProps = (firstChild as ReactElement).props as {
-              className?: string;
-            };
-            return (
-              <Highlight
-                language={
-                  firstChildProps?.className !== undefined
-                    ? firstChildProps?.className
-                    : "markdown"
-                }
-                content={GetInnerText(props.children)}
-              />
-            );
-          },
-        }}
-      >
-        {markdown}
-      </ReactMarkdown>
+      <Markdown content={markdown} />
     </Container>
   );
 };
@@ -225,7 +126,7 @@ const GetBlogRoutes = () =>
       const articleExtension = article.filename.substring(dotIndex);
       const articlePath = article.filename.substring(0, dotIndex);
       const LazyComponent = React.lazy(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 300)); // User experience looks better with small delay
         return await import(`../blogs/${blog.year}/${article.filename}`);
       });
 

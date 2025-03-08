@@ -47,17 +47,14 @@ const MyMarkdownImporter = (props) => {
 
   React.useEffect(() => {
     var asyncFunction = async () => {
-      try {
-        const importResult = await import(`../blogs/` + props.route);
-        const result = await fetch(importResult.default);
-        const text = await result.text();
-        setMarkdown(text);
-      } catch (e) {
-        console.log(e);
-        throw Error("Failed to fetch markdown file");
-      }
+      const importResult = await import(`../blogs/` + props.route);
+      const result = await fetch(importResult.default);
+      const text = await result.text();
+      setMarkdown(text);
     };
-    asyncFunction();
+    asyncFunction().catch((e) => {
+      console.log(e);
+    });
   }, [props]);
 
   return <MyMarkdown markdown={markdown} />;

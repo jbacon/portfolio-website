@@ -4,7 +4,7 @@ inputs:
   node-version:  # id of input
     description: 'NodeJS version'
     required: true
-    default: '18.x'
+    default: '23.x'
 runs:
   using: "composite"
   steps:
@@ -15,9 +15,10 @@ runs:
           cache: "npm"
       - name: Install
         shell: bash
-        run: npm ci
-      # - name: Test
-      #   run: npm test
+        run: npm ci --force
+      - name: Test
+        shell: bash
+        run: npm test -- --coverage
       - name: Build
         shell: bash
         run: npm run build

@@ -5,7 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 import ImageIllBeBack from "../../images/ill-be-back.jpg";
 
 const blog = () => (
-  <React.Fragment>
+  <>
     <Typography variant="h3">A Narrative on Web Servers</Typography>
     <Typography>
       While a subject-matter expert in web development could certainly offer a
@@ -100,6 +100,6 @@ const blog = () => (
         Mutli-Page vs Single-Page Applications
       </Link>
     </Typography>
-  </React.Fragment>
+  </>
 );
 export default blog;

@@ -4,7 +4,7 @@ import Highlight from "../../components/Highlight";
 import Link from "@mui/material/Link";
 
 const blog = () => (
-  <React.Fragment>
+  <>
     <Typography variant="h2">
       GoLang Servers:
       <br />A Basic Demo
@@ -213,6 +213,6 @@ http.ListenAndServe(":8080", handler)`}
       GoLang is a nifty language for building both simple and complex http
       servers.
     </Typography>
-  </React.Fragment>
+  </>
 );
 export default blog;
