@@ -4,8 +4,8 @@ set -e
 
 export CI=true
 
-npm run prettier-check
-npm run lint-check
+npm run prettier
+npm run lint
 npm run test -- --coverage
 npm run build
 npm run depcheck
