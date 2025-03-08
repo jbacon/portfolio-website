@@ -4,6 +4,7 @@ set -e
 
 export CI=true
 
+npm ci --force
 npm run prettier-check
 npm run lint-check
 npm run test -- --coverage
